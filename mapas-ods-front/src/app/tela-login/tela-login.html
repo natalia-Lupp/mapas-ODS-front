@@ -1,0 +1,39 @@
+<div class="flex h-screen w-full items-center justify-center">
+  <div class="flex flex-col lg:flex-row items-center justify-center gap-8">
+    <!--logo app-->
+    <app-logo></app-logo>
+    <div class="divider lg:divider-horizontal"></div>
+
+    <!-- form login -->
+    <div class="flex flex-col items-center justify-center gap-4">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <legend class="fieldset-legend">Login</legend>
+
+          <label class="label">Email</label>
+          <input formControlName="login" type="email" class="input" placeholder="Email" />
+
+          <label class="label">Password</label>
+          <input formControlName="senha" type="password" class="input" placeholder="Password" />
+        </fieldset>
+
+        <!-- botão customizado -->
+        <app-button class=" btn btn-neutral bg-blue-500 text-white w-full mt-4" titleButton="Entrar"
+          icon="fa fa-sign-in-alt" (action)="onSubmit()"></app-button>
+      </form>
+
+
+      <a class="text-blue-400 cursor-pointer hover:underline">Esqueceu a senha?</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!--TOAST-->
+<div *ngIf="showToast" class="toast toast-top toast-end">
+  <app-toast [mensagem]="'Preencha todos os campos corretamente!'" 
+             [tipoAlerta]="TipoAlerta.ERRO" 
+             [show]="showToast">
+  </app-toast>
+</div>
