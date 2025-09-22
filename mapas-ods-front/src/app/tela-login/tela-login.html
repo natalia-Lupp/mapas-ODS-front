@@ -1,39 +1,57 @@
-<div class="flex h-screen w-full items-center justify-center">
-  <div class="flex flex-col lg:flex-row items-center justify-center gap-8">
-    <!--logo app-->
-    <app-logo></app-logo>
-    <div class="divider lg:divider-horizontal"></div>
+<div class="flex h-screen w-full items-center justify-center bg-base-200">
+  <div class="flex w-[990px] max-w-6xl shadow-2xl rounded-lg overflow-hidden">
+    
+       <!-- Card Azul (Logo) -->
+    <app-logo class="rounded-l-lg"></app-logo>
 
-    <!-- form login -->
-    <div class="flex flex-col items-center justify-center gap-4">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend class="fieldset-legend">Login</legend>
+    <!-- Card Branco (Login) -->
+  <div class="card bg-white w-5/12 flex flex-col items-center justify-center p-10 rounded-l-none rounded-r-lg">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 w-11/12">
+    
+        <!-- Título centralizado -->
+        <h2 class="text-3xl font-bold text-center text-gray-600 mb-8">Login</h2>
 
-          <label class="label">Email</label>
-          <input formControlName="login" type="email" class="input" placeholder="Email" />
+        <div class="flex flex-col gap-4 w-full">
+          <div class="form-control w-full">
+            <input
+              formControlName="login"
+              type="email"
+              class="input w-full bg-white border-gray-400 text-black placeholder-gray-400"
+              placeholder="Usuario"
+            />
+          </div>
 
-          <label class="label">Password</label>
-          <input formControlName="senha" type="password" class="input" placeholder="Password" />
-        </fieldset>
+          <div class="form-control w-full">
+            <input
+              formControlName="senha"
+              type="password"
+              class="input w-full bg-white border-gray-400 text-black placeholder-gray-400"
+              placeholder="Digite sua senha"
+            />
+          </div>
 
-        <!-- botão customizado -->
-        <app-button class=" btn btn-neutral bg-blue-500 text-white w-full mt-4" titleButton="Entrar"
-          icon="fa fa-sign-in-alt" (action)="onSubmit()"></app-button>
+          <a class="mt-2 text-sm text-blue-500 self-end cursor-pointer hover:underline">
+            Esqueceu a senha?
+          </a>
+        </div>
+
+        <!-- botão customizado menor -->
+        <app-button
+          class="btn btn-primary w-full mt-4 max-w-xs bg-blue-600 self-center"
+          titleButton="Entrar"
+          icon="fa fa-sign-in-alt"
+          (action)="onSubmit()">
+        </app-button>
       </form>
-
-
-      <a class="text-blue-400 cursor-pointer hover:underline">Esqueceu a senha?</a>
     </div>
-
   </div>
 </div>
 
-
-<!--TOAST-->
+<!-- TOAST -->
 <div *ngIf="showToast" class="toast toast-top toast-end">
-  <app-toast [mensagem]="'Preencha todos os campos corretamente!'" 
-             [tipoAlerta]="TipoAlerta.ERRO" 
-             [show]="showToast">
+  <app-toast 
+    [mensagem]="'Preencha todos os campos corretamente!'" 
+    [tipoAlerta]="TipoAlerta.ERRO" 
+    [show]="showToast">
   </app-toast>
 </div>
