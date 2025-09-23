@@ -6,6 +6,7 @@ import { Button } from '../shared/components/button/button';
 import { Toast } from '../shared/components/toast/toast';
 import { TipoAlerta } from '../shared/components/toast/toast.enum';
 import { PocketBaseService } from '../services/pocketbase.service';
+import { AuthService } from '../services/authService';
 
 @Component({
   selector: 'app-tela-login',
@@ -17,11 +18,10 @@ import { PocketBaseService } from '../services/pocketbase.service';
 export class TelaLogin {
   form: FormGroup;
   showToast = false;
-
-  // <-- expõe o enum para o template
+  //deixa publico pro toast digamos 
   TipoAlerta = TipoAlerta;
 
-  constructor(private fb: FormBuilder,private pbService: PocketBaseService) {
+  constructor(private fb: FormBuilder, private pbService: PocketBaseService, private authService: AuthService) {
 
     this.form = this.fb.group({
       login: ['', Validators.required],
@@ -29,10 +29,11 @@ export class TelaLogin {
     });
   }
 
-  onSubmit():void {
+  async onSubmit(): Promise<void> {
     if (this.form.valid) {
       this.showToast = false;
-      this.pbService.login(this.form.value.login,this.form.value.senha);
+      const TOKEN_POCKET = await this.pbService.login(this.form.value.login, this.form.value.senha);
+      this.authService.setToken(TOKEN_POCKET);
     } else {
       this.showToast = true;
       setTimeout(() => this.showToast = false, 1000);
