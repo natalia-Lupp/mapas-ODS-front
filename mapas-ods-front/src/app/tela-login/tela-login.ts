@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Button } from '../shared/components/button/button';
 import { Toast } from '../shared/components/toast/toast';
 import { TipoAlerta } from '../shared/components/toast/toast.enum';
+import { PocketBaseService } from '../services/pocketbase.service';
 
 @Component({
   selector: 'app-tela-login',
@@ -20,7 +21,8 @@ export class TelaLogin {
   // <-- expõe o enum para o template
   TipoAlerta = TipoAlerta;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private pbService: PocketBaseService) {
+
     this.form = this.fb.group({
       login: ['', Validators.required],
       senha: ['', Validators.required]
@@ -30,7 +32,7 @@ export class TelaLogin {
   onSubmit():void {
     if (this.form.valid) {
       this.showToast = false;
-      
+      this.pbService.login(this.form.value.login,this.form.value.senha);
     } else {
       this.showToast = true;
       setTimeout(() => this.showToast = false, 1000);
