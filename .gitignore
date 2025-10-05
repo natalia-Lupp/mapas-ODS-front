@@ -1,0 +1,6 @@
+
+#arquivo para ignorar os arquivos gerados pelo protobuf
+
+pocketbase/pb_data/
+
+pocketbase/pocketbase.exe
