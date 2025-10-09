@@ -30,6 +30,25 @@ export class ContasSanepar implements OnInit {
     this.router.navigate(["cadastrar-leitura-sanepar"]);
   }
 
+  deletarLeitura(idLeitura?: string): void {
+    if (!idLeitura) {
+      this.showToastMessage('ID inválido para exclusão', TipoAlerta.ERRO);
+      return;
+    }
+
+    this.contasSaneparService.delete(idLeitura).subscribe({
+      next: () => {
+        this.showToastMessage('Dado removido com sucesso', TipoAlerta.SUCESSO);
+        this.getContasSanepar();
+      },
+      error: (err) => {
+        console.log(err);
+        this.showToastMessage('Erro ao remover dado', TipoAlerta.ERRO);
+      }
+    });
+  }
+
+
   private getContasSanepar() {
     this.contasSaneparService.getAll().subscribe({
       next: (data) => {
