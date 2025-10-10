@@ -1,13 +1,16 @@
 <div class="flex items-center justify-center">
-   <form [formGroup]="contaSaneparForm" action="">
-      <fieldset class="fieldset bg-[#c9e2ff] border-base-300 rounded-box w-xs border p-4">
-         <label class="label">Data</label>
-         <input formControlName="mes" type="date" class="input" placeholder="data" />
+  <form [formGroup]="contaSaneparForm" (ngSubmit)="salvar()">
+    <fieldset class="fieldset bg-[#c9e2ff] border-base-300 rounded-box w-xs border p-4">
+      <label class="label">Data</label>
+      <input formControlName="mes" type="date" class="input" placeholder="data" />
 
-         <label class="label">M³</label>
-         <input formControlName="metrosCubicos" type="number" class="input" placeholder="metros cubicos" />
-         <button class="btn btn-success mt-4" (click)="store()">Salvar</button>
-         <button class="btn btn-warning mt-4" (click)="back()">Voltar</button>
-      </fieldset>
-   </form>
+      <label class="label">M³</label>
+      <input formControlName="metrosCubicos" type="number" class="input" placeholder="metros cubicos" />
+
+      <button type="submit" class="btn btn-success mt-4">
+        {{ contaSaneparId ? 'Atualizar' : 'Salvar' }}
+      </button>
+      <button type="button" class="btn btn-warning mt-4" (click)="back()">Voltar</button>
+    </fieldset>
+  </form>
 </div>

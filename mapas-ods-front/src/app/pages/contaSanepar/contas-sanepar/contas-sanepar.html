@@ -1,5 +1,8 @@
 <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 m-10 rounded-4xl">
-   <button class="btn" (click)="cadastrarLeitura()">Nova Leitura </button>
+   <div class="flex justify-end mb-3">
+      <button class="btn btn-success" (click)="cadastrarLeitura()"><span class="text-white">Nova Leitura</span></button>
+   </div>
+
    <table class="table custom-zebra">
       <!-- head -->
       <thead class="bg-[#c9e2ff]">
@@ -11,16 +14,17 @@
          </tr>
       </thead>
       <tbody>
-         <tr *ngFor=" let conta of listaContas">
+         <tr *ngFor="let conta of listaContas">
             <td>{{ conta.mes | date:'dd/MM/yyyy' }}</td>
-            <td>{{conta.metros_cubicos}}</td>
+            <td>{{ conta.metros_cubicos }}</td>
             <td>
                <div class="badge badge-outline"
-                  [ngClass]="conta.metros_cubicos <= 900 ? 'badge-success' : 'badge-error'">
-                  {{ conta.metros_cubicos <= 900 ? 'Meta Atingida' : 'Meta Não Atingida' }} </div>
+                    [ngClass]="conta.metros_cubicos <= 900 ? 'badge-success' : 'badge-error'">
+                  {{ conta.metros_cubicos <= 900 ? 'Meta Atingida' : 'Meta Não Atingida' }}
+               </div>
             </td>
             <td>
-               <button class="btn btn-xs">
+               <button class="btn btn-xs" (click)="atualizarLeitura(conta.id)">
                   <i class="far fa-edit"></i>
                </button>
                <button class="btn btn-xs" (click)="deletarLeitura(conta.id)">
@@ -32,5 +36,4 @@
    </table>
 </div>
 
-<app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlertaToast" [show]="showToast">
-</app-toast>
+<app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlertaToast" [show]="showToast"></app-toast>

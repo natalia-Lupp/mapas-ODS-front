@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ContaSaneparService } from '../../../services/database/contaSanepar.service';
 import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
-import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { Toast } from '../../../shared/components/toast/toast';
-import { Router } from '@angular/router';
+import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 
 @Component({
   selector: 'app-contas-sanepar',
@@ -30,6 +30,14 @@ export class ContasSanepar implements OnInit {
     this.router.navigate(["cadastrar-leitura-sanepar"]);
   }
 
+  atualizarLeitura(idLeitura?: string): void {
+    if (!idLeitura) {
+      this.showToastMessage("ID inválido para atualizar", TipoAlerta.ERRO);
+      return;
+    }
+    this.router.navigate([`/atualizar-leitura-sanepar`, idLeitura]);
+  }
+
   deletarLeitura(idLeitura?: string): void {
     if (!idLeitura) {
       this.showToastMessage('ID inválido para exclusão', TipoAlerta.ERRO);
@@ -47,7 +55,6 @@ export class ContasSanepar implements OnInit {
       }
     });
   }
-
 
   private getContasSanepar() {
     this.contasSaneparService.getAll().subscribe({

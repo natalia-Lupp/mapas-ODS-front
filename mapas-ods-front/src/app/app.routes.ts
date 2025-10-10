@@ -17,6 +17,11 @@ export const routes: Routes = [
       component: FormContaSanepar
    },
    {
+      path: 'atualizar-leitura-sanepar/:id',
+      title: "Atualizar Leitura Sanpear",
+      component:FormContaSanepar
+   },
+   {
       path: '',
       title: "Home Mapa ODS",
       component: TelaLogin,
