@@ -1,0 +1,79 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { ContaSaneparService } from '../../../services/database/contaSanepar.service';
+import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
+import { Toast } from '../../../shared/components/toast/toast';
+import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
+
+@Component({
+  selector: 'app-contas-sanepar',
+  standalone: true,
+  imports: [CommonModule, Toast],
+  templateUrl: './contas-sanepar.html',
+  styleUrls: ['./contas-sanepar.css']
+})
+export class ContasSanepar implements OnInit {
+  showToast = false;
+  toastMensagem = '';
+  tipoAlertaToast: TipoAlerta = TipoAlerta.SUCESSO;
+  listaContas: IntarefaceContaSanepar[] = [];
+
+  constructor(private contasSaneparService: ContaSaneparService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.getContasSanepar();
+  }
+
+  cadastrarLeitura(): void {
+    this.router.navigate(["cadastrar-leitura-sanepar"]);
+  }
+
+  atualizarLeitura(idLeitura?: string): void {
+    if (!idLeitura) {
+      this.showToastMessage("ID inválido para atualizar", TipoAlerta.ERRO);
+      return;
+    }
+    this.router.navigate([`/atualizar-leitura-sanepar`, idLeitura]);
+  }
+
+  deletarLeitura(idLeitura?: string): void {
+    if (!idLeitura) {
+      this.showToastMessage('ID inválido para exclusão', TipoAlerta.ERRO);
+      return;
+    }
+
+    this.contasSaneparService.delete(idLeitura).subscribe({
+      next: () => {
+        this.showToastMessage('Dado removido com sucesso', TipoAlerta.SUCESSO);
+        this.getContasSanepar();
+      },
+      error: (err) => {
+        console.log(err);
+        this.showToastMessage('Erro ao remover dado', TipoAlerta.ERRO);
+      }
+    });
+  }
+
+  private getContasSanepar() {
+    this.contasSaneparService.getAll().subscribe({
+      next: (data) => {
+        this.listaContas = data;
+        this.showToastMessage('Dados carregados com sucesso', TipoAlerta.SUCESSO);
+      },
+      error: (err) => {
+        console.error('Erro ao buscar contas:', err);
+        this.showToastMessage('Erro ao carregar dados', TipoAlerta.ERRO);
+      }
+    });
+  }
+
+  showToastMessage(mensagem: string, tipo: TipoAlerta, duration = 1000) {
+    this.toastMensagem = mensagem;
+    this.tipoAlertaToast = tipo;
+    this.showToast = true;
+
+    setTimeout(() => this.showToast = false, duration);
+  }
+}

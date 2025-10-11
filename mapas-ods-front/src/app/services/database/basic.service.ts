@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 export class BasicService<T> {
   constructor(
@@ -8,7 +8,9 @@ export class BasicService<T> {
   ) { }
 
   getAll(): Observable<T[]> {
-    return this.http.get<T[]>(this.endpoint);
+    return this.http.get<{ items: T[] }>(this.endpoint).pipe(
+      map(response => response.items)
+    );
   }
 
   getById(id: string): Observable<T> {
