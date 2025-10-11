@@ -1,17 +1,17 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
+
 import { ContaSaneparService } from '../../../services/database/contaSanepar.service';
+import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
-import { Toast } from '../../../shared/components/toast/toast';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-conta-sanepar',
   standalone: true,
-  imports: [ReactiveFormsModule, Toast],
+  imports: [ReactiveFormsModule],
   templateUrl: './form-conta-sanepar.html',
   styleUrl: './form-conta-sanepar.css',
   providers: [DatePipe] // necessário para usar DatePipe no standalone

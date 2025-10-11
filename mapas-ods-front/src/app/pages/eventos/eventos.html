@@ -1,0 +1,41 @@
+<div class="flex-col">
+   <div class="flex justify-start">
+      <h3 class="text-2xl font-extrabold m-4">Registro de Eventos</h3>
+   </div>
+   <div class="flex justify-end mr-20">
+      <button class="btn btn-primary">+ Adicionar</button>
+   </div>
+   <div class="w-full px-4 mt-2">
+      <div class="overflow-x-auto w-full">
+         <table class="table custom-zebra w-full">
+            <thead class="bg-[#c9e2ff]">
+               <tr>
+                  <th class="font-extrabold text-center">Nome</th>
+                  <th class="font-extrabold text-center">N.Estimado Pessoas</th>
+                  <th class="font-extrabold text-center">Data Inicio</th>
+                  <th class="font-extrabold text-center">Data Fim</th>
+                  <th class="font-extrabold text-center">Ações</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr class="text-center  text-gray-500" *ngFor="let evento of listaEventos">
+                  <td>{{evento.nome_evento}}</td>
+                  <td>{{evento.numero_estimado_pessoas}}</td>
+                  <td>{{evento.data_inicio|date:"dd/MM/yyyy"}}</td>
+                  <td>{{evento.data_fim|date:"dd/MM/yyyy"}}</td>
+                  <td>
+                     <button class="btn btn-xs">
+                        <i class="far fa-edit"></i>
+                     </button>
+                     <button class="btn btn-xs" (click)="deletarEvento(evento.id)">
+                        <i class="fa-solid fa-trash"></i>
+                     </button>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+
+<app-toast [mensagem]="toastMessagem" [tipoAlerta]="tipoAlertaToast" [show]="showToast"></app-toast>

@@ -4,6 +4,7 @@ import { Logo } from './shared/components/logo/logo';
 import { TelaLogin } from './pages/tela-login/tela-login';
 import { ContasSanepar } from './pages/contaSanepar/contas-sanepar/contas-sanepar';
 import { FormContaSanepar } from './pages/contaSanepar/form-conta-sanepar/form-conta-sanepar';
+import { Eventos } from './pages/eventos/eventos';
 
 export const routes: Routes = [
    {
@@ -20,11 +21,15 @@ export const routes: Routes = [
       path: 'atualizar-leitura-sanepar/:id',
       title: "Atualizar Leitura Sanpear",
       component:FormContaSanepar
+   },{
+      path:"eventos",
+      title:"Eventos",
+      component:Eventos
    },
    {
       path: '',
       title: "Home Mapa ODS",
-      component: TelaLogin,
+      component: Eventos,
       pathMatch: "full"
    }
 ];
