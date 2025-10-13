@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
-import { telaLoginRoutes } from './pages/tela-login/tela-login.routes';
-import { Logo } from './shared/components/logo/logo';
 import { TelaLogin } from './pages/tela-login/tela-login';
+import { Home } from './pages/home/home'
 import { ContasSanepar } from './pages/contaSanepar/contas-sanepar/contas-sanepar';
 import { FormContaSanepar } from './pages/contaSanepar/form-conta-sanepar/form-conta-sanepar';
 
@@ -21,10 +20,15 @@ export const routes: Routes = [
       title: "Atualizar Leitura Sanpear",
       component:FormContaSanepar
    },
+  {
+      path: 'login',
+      title: "Tela de Login",
+      component: TelaLogin
+   },
    {
       path: '',
       title: "Home Mapa ODS",
-      component: TelaLogin,
+      component: Home,
       pathMatch: "full"
    }
 ];
