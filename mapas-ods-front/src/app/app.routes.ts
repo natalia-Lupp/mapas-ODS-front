@@ -5,6 +5,7 @@ import { TelaLogin } from './pages/tela-login/tela-login';
 import { ContasSanepar } from './pages/contaSanepar/contas-sanepar/contas-sanepar';
 import { FormContaSanepar } from './pages/contaSanepar/form-conta-sanepar/form-conta-sanepar';
 import { Eventos } from './pages/eventos/eventos';
+import { FormEventos } from './pages/eventos/form-eventos/form-eventos';
 
 export const routes: Routes = [
    {
@@ -27,7 +28,12 @@ export const routes: Routes = [
       component:Eventos
    },
    {
-      path: '',
+      path:"",
+      title:"Gerenciar Evento",
+      component:FormEventos
+   },
+   {
+      path: 'xxxxxx',
       title: "Home Mapa ODS",
       component: Eventos,
       pathMatch: "full"
