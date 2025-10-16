@@ -27,6 +27,10 @@ export const routes: Routes = [
       path: 'atualizar-leitura-sanepar/:id',
       title: "Atualizar Leitura Sanpear",
       component:FormContaSanepar
+   },{
+      path:"eventos",
+      title:"Eventos",
+      component:Eventos
    },
   {
       path: 'login',
@@ -34,9 +38,14 @@ export const routes: Routes = [
       component: TelaLogin
    },
    {
-      path: '',
+      path:"gerenciar-evento/:id",
+      title:"Gerenciar Evento",
+      component:FormEventos
+   },
+   {
+      path: 'xxxxxx',
       title: "Home Mapa ODS",
-      component: Home,
+      component: Eventos,
       pathMatch: "full"
    }
 ];
