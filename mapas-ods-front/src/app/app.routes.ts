@@ -28,7 +28,7 @@ export const routes: Routes = [
       component:Eventos
    },
    {
-      path:"",
+      path:"gerenciar-evento/:id",
       title:"Gerenciar Evento",
       component:FormEventos
    },

@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { InterfaceEvento } from '../../../services/models/evento';
-import { HttpClient } from '@angular/common/http';
-import { EventosService } from '../../../services/database/eventos.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { EventosService } from '../../../services/database/eventos.service';
+import { InterfaceEvento } from '../../../services/models/evento';
 import { Toast } from '../../../shared/components/toast/toast';
+import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 
 @Component({
   selector: 'app-form-eventos',
@@ -35,11 +36,26 @@ export class FormEventos implements OnInit {
   }
 
 
+  private validarData(): boolean {
+    const dataInicio = new Date(this.eventoForm.value.data_inicio);
+    const dataFim = new Date(this.eventoForm.value.data_fim);
+
+    if (dataFim < dataInicio) {
+      return false;
+    }
+    return true;
+  }
+
+  back(): void {
+    this.router.navigate(['eventos']);
+  }
+
   salvar(): void {
 
-    if (!this.eventoForm) {
+    if (!this.eventoForm || !this.validarData()) {
       this.showToast = true;
       this.showToastMessage('Verifique os dados informados', TipoAlerta.ERRO);
+      return;
     };
 
     const data: InterfaceEvento = {
@@ -88,9 +104,5 @@ export class FormEventos implements OnInit {
         }
       })
     }
-  }
-
-  getEvento(): void {
-
   }
 }

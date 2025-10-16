@@ -9,7 +9,7 @@ import { Toast } from '../../shared/components/toast/toast';
 
 @Component({
   selector: 'app-eventos',
-  imports: [CommonModule,Toast],
+  imports: [CommonModule, Toast],
   standalone: true,
   templateUrl: './eventos.html',
   styleUrl: './eventos.css'
@@ -39,6 +39,14 @@ export class Eventos implements OnInit {
         this.showToastMessage('Erro ao carregar dados', TipoAlerta.ERRO);
       }
     })
+  }
+
+  atualizarEvento(idEvento?: string): void {
+    if (!idEvento) {
+      this.showToastMessage('Erro ao atualizar evento', TipoAlerta.ERRO);
+      return;
+    }
+    this.router.navigate(['gerenciar-evento',idEvento]);
   }
 
   deletarEvento(idEvento?: string) {

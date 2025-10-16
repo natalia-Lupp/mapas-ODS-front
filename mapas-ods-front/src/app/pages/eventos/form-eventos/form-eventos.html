@@ -26,8 +26,15 @@
          <input formControlName="descricao_evento" type="text" class="input w-full" placeholder="descrição do evento" />
       </fieldset>
 
-      <button (click)="salvar()">SALVAR</button>
+      <div class="flex items-center justify-between mt-10">
+         <button type="button" class="btn btn-outline bg-amber-50 border-r-2 mt-4 m-5" (click)="back()"><span
+               class="text-blue-600">Voltar</span></button>
+         <button type="button" class="btn btn-outline bg-[#2462ea] border-1" (click)="salvar()"><i
+               class="far fa-save text-white"></i><span class="text-white">Salvar</span></button>
+
+      </div>
    </form>
 </div>
+
 
 <app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlerta" [show]="showToast"></app-toast>

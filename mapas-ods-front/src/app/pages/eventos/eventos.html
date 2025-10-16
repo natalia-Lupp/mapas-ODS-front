@@ -24,7 +24,7 @@
                   <td>{{evento.data_inicio|date:"dd/MM/yyyy"}}</td>
                   <td>{{evento.data_fim|date:"dd/MM/yyyy"}}</td>
                   <td>
-                     <button class="btn btn-xs">
+                     <button class="btn btn-xs" (click)="atualizarEvento(evento.id)">
                         <i class="far fa-edit"></i>
                      </button>
                      <button class="btn btn-xs" (click)="deletarEvento(evento.id)">
