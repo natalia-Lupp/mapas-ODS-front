@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarAdm } from './pages/navbar-adm/navbar-adm';
+import { NavbarAdm } from './shared/components/navbar-adm/navbar-adm';
 
 @Component({
   selector: 'app-root',
