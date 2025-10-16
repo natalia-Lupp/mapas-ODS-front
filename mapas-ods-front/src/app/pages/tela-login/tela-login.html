@@ -1,15 +1,18 @@
-<div class="flex h-screen w-full items-center justify-center bg-base-200">
-  <div class="flex w-[990px] max-w-6xl shadow-2xl rounded-lg overflow-hidden">
+<div class="flex h-screen w-full items-center justify-center bg-base-200 p-4">
+  <div class="flex flex-col md:flex-row w-full max-w-6xl shadow-2xl rounded-lg overflow-hidden md:items-stretch">
 
     <!-- Card Azul (Logo) -->
-    <app-logo class="rounded-l-lg"></app-logo>
+    <app-logo class="w-full md:w-7/12 h-64 md:h-auto"></app-logo>
 
     <!-- Card Branco (Login) -->
-    <div class="card bg-white w-5/12 flex flex-col items-center justify-center p-10 rounded-l-none rounded-r-lg">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 w-11/12">
+    <div
+      class="card bg-white w-full md:w-5/12 flex flex-col items-center justify-center p-6 md:p-10 rounded-b-lg md:rounded-r-lg md:rounded-l-none">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 w-full md:w-11/12">
 
         <!-- Título centralizado -->
-        <h2 class="text-3xl font-bold text-center text-gray-600 mb-8">Login</h2>
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-600 mb-6 md:mb-8">Login</h2>
+
+        <!-- Usuário -->
         <div class="form-control w-full">
           <label class="input input-bordered flex items-center gap-2">
             <i class="fa-regular fa-user text-gray-500"></i>
@@ -17,6 +20,7 @@
           </label>
         </div>
 
+        <!-- Senha -->
         <div class="form-control w-full">
           <label class="input input-bordered flex items-center gap-2">
             <i class="fa-solid fa-lock text-gray-500"></i>
@@ -24,10 +28,11 @@
           </label>
         </div>
 
-        <!-- botão customizado menor -->
+        <!-- Botão -->
         <app-button class="btn btn-primary w-full mt-4 max-w-xs bg-blue-600 self-center" titleButton="Entrar"
           icon="fa-regular fa-cloud" (action)="onSubmit()">
         </app-button>
+
       </form>
     </div>
   </div>
