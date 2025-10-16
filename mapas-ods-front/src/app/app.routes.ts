@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
-import { telaLoginRoutes } from './pages/tela-login/tela-login.routes';
-import { Logo } from './shared/components/logo/logo';
 import { TelaLogin } from './pages/tela-login/tela-login';
+import { Home } from './pages/home/home'
 import { ContasSanepar } from './pages/contaSanepar/contas-sanepar/contas-sanepar';
 import { FormContaSanepar } from './pages/contaSanepar/form-conta-sanepar/form-conta-sanepar';
 import { Eventos } from './pages/eventos/eventos';
@@ -26,6 +25,11 @@ export const routes: Routes = [
       path:"eventos",
       title:"Eventos",
       component:Eventos
+   },
+  {
+      path: 'login',
+      title: "Tela de Login",
+      component: TelaLogin
    },
    {
       path:"gerenciar-evento/:id",
