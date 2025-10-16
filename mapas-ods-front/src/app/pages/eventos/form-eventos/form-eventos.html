@@ -1,0 +1,40 @@
+<div class="bg-[#c9e2ff] flex items-center justify-center ml-[15%] mr-[15%] h-[90%]">
+   <form [formGroup]="eventoForm" action="" class="flex flex-col w-full max-w-2xl p-6">
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend">Nome Evento</legend>
+         <input formControlName="nome_evento" type="text" class="input w-full" placeholder="nome evento" />
+      </fieldset>
+
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend">Número Estimado de Pessoas</legend>
+         <input formControlName="numero_estimado_pessoas" type="text" class="input w-full"
+            placeholder="número estimado de pessoas" />
+      </fieldset>
+
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend">Data Início</legend>
+         <input formControlName="data_inicio" type="date" class="input w-full" placeholder="data início" />
+      </fieldset>
+
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend">Data Fim</legend>
+         <input formControlName="data_fim" type="date" class="input w-full" placeholder="data fim" />
+      </fieldset>
+
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend">Descrição Evento</legend>
+         <input formControlName="descricao_evento" type="text" class="input w-full" placeholder="descrição do evento" />
+      </fieldset>
+
+      <div class="flex items-center justify-between mt-10">
+         <button type="button" class="btn btn-outline bg-amber-50 border-r-2 mt-4 m-5" (click)="back()"><span
+               class="text-blue-600">Voltar</span></button>
+         <button type="button" class="btn btn-outline bg-[#2462ea] border-1" (click)="salvar()"><i
+               class="far fa-save text-white"></i><span class="text-white">Salvar</span></button>
+
+      </div>
+   </form>
+</div>
+
+
+<app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlerta" [show]="showToast"></app-toast>

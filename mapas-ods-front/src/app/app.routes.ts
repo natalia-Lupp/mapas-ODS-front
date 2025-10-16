@@ -3,6 +3,8 @@ import { TelaLogin } from './pages/tela-login/tela-login';
 import { Home } from './pages/home/home'
 import { ContasSanepar } from './pages/contaSanepar/contas-sanepar/contas-sanepar';
 import { FormContaSanepar } from './pages/contaSanepar/form-conta-sanepar/form-conta-sanepar';
+import { Eventos } from './pages/eventos/eventos';
+import { FormEventos } from './pages/eventos/form-eventos/form-eventos';
 
 export const routes: Routes = [
    {
@@ -19,6 +21,10 @@ export const routes: Routes = [
       path: 'atualizar-leitura-sanepar/:id',
       title: "Atualizar Leitura Sanpear",
       component:FormContaSanepar
+   },{
+      path:"eventos",
+      title:"Eventos",
+      component:Eventos
    },
   {
       path: 'login',
@@ -26,9 +32,14 @@ export const routes: Routes = [
       component: TelaLogin
    },
    {
-      path: '',
+      path:"gerenciar-evento/:id",
+      title:"Gerenciar Evento",
+      component:FormEventos
+   },
+   {
+      path: 'xxxxxx',
       title: "Home Mapa ODS",
-      component: Home,
+      component: Eventos,
       pathMatch: "full"
    }
 ];
