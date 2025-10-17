@@ -7,6 +7,7 @@ import { FormEventos } from './pages/eventos/form-eventos/form-eventos';
 import { Home } from './pages/home/home';
 import { NavbarAdm } from './shared/components/navbar-adm/navbar-adm';
 import { TelaLogin } from './pages/tela-login/tela-login';
+import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
 
 export const routes: Routes = [
    {
@@ -47,7 +48,7 @@ export const routes: Routes = [
    {
       path: '',
       title: "Home Mapa ODS",
-      component: Home,
+      component: Infraestrutura,
       pathMatch: "full"
    }
 ];
