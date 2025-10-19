@@ -13,4 +13,7 @@ export class EventosService extends BasicService<InterfaceEvento> {
       const endpoint = BASE_URLS.URL_POCKETBASE + BASE_URLS.URL_EVENTOS;
       super(http, endpoint)
    }
+
+
+   
 }

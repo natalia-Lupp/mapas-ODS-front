@@ -12,12 +12,19 @@ export class BasicService<T> {
       map(response => response.items)
     );
   }
+  //quebraGalho
+  getFirst(): Observable<T | null> {
+    return this.getAll().pipe(
+      map(items => items.length > 0 ? items[0] : null)
+    )
+  }
 
   getById(id: string): Observable<T> {
     return this.http.get<T>(`${this.endpoint}/${id}`);
   }
 
   create(item: T): Observable<T> {
+    console.log({itemChegnado:item,rota:this.endpoint});
     return this.http.post<T>(this.endpoint, item);
   }
 
