@@ -8,12 +8,19 @@ import { Home } from './pages/home/home';
 import { NavbarAdm } from './shared/components/navbar-adm/navbar-adm';
 import { TelaLogin } from './pages/tela-login/tela-login';
 import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
+import { Sidenav } from './shared/components/sidenav/sidenav';
 
 export const routes: Routes = [
    {
       path: 'navbar-adm',
       title: "navbar com rota temporaria",
       component: NavbarAdm
+
+   },
+     {
+      path: 'sidenav-adm',
+      title: "sidenav com rota temporaria",
+      component: Sidenav
 
    },
    {
