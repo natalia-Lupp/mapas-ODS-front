@@ -1,22 +1,40 @@
-<nav class="navbar bg-white shadow-sm border-b border-blue-500">
-    <div class="flex-1">
-        <a [routerLink]="'/dashboard-adm'" class="bt btghost">
-            <img src="assets/img/logo-escrito.png" alt="Logo Mapas ODS" class="h-8 w-auto" />
-        </a>
+<div class="navbar bg-base-100 bg-white shadow-sm px-4">
+    <!-- Botão hambúrguer mobile -->
+    <div class="flex-none lg:hidden">
+        <label for="dashboard-drawer" class="btn btn-ghost btn-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </label>
     </div>
 
+    <!-- logo-->
+    <div class="flex-1">
+        <a href="/dashbord-adm">
+            <img src="assets/img/logo-escrito.png" alt="MapasODS" class="h-8 w-auto" />
+        </a>
+    </div>
     <div class="flex-none">
-        <ul class="menu menu-horizontal px-1">
-            <li><a class="text-gray-500" routerLink="/">Home</a></li>
-            <li><a class="text-gray-500" routerLink="/contas-sanepar">Registro Contas Sanepar</a></li>
-            <li><a class="text-gray-500" routerLink="/eventos">Eventos</a></li>
-            <li><a class="text-gray-500">Sair</a></li>
+        <ul class="menu menu-horizontal px-1 text-gray-500">
+            <li><a><i class="fas fa-plus"></i>Cadastrar Consumo</a></li>
+            <li><a>Visualizar Dados</a></li>
         </ul>
     </div>
 
-    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full">
-            <img src="assets/img/img-modelo-adm.png" alt="adm-foto" />
+    <!-- Avatar admin -->
+    <div class="flex-none">
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                    <img src="assets/img/img-modelo-adm.png" alt="adm" />
+                </div>
+            </div>
+            <ul tabindex="0"
+                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 bg-white shadow text-gray-500 ">
+                <li><a>Perfil</a></li>
+                <li><a>Sair</a></li>
+            </ul>
         </div>
     </div>
-</nav>
+</div>
