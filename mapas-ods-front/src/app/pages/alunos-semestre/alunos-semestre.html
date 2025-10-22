@@ -1,1 +1,37 @@
-<p>alunos-semestre works!</p>
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 m-10 rounded-4xl">
+   <div class="flex justify-end mb-3">
+      <button class="btn btn-success" (click)="cadastrar()"><span class="text-white">Novo Semestre</span></button>
+   </div>
+
+   <table class="table custom-zebra">
+      <!-- head -->
+      <thead class="bg-[#c9e2ff]">
+         <tr class="text-center">
+            <th>Semestre</th>
+            <th>Alunos Semestre</th>
+            <th>Alunos Integral</th>
+            <th>Alunos Noturnos</th>
+            <th>Data Inicio</th>
+            <th>Data Fim</th>
+            <th>Ações</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr class="text-center" *ngFor="let alunosDoSemestre of alunosSemestres">
+            <td>{{alunosDoSemestre.nome_semestre}}</td>
+            <td>{{alunosDoSemestre.quantidade_alunos_geral}}</td>
+            <td>{{alunosDoSemestre.quantidade_alunos_integral}}</td>
+            <td>{{alunosDoSemestre.quantidade_alunos_noturnos}}</td>
+            <td>{{alunosDoSemestre.data_inicio_semestre | date :"dd/MM/yyyy"}}</td>
+            <td>{{alunosDoSemestre.data_fim_semestre | date :"dd/MM/yyyy"}}</td>
+            <td class="flex flex-row justify-center">
+               <button class="btn btn-xs bg-warning" (click)="atualizar(alunosDoSemestre.id)"> <i
+                     class="far fa-edit"></i></button>
+               <button class="btn btn-xs bg-error" (click)="deletar(alunosDoSemestre.id)"> <i class="fa-solid fa-trash"></i></button>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+<app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlertaToast" [show]="showToast"></app-toast>

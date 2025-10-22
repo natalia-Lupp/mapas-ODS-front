@@ -9,6 +9,7 @@ import { NavbarAdm } from './shared/components/navbar-adm/navbar-adm';
 import { TelaLogin } from './pages/tela-login/tela-login';
 import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
 import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre/form-alunos-semestre';
+import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
 
 export const routes: Routes = [
    {
@@ -49,7 +50,22 @@ export const routes: Routes = [
    {
       path: '',
       title: "Home Mapa ODS",
-      component: FormAlunosSemestre,
+      component: Home,
       pathMatch: "full"
+   },
+   {
+      path: 'alunos-semestre',
+      title: "Alunos Semestre",
+      component: AlunosSemestre,
+   },
+   {
+      path:"form-alunos-semestre/:id",
+      title :"Gerenciar Alunos Semestre",
+      component:FormAlunosSemestre
+   },
+   {
+      path:"form-alunos-semestre",
+      title :" Gerenciar Alunos Semestre",
+      component: FormAlunosSemestre
    }
 ];

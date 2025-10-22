@@ -1,4 +1,5 @@
 export interface InterfaceAlunosSemestres {
+   id?:string,
    quantidade_alunos_geral: Number,
    quantidade_alunos_integral: Number,
    quantidade_alunos_noturnos: Number,

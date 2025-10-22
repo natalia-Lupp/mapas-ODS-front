@@ -2,19 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlunosServices } from '../../services/database/alunos.service';
 import { InterfaceAlunosSemestres } from '../../services/models/alunosSemestre';
-import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { TipoAlerta } from '../../shared/components/toast/toast.enum';
+import { Toast } from '../../shared/components/toast/toast';
 
 @Component({
   selector: 'app-alunos-semestre',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Toast],
   templateUrl: './alunos-semestre.html',
   styleUrls: ['./alunos-semestre.css']
 })
 export class AlunosSemestre implements OnInit {
 
   alunosSemestres: InterfaceAlunosSemestres[] = [];
+  showToast = false;
+  toastMensagem = "";
+  tipoAlertaToast = TipoAlerta.SUCESSO;
+  alunosSemestreId: string | undefined = "";
 
   constructor(
     private router: Router, private alunosSemestreService: AlunosServices) { }
@@ -23,7 +28,47 @@ export class AlunosSemestre implements OnInit {
     this.getAlunosSemestres();
   }
 
-  getAlunosSemestres(): Observable<InterfaceAlunosSemestres[]> {
-    return this.alunosSemestreService.getAll();
+  private getAlunosSemestres() {
+    this.alunosSemestreService.getAll().subscribe({
+      next: (data) => {
+        console.log(data);
+        return this.alunosSemestres = data;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
+  }
+
+  cadastrar(): void {
+    this.router.navigate(["form-alunos-semestre"]);
+  }
+
+  atualizar(id?: string): void {
+    this.router.navigate([`form-alunos-semestre/${id}`]);
+  }
+
+  deletar(id?: string): void {
+    if (!id) {
+      this.showToastMessage("Erro ao tentar deletar", TipoAlerta.ERRO);
+      return;
+    }
+    this.alunosSemestreService.delete(id).subscribe({
+      next: () => {
+        this.showToastMessage("Registro Deletado com sucesso", TipoAlerta.SUCESSO);
+        this.getAlunosSemestres();
+        return;
+      },
+      error: (err) => {
+        this.showToastMessage("Erro ao tentar deletar", TipoAlerta.ERRO);
+      }
+    })
+  }
+
+  private showToastMessage(mensagem: string, tipo: TipoAlerta, duration = 1000) {
+    this.toastMensagem = mensagem;
+    this.tipoAlertaToast = tipo;
+    this.showToast = true;
+    setTimeout(() => this.showToast = false, duration);
   }
 }
