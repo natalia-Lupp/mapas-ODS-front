@@ -10,6 +10,7 @@ import { TelaLogin } from './pages/tela-login/tela-login';
 import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
 import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre/form-alunos-semestre';
 import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
+import { Outros } from './pages/outros/outros';
 
 export const routes: Routes = [
    {
@@ -67,5 +68,10 @@ export const routes: Routes = [
       path:"form-alunos-semestre",
       title :" Gerenciar Alunos Semestre",
       component: FormAlunosSemestre
+   },
+   {
+      path:'outros',
+      title:"Outros",
+      component:Outros
    }
 ];
