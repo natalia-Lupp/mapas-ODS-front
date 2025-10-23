@@ -11,6 +11,7 @@ import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
 import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre/form-alunos-semestre';
 import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
 import { Outros } from './pages/outros/outros';
+import { FormOutros } from './pages/outros/form-outros/form-outros';
 
 export const routes: Routes = [
    {
@@ -60,18 +61,28 @@ export const routes: Routes = [
       component: AlunosSemestre,
    },
    {
-      path:"form-alunos-semestre/:id",
-      title :"Gerenciar Alunos Semestre",
-      component:FormAlunosSemestre
-   },
-   {
-      path:"form-alunos-semestre",
-      title :" Gerenciar Alunos Semestre",
+      path: "form-alunos-semestre/:id",
+      title: "Gerenciar Alunos Semestre",
       component: FormAlunosSemestre
    },
    {
-      path:'outros',
-      title:"Outros",
-      component:Outros
+      path: "form-alunos-semestre",
+      title: " Gerenciar Alunos Semestre",
+      component: FormAlunosSemestre
+   },
+   {
+      path: 'outros',
+      title: "Outros",
+      component: Outros
+   },
+   {
+      path: 'cadastrar-outros',
+      title: "Cadastrar Outros ",
+      component: FormOutros
+   },
+   {
+      path: 'outros/:id',
+      title: "Gerenciar Outros",
+      component: FormOutros
    }
 ];
