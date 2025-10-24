@@ -8,12 +8,43 @@ import { Home } from './pages/home/home';
 import { NavbarAdm } from './shared/components/navbar-adm/navbar-adm';
 import { TelaLogin } from './pages/tela-login/tela-login';
 import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
+import { Sidebar } from './shared/components/sidebar/sidebar';
+import { DashboardAdmin } from './pages/dashboard-admin/dashboard-admin';
+import { Perfil } from './pages/perfil/perfil';
 
 export const routes: Routes = [
+    {
+      path: '',
+      title: "Home Mapa ODS",
+      component: Infraestrutura,
+      pathMatch: "full"
+   },
+   {
+      path: 'login',
+      title: "Tela de Login",
+      component: TelaLogin
+   },
    {
       path: 'navbar-adm',
       title: "navbar com rota temporaria",
       component: NavbarAdm
+
+   },
+     {
+      path: 'sidebar-adm',
+      title: "sidebar com rota temporaria",
+      component: Sidebar
+   },
+      {
+      path: 'dashbord-adm',
+      title: "Dashbord administrador",
+      component: DashboardAdmin
+
+   },
+        {
+      path: 'perfil-adm',
+      title: "Perfil administrador",
+      component: Perfil
 
    },
    {
@@ -35,20 +66,10 @@ export const routes: Routes = [
       title: "Eventos",
       component: Eventos
    },
-   {
-      path: 'login',
-      title: "Tela de Login",
-      component: TelaLogin
-   },
+   
    {
       path: "gerenciar-evento/:id",
       title: "Gerenciar Evento",
       component: FormEventos
-   },
-   {
-      path: '',
-      title: "Home Mapa ODS",
-      component: Infraestrutura,
-      pathMatch: "full"
-   }
+   }  
 ];

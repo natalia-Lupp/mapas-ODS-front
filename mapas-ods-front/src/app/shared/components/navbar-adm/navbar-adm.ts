@@ -1,13 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-adm',
-  imports: [CommonModule, RouterModule], // router link colocado por ser um item padrão
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar-adm.html',
-  styleUrl: './navbar-adm.css'
+  styleUrls: ['./navbar-adm.css']
 })
-export class NavbarAdm {
-
-}
+export class NavbarAdm {}

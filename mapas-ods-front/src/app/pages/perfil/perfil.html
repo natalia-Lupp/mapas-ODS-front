@@ -1,0 +1,65 @@
+<!-- Área principal (Navbar + Conteúdo) -->
+<div class="flex-1 flex flex-col min-h-screen">
+    <!-- Navbar no topo -->
+    <app-navbar-adm></app-navbar-adm>
+
+    <div class="drawer lg:drawer-open min-h-screen flex">
+        <!-- Sidebar -->
+        <app-sidebar class="hidden lg:block w-64"></app-sidebar>
+
+        <!-- Conteúdo principal -->
+        <main class="p-6 flex-1 bg-white">
+            <h2 class="text-3xl font-semibold mb-2 text-gray-900">Perfil</h2>
+            <div class="bg-[#c9e2ff] rounded-2xl p-6 shadow-md border border-blue-200 max-w-xl">
+                <form class="space-y-5 ">
+                    <!-- Nome -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-500 mb-1">Nome</label>
+                        <input type="text" placeholder="Digite seu nome"
+                            class="input input-bordered w-full bg-white text-gray-500" [(ngModel)]="perfil.nome"
+                            name="nome" />
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-500 mb-1">Email</label>
+                        <input type="email" placeholder="exemplo@dominio.com"
+                            class="input input-bordered w-full bg-white text-gray-500" [(ngModel)]="perfil.email"
+                            name="email" />
+                    </div>
+
+                    <!-- Unidade -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-500 mb-1">Unidade</label>
+                        <select class="select select-bordered w-full bg-white text-gray-500"
+                            [(ngModel)]="perfil.unidade" name="unidade">
+                            <option disabled selected class="text-gray-500">Exemplo: Guarapuava</option>
+                            <option *ngFor="let unidade of unidades" [value]="unidade">{{ unidade }}</option>
+                        </select>
+                    </div>
+
+                    <!-- Descrição -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-500 mb-1">Descrição</label>
+                        <textarea class="textarea textarea-bordered w-full bg-white" rows="4"
+                            [(ngModel)]="perfil.descricao" name="descricao"
+                            placeholder="Escreva uma breve descrição..."></textarea>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="flex justify-between pt-4">
+                        <button type="button" class="px-6 py-2 rounded-full font-semibold text-blue-700 bg-white border"
+                            (click)="voltar()">
+                            Voltar
+                        </button>
+                        <button type="submit"
+                            class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800"
+                            (click)="salvar()">
+                            Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
