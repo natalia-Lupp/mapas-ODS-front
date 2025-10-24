@@ -12,6 +12,7 @@ import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre
 import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
 import { Outros } from './pages/outros/outros';
 import { FormOutros } from './pages/outros/form-outros/form-outros';
+import { CalculadoraNakagawa } from './pages/calculadora-nakagawa/calculadora-nakagawa';
 
 export const routes: Routes = [
    {
@@ -49,6 +50,11 @@ export const routes: Routes = [
       title: "Gerenciar Evento",
       component: FormEventos
    },
+     {
+      path: "cadastrar-evento",
+      title: "Cadastrar Evento",
+      component: FormEventos
+   },
    {
       path: '',
       title: "Home Mapa ODS",
@@ -84,5 +90,10 @@ export const routes: Routes = [
       path: 'outros/:id',
       title: "Gerenciar Outros",
       component: FormOutros
+   },
+   {
+      path:'calculadora-nakagawa',
+      title:"Calculadora Nakagawa",
+      component:CalculadoraNakagawa
    }
 ];

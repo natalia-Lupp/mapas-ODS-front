@@ -8,9 +8,10 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-form-outros',
-  imports: [DatePipe,ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './form-outros.html',
-  styleUrls: ['./form-outros.css']
+  styleUrls: ['./form-outros.css'],
+  providers:[DatePipe]
 })
 export class FormOutros implements OnInit {
 
@@ -22,7 +23,8 @@ export class FormOutros implements OnInit {
     private router: Router,
     private outrosService: OutrosService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -45,8 +47,8 @@ export class FormOutros implements OnInit {
             auxiliaresAdministrativos: data.auxiliares_administrativos ?? 0,
             tercerizados: data.tercerizados ?? 0,
             docentes: data.docentes ?? 0,
-            periodoInicio: new Date(data.periodo_inicio),
-            periodoFim: new Date(data.periodo_fim)
+            periodoInicio: this.datePipe.transform(data.periodo_inicio,"yyyy-MM-dd"),
+            periodoFim: this.datePipe.transform(data.periodo_fim,"yyyy-MM-dd")
           });
         }
       });
@@ -57,7 +59,41 @@ export class FormOutros implements OnInit {
     return this.outrosService.getById(id);
   }
 
-  back(){}
+  back(): void {
+    this.router.navigate(["outros"]);
+  }
 
-  salvar(){}
+  salvar(): void {
+    if (this.formOutro.invalid) {
+      this.formOutro.markAllAsTouched();
+      return;
+    }
+    const outro: IntefaceOutros = {
+      apelido: this.formOutro.value.apelido,
+      auxiliares_administrativos: this.formOutro.value.auxiliaresAdministrativos ?? 0,
+      tercerizados: this.formOutro.value.tercerizados ?? 0,
+      docentes: this.formOutro.value.docentes ?? 0,
+      periodo_inicio: this.formOutro.value.periodoInicio,
+      periodo_fim: this.formOutro.value.periodoFim,
+    };
+
+    if (!this.outroId) {
+      this.outrosService.create(outro).subscribe({
+        next: () => {
+          alert('Registro criado com sucesso!');
+          this.back();
+        },
+        error: (err) => console.error('Erro ao criar registro:', err)
+      });
+    } else {
+      this.outrosService.update(this.outroId, outro).subscribe({
+        next: () => {
+          alert('Registro atualizado com sucesso!');
+          this.back();
+        },
+        error: (err) => console.error('Erro ao atualizar registro:', err)
+      });
+    }
+  }
+
 }

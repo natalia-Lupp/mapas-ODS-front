@@ -26,6 +26,10 @@ export class Eventos implements OnInit {
     this.getEventos();
   }
 
+  cadastrar():void{
+    this.router.navigate(["cadastrar-evento"]);
+  }
+
 
   private getEventos() {
     this.eventoService.getAll().subscribe({
