@@ -15,6 +15,8 @@ interface Consumo {
   imports: [CommonModule, SharedModule],
   templateUrl: './dashboard-admin.html',
 })
+
+
 export class DashboardAdmin {
   consumos: Consumo[] = [
     { mes: 'Janeiro', consumoM3: 490, mediaLitrosPorPessoa: 48, atingiuMeta: true },

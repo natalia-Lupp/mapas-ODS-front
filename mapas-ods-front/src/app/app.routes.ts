@@ -10,6 +10,7 @@ import { TelaLogin } from './pages/tela-login/tela-login';
 import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
 import { Sidebar } from './shared/components/sidebar/sidebar';
 import { DashboardAdmin } from './pages/dashboard-admin/dashboard-admin';
+import { Perfil } from './pages/perfil/perfil';
 
 export const routes: Routes = [
     {
@@ -38,6 +39,12 @@ export const routes: Routes = [
       path: 'dashbord-adm',
       title: "Dashbord administrador",
       component: DashboardAdmin
+
+   },
+        {
+      path: 'perfil-adm',
+      title: "Perfil administrador",
+      component: Perfil
 
    },
    {
