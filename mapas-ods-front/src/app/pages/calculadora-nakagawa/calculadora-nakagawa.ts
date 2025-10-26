@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { TabelaNakagawa } from './tabela-nakagawa/tabela-nakagawa';
 @Component({
   selector: 'app-calculadora-nakagawa',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,TabelaNakagawa],
   templateUrl: './calculadora-nakagawa.html',
   styleUrl: './calculadora-nakagawa.css'
 })

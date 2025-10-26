@@ -26,7 +26,7 @@ export class Eventos implements OnInit {
     this.getEventos();
   }
 
-  cadastrar():void{
+  cadastrar(): void {
     this.router.navigate(["cadastrar-evento"]);
   }
 
@@ -50,7 +50,7 @@ export class Eventos implements OnInit {
       this.showToastMessage('Erro ao atualizar evento', TipoAlerta.ERRO);
       return;
     }
-    this.router.navigate(['gerenciar-evento',idEvento]);
+    this.router.navigate(['gerenciar-evento', idEvento]);
   }
 
   deletarEvento(idEvento?: string) {
@@ -74,7 +74,6 @@ export class Eventos implements OnInit {
     this.toastMessagem = mensagem;
     this.tipoAlertaToast = tipo;
     this.showToast = true;
-
     setTimeout(() => this.showToast = false, duration);
   }
 }

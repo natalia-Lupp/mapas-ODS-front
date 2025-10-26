@@ -20,4 +20,18 @@ export class AlunosServices extends BasicService<InterfaceAlunosSemestres> {
          map(items => items.find(item => item.nome_semestre === nomeSemestre))
       )
    }
+
+   getByIntervaloData(dataInicio: Date, dataFim: Date) {
+      return this.getAll().pipe(
+         map((alunos: InterfaceAlunosSemestres[]) => {
+            const inicio = new Date(dataInicio).getTime();
+            const fim = new Date(dataFim).getTime();
+            return alunos.filter(aluno => {
+               const inicioSemestre = new Date(aluno.data_inicio_semestre).getTime();
+               const fimSemestre = new Date(aluno.data_fim_semestre).getTime();
+               return inicioSemestre >= inicio && fimSemestre <= fim;
+            });
+         })
+      );
+   }
 }
