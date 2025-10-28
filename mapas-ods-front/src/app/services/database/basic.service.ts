@@ -25,7 +25,7 @@ export class BasicService<T> {
   
 
   create(item: T): Observable<T> {
-    console.log({itemChegnado:item,rota:this.endpoint});
+    console.log(item);
     return this.http.post<T>(this.endpoint, item);
   }
 

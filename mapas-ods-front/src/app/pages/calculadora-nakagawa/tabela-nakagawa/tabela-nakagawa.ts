@@ -2,19 +2,23 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { ContaSaneparService } from '../../../services/database/contaSanepar.service';
-import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
-import { EventosService } from '../../../services/database/eventos.service';
-import { InterfaceEvento } from '../../../services/models/evento';
-import { InterfaceAlunosSemestres } from '../../../services/models/alunosSemestre';
 import { AlunosServices } from '../../../services/database/alunos.service';
+import { ContaSaneparService } from '../../../services/database/contaSanepar.service';
+import { EventosService } from '../../../services/database/eventos.service';
+import { MetricasService } from '../../../services/database/metricas.service';
 import { OutrosService } from '../../../services/database/outros.service';
+import { InterfaceAlunosSemestres } from '../../../services/models/alunosSemestre';
+import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
+import { InterfaceEvento } from '../../../services/models/evento';
+import { InterfaceMetricas } from '../../../services/models/metrica';
 import { IntefaceOutros } from '../../../services/models/outros';
+import { Toast } from '../../../shared/components/toast/toast';
+import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 
 @Component({
   selector: 'app-tabela-nakagawa',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, Toast],
   templateUrl: './tabela-nakagawa.html',
   styleUrls: ['./tabela-nakagawa.css'],
   providers: [DatePipe]
@@ -22,6 +26,11 @@ import { IntefaceOutros } from '../../../services/models/outros';
 export class TabelaNakagawa implements OnChanges, OnInit {
   @Input() dataInicio!: string;
   @Input() dataFim!: string;
+  @Input() formPeso!: FormGroup;
+
+  showToast = false;
+  toastMensagem = "";
+  tipoAlerta: TipoAlerta = TipoAlerta.SUCESSO;
 
   listaContaSanapear: IntarefaceContaSanepar[] = [];
   listaEventos: InterfaceEvento[] = [];
@@ -30,15 +39,66 @@ export class TabelaNakagawa implements OnChanges, OnInit {
   formMetricas!: FormGroup;
   formArrayTabela!: FormArray;
 
-  constructor(private contasSaneparService: ContaSaneparService, private eventosService: EventosService, private alunosService: AlunosServices, private outrosServices: OutrosService, private formBuilder: FormBuilder, private datePipe: DatePipe) { }
+  constructor(private contasSaneparService: ContaSaneparService, private eventosService: EventosService, private alunosService: AlunosServices, private outrosServices: OutrosService, private metricasService: MetricasService, private formBuilder: FormBuilder, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.formMetricas = this.formBuilder.group({
       contasSanepar: this.formBuilder.array([]),
       eventos: this.formBuilder.array([]),
       alunosSemestre: this.formBuilder.array([]),
-      outros: this.formBuilder.array([])
+      outros: this.formBuilder.array([]),
     });
+  }
+
+
+  salvar(): void {
+
+    const metricas = this.formMetricas.value;
+    const pesos = this.formPeso.value;
+
+    //xaxho 
+    const metricasParaSalvar: InterfaceMetricas = {
+      contas_sanepars: metricas.contasSanepar.map((c: any) => c.id),
+      eventos: metricas.eventos.map((e: any) => e.id),
+      outros: metricas.outros.map((o: any) => o.id),
+      alunos_semestres: metricas.alunosSemestre.map((a: any) => a.id),
+      id_infra: "kr3rbrpwz7sqi4r",
+      valores_pesos: this.montarArrayPesso(this.formPeso)
+    };
+
+
+    this.metricasService.create(metricasParaSalvar).subscribe({
+      next: (metricaSalva) => {
+        this.showToastMessage("Metrica Registrada com Sucesso", TipoAlerta.SUCESSO);
+      },
+      error: (err) => {
+        this.showToastMessage("Não Foi Possivel Salvar Metrica", TipoAlerta.ERRO);
+        console.error(err);
+      }
+    });
+  }
+
+  //xaxho2
+  private montarArrayPesso(formPeso: FormGroup): number[] {
+    const campos = [
+      formPeso.value?.pesoAlunosSemestreGeral,
+      formPeso.value?.pesoAlunosSemestreIntegral,
+      formPeso.value?.pesoAlunosSemestreNotuno,
+      formPeso.value?.pesoAuxiliaresAdministrativos,
+      formPeso.value?.pesoDocentes
+    ];
+    return campos.map(p => Number(p) || 1 );
+  }
+
+  back(): void {
+
+  }
+
+  showToastMessage(mensagem: string, tipo: TipoAlerta, duration = 1500) {
+    this.toastMensagem = mensagem;
+    this.tipoAlerta = tipo;
+    this.showToast = true;
+    setTimeout(() => this.showToast = false, duration);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -69,6 +129,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
   private createContasSaneparFormGroup(conta: IntarefaceContaSanepar): FormGroup {
     return this.formBuilder.group({
+      id: [conta.id],
       mes: [this.datePipe.transform(conta.mes, 'yyyy-MM-dd'), Validators.required],
       metrosCubicos: [conta.metros_cubicos, Validators.required]
     });
@@ -76,6 +137,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
   private createEventosFormGroup(evento: InterfaceEvento): FormGroup {
     return this.formBuilder.group({
+      id: [evento.id],
       nomeEvento: [evento.nome_evento, Validators.required],
       numeroEstimadoPessoas: [evento.numero_estimado_pessoas, Validators.required],
       eventoDataInicio: [this.datePipe.transform(evento.data_inicio, 'yyyy,MM-dd'), Validators.required],
@@ -85,6 +147,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
   private createAlunosFormGroup(aluno: InterfaceAlunosSemestres): FormGroup {
     return this.formBuilder.group({
+      id: [aluno.id],
       alunosSemestreGeral: [aluno.quantidade_alunos_geral, Validators.required],
       alunosSemestreIntegral: [aluno.quantidade_alunos_integral, Validators.required],
       alunosSemestreNoturno: [aluno.quantidade_alunos_noturnos, Validators.required],
@@ -96,6 +159,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
   private createOutrosFormGroup(outro: IntefaceOutros): FormGroup {
     return this.formBuilder.group({
+      id: [outro.id],
       apelido: [outro.apelido, Validators.required],
       auxiliaresAdministrativos: [outro.auxiliares_administrativos ?? 0],
       tercerizados: [outro.tercerizados ?? 0],
