@@ -23,6 +23,8 @@ export class CalculadoraNakagawa implements OnInit {
       pesoAuxiliaresAdministrativos:["",Validators.required],
       pesoTercerizados:["",Validators.required],
       pesoDocentes:["",Validators.required],
+      pesoOutros:["",Validators.required],
+      pesoEventos:["",Validators.required],
       dataInicioSemestre:["",Validators.required],
       dataFimSemestre:["",Validators.required]
     })

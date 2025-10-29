@@ -54,7 +54,6 @@ export class TabelaNakagawa implements OnChanges, OnInit {
   salvar(): void {
 
     const metricas = this.formMetricas.value;
-    const pesos = this.formPeso.value;
 
     //xaxho 
     const metricasParaSalvar: InterfaceMetricas = {
@@ -62,8 +61,17 @@ export class TabelaNakagawa implements OnChanges, OnInit {
       eventos: metricas.eventos.map((e: any) => e.id),
       outros: metricas.outros.map((o: any) => o.id),
       alunos_semestres: metricas.alunosSemestre.map((a: any) => a.id),
-      id_infra: "kr3rbrpwz7sqi4r",
-      valores_pesos: this.montarArrayPesso(this.formPeso)
+      id_infra: "kr3rbrpwz7sqi4r", //valor sempre fixo tem que ajustar isso
+      peso_alunos_geral: this.formPeso.value?.pesoAlunosSemestreGeral,
+      peso_alunos_noturno: this.formPeso.value?.pesoAlunosSemestreNotuno,
+      peso_alunos_integral: this.formPeso.value?.pesoAlunosSemestreIntegral,
+      peso_aux_administrativos: this.formPeso.value?.pesoAuxiliaresAdministrativos,
+      peso_tercerizados: this.formPeso.value?.pesoTercerizados,
+      peso_docentes: this.formPeso.value?.pesoDocentes,
+      peso_outro:this.formPeso.value?.peso_outro,
+      peso_evento:this.formPeso.value?.pesoEventos,
+      data_inicio_periodo: this.formPeso.value?.dataInicioSemestre,
+      data_fim_periodo: this.formPeso.value?.dataFimSemestre
     };
 
 
@@ -76,18 +84,6 @@ export class TabelaNakagawa implements OnChanges, OnInit {
         console.error(err);
       }
     });
-  }
-
-  //xaxho2
-  private montarArrayPesso(formPeso: FormGroup): number[] {
-    const campos = [
-      formPeso.value?.pesoAlunosSemestreGeral,
-      formPeso.value?.pesoAlunosSemestreIntegral,
-      formPeso.value?.pesoAlunosSemestreNotuno,
-      formPeso.value?.pesoAuxiliaresAdministrativos,
-      formPeso.value?.pesoDocentes
-    ];
-    return campos.map(p => Number(p) || 1 );
   }
 
   back(): void {

@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
 
+import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
+import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre/form-alunos-semestre';
+import { CalculadoraNakagawa } from './pages/calculadora-nakagawa/calculadora-nakagawa';
+import { FormBusca } from './pages/calculadora-nakagawa/resultado/form-busca/form-busca';
 import { ContasSanepar } from './pages/contaSanepar/contas-sanepar/contas-sanepar';
 import { FormContaSanepar } from './pages/contaSanepar/form-conta-sanepar/form-conta-sanepar';
 import { Eventos } from './pages/eventos/eventos';
 import { FormEventos } from './pages/eventos/form-eventos/form-eventos';
 import { Home } from './pages/home/home';
-import { NavbarAdm } from './shared/components/navbar-adm/navbar-adm';
-import { TelaLogin } from './pages/tela-login/tela-login';
-import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
-import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre/form-alunos-semestre';
-import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
-import { Outros } from './pages/outros/outros';
 import { FormOutros } from './pages/outros/form-outros/form-outros';
-import { CalculadoraNakagawa } from './pages/calculadora-nakagawa/calculadora-nakagawa';
+import { Outros } from './pages/outros/outros';
+import { TelaLogin } from './pages/tela-login/tela-login';
+import { NavbarAdm } from './shared/components/navbar-adm/navbar-adm';
 
 export const routes: Routes = [
    {
@@ -50,7 +50,7 @@ export const routes: Routes = [
       title: "Gerenciar Evento",
       component: FormEventos
    },
-     {
+   {
       path: "cadastrar-evento",
       title: "Cadastrar Evento",
       component: FormEventos
@@ -92,8 +92,13 @@ export const routes: Routes = [
       component: FormOutros
    },
    {
-      path:'calculadora-nakagawa',
-      title:"Calculadora Nakagawa",
-      component:CalculadoraNakagawa
+      path: 'calculadora-nakagawa',
+      title: "Calculadora Nakagawa",
+      component: CalculadoraNakagawa
+   },
+   {
+      path: 'form-resultado',
+      title: "Resultado Nakagawa",
+      component: FormBusca
    }
 ];

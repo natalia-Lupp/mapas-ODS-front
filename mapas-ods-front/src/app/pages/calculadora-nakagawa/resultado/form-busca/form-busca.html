@@ -1,0 +1,16 @@
+<form [formGroup]="formData" class="p-4 border rounded">
+   <div>
+      <label>Data Início:</label>
+      <input type="date" formControlName="dataInicio">
+   </div>
+
+   <div>
+      <label>Data Fim:</label>
+      <input type="date" formControlName="dataFim">
+   </div>
+</form>
+
+<hr>
+
+<app-resumo [dataInicio]="formData.get('dataInicio')?.value" [dataFim]="formData.get('dataFim')?.value">
+</app-resumo>

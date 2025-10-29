@@ -1,9 +1,10 @@
-import { Injectable } from "@angular/core";
-import { BasicService } from "./basic.service";
-import { HttpClient } from "@angular/common/http";
-import { BASE_URLS } from "../conts";
-import { InterfaceAlunosSemestres } from "../models/alunosSemestre";
-import { map, Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+
+import { BASE_URLS } from '../conts';
+import { InterfaceAlunosSemestres } from '../models/alunosSemestre';
+import { BasicService } from './basic.service';
 
 @Injectable({
    providedIn: "root"
@@ -34,4 +35,6 @@ export class AlunosServices extends BasicService<InterfaceAlunosSemestres> {
          })
       );
    }
+
+
 }
