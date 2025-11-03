@@ -19,6 +19,8 @@ import { TelaLogin } from './pages/tela-login/tela-login';
 import { ConsultarDados } from './pages/consultar-dados/consultar-dados';
 
 export const routes: Routes = [
+
+   
    // Página inicial
    {
       path: '',
