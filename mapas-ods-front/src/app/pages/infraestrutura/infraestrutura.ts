@@ -38,7 +38,6 @@ export class Infraestrutura implements OnInit {
 
   salvar(): void {
     if (this.formInfra.invalid) {
-      console.error("12313132");
       return;
     } else {
       const data: InterfaceInfraestrutura = {

@@ -1,0 +1,51 @@
+<form class="max-w-5xl mx-auto mt-10 p-8 bg-[#c9e2ff] rounded-2xl shadow-lg" [formGroup]="formAlunosSemestre"
+   (ngSubmit)="salvar()">
+   <h2 class="text-2xl font-semibold text-center mb-10 text-primary">
+      Gerenciar Alunos Por Semestre
+   </h2>
+   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <fieldset class="fieldset bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
+         <label class="label font-medium text-gray-700">Alunos Semestre Geral</label>
+         <input formControlName="alunosSemestreGeral" type="number" class="input input-bordered w-full"
+            placeholder="Quantidade geral" min="1" />
+      </fieldset>
+
+      <fieldset class="fieldset bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
+         <label class="label font-medium text-gray-700">Alunos Semestre Integral</label>
+         <input formControlName="alunosSemestreIntegral" type="number" class="input input-bordered w-full"
+            placeholder="Quantidade integral" min="1" />
+      </fieldset>
+
+      <fieldset class="fieldset bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
+         <label class="label font-medium text-gray-700">Alunos Semestre Noturno</label>
+         <input formControlName="alunosSemestreNoturno" type="number" class="input input-bordered w-full"
+            placeholder="Quantidade noturno" min="1" />
+      </fieldset>
+   </div>
+   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <fieldset class="fieldset bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
+         <label class="label font-medium text-gray-700">Data Início Semestre</label>
+         <input formControlName="dataInicioSemestre" type="date" class="input input-bordered w-full" />
+      </fieldset>
+
+      <fieldset class="fieldset bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
+         <label class="label font-medium text-gray-700">Data Fim Semestre</label>
+         <input formControlName="dataFimSemestre" type="date" class="input input-bordered w-full" />
+      </fieldset>
+
+      <fieldset class="fieldset bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
+         <label class="label font-medium text-gray-700">Nome Semestre</label>
+         <input formControlName="nomeSemestre" type="input" min="1" class="input input-bordered w-full" required="" />
+      </fieldset>
+   </div>
+   <div class="flex justify-center gap-4">
+      <button type="button" class="btn btn-warning px-8" (click)="back()">
+         Voltar
+      </button>
+      <button type="submit" class="btn btn-primary px-8" [disabled]="formAlunosSemestre.invalid">
+         Salvar
+      </button>
+   </div>
+</form>
+
+<app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlertaToast" [show]="showToast"></app-toast>

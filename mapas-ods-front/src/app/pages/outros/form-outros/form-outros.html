@@ -1,0 +1,45 @@
+<form [formGroup]="formOutro" class="bg-[#c9e2ff] m-12">
+   <div class="flex flex-row justify-around">
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend">Apelido</legend>
+         <input formControlName="apelido" type="text" class="input w-1/2" placeholder="ex: ano 2025" />
+      </fieldset>
+
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend">Nº Aux Administrativos</legend>
+         <input formControlName="auxiliaresAdministrativos" type="number" class="input w-1/2" placeholder="75"
+            required />
+      </fieldset>
+
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend">Nº Tercerizados</legend>
+         <input formControlName="tercerizados" type="number" class="input w-1/2" placeholder="75" required />
+      </fieldset>
+
+
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend">Nº Docentes</legend>
+         <input formControlName="docentes" type="number" class="input w-1/2" placeholder="75" required />
+      </fieldset>
+
+   </div>
+   <div class="flex flex-row justify-center items-center ">
+      <fieldset class="fieldset m-5">
+         <legend class="fieldset-legend text-center">Periodo Inicio</legend>
+         <input formControlName="periodoInicio" type="date" class="input w-0.5/2" placeholder="75" required />
+      </fieldset>
+
+      <fieldset class="fieldset">
+         <legend class="fieldset-legend text-center">Periodo Fim</legend>
+         <input formControlName="periodoFim" type="date" class="input w-0.5/2" placeholder="75" required />
+      </fieldset>
+   </div>
+
+   <div class="flex  justify-center items-center mt-5">
+      <button type="button" class="btn btn-outline bg-amber-50 border-r-2 mt-4 m-5" (click)="back()"><span
+            class="text-blue-600">Voltar</span></button>
+      <button type="button" class="btn btn-outline bg-[#2462ea] border-1" (click)="salvar()"><i
+            class="far fa-save text-white"></i><span class="text-white">Salvar</span></button>
+
+   </div>
+</form>

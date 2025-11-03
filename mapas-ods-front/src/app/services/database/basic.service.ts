@@ -22,9 +22,10 @@ export class BasicService<T> {
   getById(id: string): Observable<T> {
     return this.http.get<T>(`${this.endpoint}/${id}`);
   }
+  
 
   create(item: T): Observable<T> {
-    console.log({itemChegnado:item,rota:this.endpoint});
+    console.log(item);
     return this.http.post<T>(this.endpoint, item);
   }
 

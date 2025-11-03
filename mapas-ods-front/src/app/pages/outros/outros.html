@@ -1,0 +1,37 @@
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 m-10 rounded-4xl">
+   <div class="flex justify-end mb-3">
+      <button class="btn btn-success" (click)="cadastrar()"><span class="text-white">Novo+</span></button>
+   </div>
+
+   <table class="table custom-zebra">
+      <thead class="bg-[#c9e2ff]">
+         <tr class="text-center">
+            <th>Apelido</th>
+            <th>Aux. Administrtivos</th>
+            <th>Docentes</th>
+            <th>tercerizados</th>
+            <th>Periodo Inicio</th>
+            <th>Periodo Fim</th>
+            <th>Ações</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr class="text-center" *ngFor="let outro of outrosLista">
+            <td>{{outro.apelido}}</td>
+            <td>{{outro.auxiliares_administrativos}}</td>
+            <td>{{outro.docentes}}</td>
+            <td>{{outro.tercerizados}}</td>
+            <td>{{outro.periodo_inicio | date :"dd/MM/yyyy"}}</td>
+            <td>{{outro.periodo_fim | date :"dd/MM/yyyy"}}</td>
+            <td class="flex flex-row justify-center">
+               <button class="btn btn-xs bg-warning" (click)="atualizar(outro.id)">
+                  <i class="far fa-edit"></i>
+               </button>
+               <button class="btn btn-xs bg-error" (click)="deletar(outro.id)">
+                  <i class="fa-solid fa-trash"></i>
+               </button>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
