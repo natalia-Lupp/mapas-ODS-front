@@ -61,7 +61,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
       eventos: metricas.eventos.map((e: any) => e.id),
       outros: metricas.outros.map((o: any) => o.id),
       alunos_semestres: metricas.alunosSemestre.map((a: any) => a.id),
-      id_infra: "kr3rbrpwz7sqi4r", //valor sempre fixo tem que ajustar isso
+      id_infra: "kr3rbrpwz7sqi4r", //valor sempre fixo tem que ajustar isso por horas vai assim mesmo
       peso_alunos_geral: this.formPeso.value?.pesoAlunosSemestreGeral,
       peso_alunos_noturno: this.formPeso.value?.pesoAlunosSemestreNotuno,
       peso_alunos_integral: this.formPeso.value?.pesoAlunosSemestreIntegral,
@@ -77,6 +77,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
     this.metricasService.create(metricasParaSalvar).subscribe({
       next: (metricaSalva) => {
+        console.log(metricaSalva);
         this.showToastMessage("Metrica Registrada com Sucesso", TipoAlerta.SUCESSO);
       },
       error: (err) => {

@@ -106,7 +106,7 @@ export class MetricasService extends BasicService<InterfaceMetricas> {
    }> {
       const requisicoes = ids.map(id => this.alunosService.getById(id));
 
-      //esse forkJOin é novo para min vi num video no youtube 
+      //esse forkJOin é novo para min é novo
       return forkJoin(requisicoes).pipe(
          map((alunos: InterfaceAlunosSemestres[]) => {
             const somas = alunos.reduce(
