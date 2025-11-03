@@ -3,102 +3,151 @@ import { Routes } from '@angular/router';
 import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
 import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre/form-alunos-semestre';
 import { CalculadoraNakagawa } from './pages/calculadora-nakagawa/calculadora-nakagawa';
-import { FormBusca } from './pages/calculadora-nakagawa/resultado/form-busca/form-busca';
 import { ContasSanepar } from './pages/contaSanepar/contas-sanepar/contas-sanepar';
 import { FormContaSanepar } from './pages/contaSanepar/form-conta-sanepar/form-conta-sanepar';
+import { DashboardAdmin } from './pages/dashboard-admin/dashboard-admin';
+import { DashboardUser } from './pages/dashboard-user/dashboard-user';
 import { Eventos } from './pages/eventos/eventos';
 import { FormEventos } from './pages/eventos/form-eventos/form-eventos';
 import { Home } from './pages/home/home';
+import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
 import { FormOutros } from './pages/outros/form-outros/form-outros';
 import { Outros } from './pages/outros/outros';
+import { PerfilUser } from './pages/perfil-user/perfil-user';
+import { Perfil } from './pages/perfil/perfil';
 import { TelaLogin } from './pages/tela-login/tela-login';
-import { NavbarAdm } from './shared/components/navbar-adm/navbar-adm';
+import { ConsultarDados } from './pages/consultar-dados/consultar-dados';
 
 export const routes: Routes = [
+   // Página inicial
    {
-      path: 'navbar-adm',
-      title: "navbar com rota temporaria",
-      component: NavbarAdm
-
+      path: '',
+      title: 'Home Mapa ODS',
+      component: Home,
+      pathMatch: 'full'
    },
    {
+      path: 'consultar-dados',
+      title: "Consultar Dados",
+      component: ConsultarDados
+   },
+
+   // Login
+   {
+      path: 'login',
+      title: 'Tela de Login',
+      component: TelaLogin
+   },
+
+   // Dashboards
+   {
+      path: 'dashboard-adm',
+      title: 'Dashboard Administrador',
+      component: DashboardAdmin
+   },
+   {
+      path: 'dashboard-user',
+      title: 'Dashboard Usuário',
+      component: DashboardUser
+   },
+
+   // Perfis
+   {
+      path: 'perfil-adm',
+      title: 'Perfil Administrador',
+      component: Perfil
+   },
+   {
+      path: 'perfil-user',
+      title: 'Perfil Usuário',
+      component: PerfilUser
+   },
+
+   // Contas Sanepar
+   {
       path: 'contas-sanepar',
-      title: "Contas Sanepar",
+      title: 'Contas Sanepar',
       component: ContasSanepar
    },
    {
       path: 'cadastrar-leitura-sanepar',
-      title: "Cadastrar Leitura Sanepar",
+      title: 'Cadastrar Leitura Sanepar',
       component: FormContaSanepar
    },
    {
       path: 'atualizar-leitura-sanepar/:id',
-      title: "Atualizar Leitura Sanpear",
+      title: 'Atualizar Leitura Sanepar',
       component: FormContaSanepar
-   }, {
-      path: "eventos",
-      title: "Eventos",
+   },
+
+   // Eventos
+   {
+      path: 'eventos',
+      title: 'Eventos',
       component: Eventos
    },
    {
-      path: 'login',
-      title: "Tela de Login",
-      component: TelaLogin
-   },
-   {
-      path: "gerenciar-evento/:id",
-      title: "Gerenciar Evento",
+      path: 'cadastrar-evento',
+      title: 'Cadastrar Evento',
       component: FormEventos
    },
    {
-      path: "cadastrar-evento",
-      title: "Cadastrar Evento",
+      path: 'gerenciar-evento/:id',
+      title: 'Gerenciar Evento',
       component: FormEventos
    },
-   {
-      path: '',
-      title: "Home Mapa ODS",
-      component: Home,
-      pathMatch: "full"
-   },
-   {
-      path: 'alunos-semestre',
-      title: "Alunos Semestre",
-      component: AlunosSemestre,
-   },
-   {
-      path: "form-alunos-semestre/:id",
-      title: "Gerenciar Alunos Semestre",
-      component: FormAlunosSemestre
-   },
-   {
-      path: "form-alunos-semestre",
-      title: " Gerenciar Alunos Semestre",
-      component: FormAlunosSemestre
-   },
+
+   // Outros
    {
       path: 'outros',
-      title: "Outros",
+      title: 'Outros',
       component: Outros
    },
    {
-      path: 'cadastrar-outros',
-      title: "Cadastrar Outros ",
+      path: 'cadastrar-outro',
+      title: 'Cadastrar Outro',
       component: FormOutros
    },
    {
-      path: 'outros/:id',
-      title: "Gerenciar Outros",
+      path: 'atualizar-outro/:id',
+      title: 'Atualizar Outro',
       component: FormOutros
    },
+
+   // Alunos Semestre
+   {
+      path: 'alunos-semestre',
+      title: 'Alunos por Semestre',
+      component: AlunosSemestre
+   },
+   {
+      path: 'cadastrar-aluno-semestre',
+      title: 'Cadastrar Aluno Semestre',
+      component: FormAlunosSemestre
+   },
+   {
+      path: 'atualizar-aluno-semestre/:id',
+      title: 'Atualizar Aluno Semestre',
+      component: FormAlunosSemestre
+   },
+
+   // Calculadora Nakagawa
    {
       path: 'calculadora-nakagawa',
-      title: "Calculadora Nakagawa",
+      title: 'Calculadora Nakagawa',
       component: CalculadoraNakagawa
    },
+
+   // Infraestrutura
    {
-      path: 'form-resultado',
-      title: "Resultado Nakagawa",
-      component: FormBusca
+      path: 'infraestrutura',
+      title: 'Infraestrutura',
+      component: Infraestrutura
+   },
+
+   // Rota curinga (404)
+   {
+      path: '**',
+      redirectTo: ''
    }
 ];

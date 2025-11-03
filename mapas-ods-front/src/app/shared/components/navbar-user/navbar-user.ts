@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar-adm',
+  selector: 'app-navbar-user',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './navbar-adm.html',
-  styleUrls: ['./navbar-adm.css']
+  templateUrl: './navbar-user.html',
+  styleUrls: ['./navbar-user.css']
 })
-export class NavbarAdm {}
+export class NavbarUser {}

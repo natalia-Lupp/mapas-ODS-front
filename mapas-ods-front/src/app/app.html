@@ -1,3 +1,9 @@
-<header><app-navbar-adm></app-navbar-adm></header>
-<main><router-outlet></router-outlet></main>
-<footer><app-footer></app-footer></footer>
+<div class="min-h-screen flex flex-col">
+    <app-header></app-header>
+
+    <main class="flex-1">
+        <router-outlet></router-outlet>
+    </main>
+
+    <app-footer></app-footer>
+</div>
