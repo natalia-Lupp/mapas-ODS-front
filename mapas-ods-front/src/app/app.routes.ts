@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
 import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre/form-alunos-semestre';
 import { CalculadoraNakagawa } from './pages/calculadora-nakagawa/calculadora-nakagawa';
+import { DashboardNakagawa } from './pages/calculadora-nakagawa/dashboard-nakagawa/dashboard-nakagawa';
 import { ContasSanepar } from './pages/contaSanepar/contas-sanepar/contas-sanepar';
 import { FormContaSanepar } from './pages/contaSanepar/form-conta-sanepar/form-conta-sanepar';
 import { DashboardAdmin } from './pages/dashboard-admin/dashboard-admin';
@@ -138,6 +139,11 @@ export const routes: Routes = [
       path: 'calculadora-nakagawa',
       title: 'Calculadora Nakagawa',
       component: CalculadoraNakagawa
+   },
+   {
+      path: 'dashboard-nakagawa',
+      title: 'Dashboard Nakagawa',
+      component: DashboardNakagawa
    },
 
    // Infraestrutura
