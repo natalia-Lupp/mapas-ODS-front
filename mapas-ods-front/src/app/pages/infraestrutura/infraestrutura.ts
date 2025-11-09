@@ -5,10 +5,11 @@ import { InterfaceInfraestrutura } from '../../services/models/infraestrutura';
 import { InfraestruturaService } from '../../services/database/infraestrutua.service';
 import { FormBuilder, FormGroup, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../../../app/shared/shared.module/shared.module';
 
 @Component({
   selector: 'app-infraestrutura',
-  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
+  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule, SharedModule],
   standalone: true,
   templateUrl: './infraestrutura.html',
   styleUrl: './infraestrutura.css'

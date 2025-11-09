@@ -6,10 +6,10 @@ import { EventosService } from '../../services/database/eventos.service';
 import { InterfaceEvento } from '../../services/models/evento';
 import { TipoAlerta } from '../../shared/components/toast/toast.enum';
 import { Toast } from '../../shared/components/toast/toast';
-
+import { SharedModule } from '../../../app/shared/shared.module/shared.module';
 @Component({
   selector: 'app-eventos',
-  imports: [CommonModule, Toast],
+  imports: [CommonModule, Toast, SharedModule],
   standalone: true,
   templateUrl: './eventos.html',
   styleUrl: './eventos.css'

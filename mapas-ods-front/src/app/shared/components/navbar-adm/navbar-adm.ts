@@ -16,6 +16,10 @@ export class NavbarAdm {
   perfilRoute: string = '/perfil-adm';
   dashboardRoute: string = '/dashboard-adm';
   saneparRoute: string = '/contas-sanepar';
+  registerAccountsRoute: string = '/cadastrar-leitura-sanepar'
+  infrastructureRoute: string = '/infraestrutura'
+  eventRoute: string = '/eventos'
+  queryDataRoute: string = '/consultar-dados'
 
   constructor(
     private pbService: PocketBaseService,
@@ -38,4 +42,23 @@ export class NavbarAdm {
   goSanepar() {
     this.router.navigate([this.saneparRoute]);
   }
+
+  registerAccounts() {
+    this.router.navigate([this.registerAccountsRoute]);
+  }
+
+  infrastructure() {
+  this.router.navigate([this.infrastructureRoute]);
+  }
+
+  eventUTF() {
+  this.router.navigate([this.eventRoute]);
+  }
+
+  queryData() {
+  this.router.navigate([this.queryDataRoute]);
+  }
+
+  
 }
+

@@ -1,18 +1,41 @@
-<div class="flex flex-col items-center justify-center mt-4">
-   <div>
-      <h3 class="font-extrabold text-2xl">Informações do Campus UTFPR-Guarapuava</h3>
-   </div>
-   <div>
-      <form [formGroup]="formInfra">
-         <fieldset class="fieldset bg-[#c9e2ff] border-base-300 rounded-box w-xs border p-4">
-            <legend class="fieldset-legend">Tamanho Campus</legend>
-            <input formControlName="area_construida" type="number" class="input" placeholder="informe um valor" />
-            <p class="label">Informe em m² o tamanho do campus</p>
-         </fieldset>
-      </form>
-   </div>
-   <div class="mt-2">
-      <button class="m-2 btn btn-soft btn-warning" (click)="navigate('home')">Voltar</button>
-      <button class="m-2 btn btn-soft btn-primary"(click)="salvar()">Salvar</button>
+<!-- Área principal (Navbar + Conteúdo) -->
+<div class="flex-1 flex flex-col min-h-screen">
+   <!-- Navbar no topo -->
+   <app-navbar-adm></app-navbar-adm>
+
+   <div class="drawer lg:drawer-open min-h-screen flex">
+      <!-- Sidebar -->
+      <app-sidebar class="hidden lg:block w-64"></app-sidebar>
+
+      <!-- Conteúdo principal -->
+      <main class="p-6 flex-1 bg-white">
+         <h2 class="text-3xl font-semibold mb-6 text-gray-900">Informações do Campus UTFPR-Guarapuava</h2>
+
+         <!-- Formulário card -->
+         <div class="max-w-lg w-full bg-[#c9e2ff] rounded-2xl p-6 shadow-md border border-blue-200">
+            <form [formGroup]="formInfra" (ngSubmit)="salvar()" class="space-y-5">
+               <!-- Tamanho do Campus -->
+               <div>
+                  <label class="block text-sm font-medium text-gray-500 mb-1">Tamanho Campus (m²)</label>
+                  <input formControlName="area_construida" type="number"
+                     class="input input-bordered w-full bg-white text-gray-500"
+                     placeholder="Informe em m² o tamanho do campus" />
+               </div>
+
+               <!-- Botões -->
+               <div class="flex flex-col sm:flex-row justify-between gap-4 pt-4">
+                  <button type="button"
+                     class="px-6 py-2 rounded-full font-semibold text-blue-700 bg-white border w-full sm:w-auto"
+                     (click)="navigate('dashboard-adm')">
+                     Voltar
+                  </button>
+                  <button type="submit"
+                     class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto">
+                     Salvar
+                  </button>
+               </div>
+            </form>
+         </div>
+      </main>
    </div>
 </div>

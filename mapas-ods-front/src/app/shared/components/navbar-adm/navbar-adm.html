@@ -17,7 +17,7 @@
     <ul class="menu menu-horizontal px-1 text-gray-500">
       <li><a (click)="goDashboard()">Dashboard</a></li>
       <li><a (click)="goSanepar()"><i class="fas fa-plus"></i> Cadastrar Consumo</a></li>
-      <li><a>Visualizar Dados</a></li>
+      <li><a (click)="queryData()">Visualizar Dados</a></li>
     </ul>
   </div>
 
@@ -32,9 +32,9 @@
       <ul tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 bg-white shadow text-gray-500">
         <li><a (click)="goPerfil()">Perfil</a></li>
-        <li><a>Cadastrar Novo Prédio</a></li>
-        <li><a>Cadastrar Contas</a></li>
-        <li><a>Cadastrar Evento</a></li>
+        <li><a (click)="infrastructure()">Cadastrar Novo Prédio</a></li>
+        <li><a (click)="registerAccounts()">Cadastrar Contas</a></li>
+        <li><a (click)="eventUTF()">Cadastrar Evento</a></li>
         <li><a (click)="logout()">Sair</a></li>
       </ul>
     </div>

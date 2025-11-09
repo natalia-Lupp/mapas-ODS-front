@@ -8,10 +8,11 @@ import { EventosService } from '../../../services/database/eventos.service';
 import { InterfaceEvento } from '../../../services/models/evento';
 import { Toast } from '../../../shared/components/toast/toast';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
+import { SharedModule } from '../../../../app/shared/shared.module/shared.module';
 
 @Component({
   selector: 'app-form-eventos',
-  imports: [ReactiveFormsModule, Toast],
+  imports: [ReactiveFormsModule, Toast, SharedModule],
   standalone: true,
   templateUrl: './form-eventos.html',
   styleUrl: './form-eventos.css',

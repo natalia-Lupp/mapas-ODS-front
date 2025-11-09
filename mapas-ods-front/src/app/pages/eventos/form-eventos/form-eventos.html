@@ -1,40 +1,70 @@
-<div class="bg-[#c9e2ff] flex items-center justify-center ml-[15%] mr-[15%] h-[90%]">
-   <form [formGroup]="eventoForm" action="" class="flex flex-col w-full max-w-2xl p-6">
-      <fieldset class="fieldset">
-         <legend class="fieldset-legend">Nome Evento</legend>
-         <input formControlName="nome_evento" type="text" class="input w-full" placeholder="nome evento" />
-      </fieldset>
+<div class="flex-1 flex flex-col min-h-screen">
+   <!-- Navbar no topo -->
+   <app-navbar-adm></app-navbar-adm>
 
-      <fieldset class="fieldset">
-         <legend class="fieldset-legend">Número Estimado de Pessoas</legend>
-         <input formControlName="numero_estimado_pessoas" type="text" class="input w-full"
-            placeholder="número estimado de pessoas" />
-      </fieldset>
+   <div class="drawer lg:drawer-open min-h-screen flex">
+      <!-- Sidebar -->
+      <app-sidebar class="hidden lg:block w-64"></app-sidebar>
 
-      <fieldset class="fieldset">
-         <legend class="fieldset-legend">Data Início</legend>
-         <input formControlName="data_inicio" type="date" class="input w-full" placeholder="data início" />
-      </fieldset>
+      <!-- Conteúdo principal -->
+      <main class="p-6 flex-1 bg-white">
+         <h2 class="text-3xl font-semibold mb-6 text-gray-900">Registro de Eventos</h2>
 
-      <fieldset class="fieldset">
-         <legend class="fieldset-legend">Data Fim</legend>
-         <input formControlName="data_fim" type="date" class="input w-full" placeholder="data fim" />
-      </fieldset>
+         <!-- Formulário card -->
+         <div class="max-w-lg w-full  bg-[#c9e2ff] rounded-2xl p-6 shadow-md border border-blue-200">
+            <form [formGroup]="eventoForm" (ngSubmit)="salvar()" class="space-y-5">
+               <!-- Nome Evento -->
+               <div>
+                  <label class="block text-sm font-medium text-gray-500 mb-1">Nome Evento</label>
+                  <input formControlName="nome_evento" type="text"
+                     class="input input-bordered w-full bg-white text-gray-500" placeholder="Nome do evento" />
+               </div>
 
-      <fieldset class="fieldset">
-         <legend class="fieldset-legend">Descrição Evento</legend>
-         <input formControlName="descricao_evento" type="text" class="input w-full" placeholder="descrição do evento" />
-      </fieldset>
+               <!-- Número Estimado de Pessoas -->
+               <div>
+                  <label class="block text-sm font-medium text-gray-500 mb-1">Número Estimado de Pessoas</label>
+                  <input formControlName="numero_estimado_pessoas" type="number"
+                     class="input input-bordered w-full bg-white text-gray-500"
+                     placeholder="Número estimado de pessoas" />
+               </div>
 
-      <div class="flex items-center justify-between mt-10">
-         <button type="button" class="btn btn-outline bg-amber-50 border-r-2 mt-4 m-5" (click)="back()"><span
-               class="text-blue-600">Voltar</span></button>
-         <button type="button" class="btn btn-outline bg-[#2462ea] border-1" (click)="salvar()"><i
-               class="far fa-save text-white"></i><span class="text-white">Salvar</span></button>
+               <!-- Data Início -->
+               <div>
+                  <label class="block text-sm font-medium text-gray-500 mb-1">Data Início</label>
+                  <input formControlName="data_inicio" type="date"
+                     class="input input-bordered w-full bg-white text-gray-500" placeholder="Data início" />
+               </div>
 
-      </div>
-   </form>
+               <!-- Data Fim -->
+               <div>
+                  <label class="block text-sm font-medium text-gray-500 mb-1">Data Fim</label>
+                  <input formControlName="data_fim" type="date"
+                     class="input input-bordered w-full bg-white text-gray-500" placeholder="Data fim" />
+               </div>
+
+               <!-- Descrição Evento -->
+               <div>
+                  <label class="block text-sm font-medium text-gray-500 mb-1">Descrição Evento</label>
+                  <input formControlName="descricao_evento" type="text"
+                     class="input input-bordered w-full bg-white text-gray-500" placeholder="Descrição do evento" />
+               </div>
+
+               <!-- Botões -->
+               <div class="flex flex-col sm:flex-row justify-between gap-4 pt-4">
+                  <button type="button"
+                     class="px-6 py-2 rounded-full font-semibold text-blue-700 bg-white border w-full sm:w-auto"
+                     (click)="back()">
+                     Voltar
+                  </button>
+                  <button type="submit"
+                     class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto">
+                     {{ eventoId ? 'Atualizar' : 'Salvar' }}
+                  </button>
+               </div>
+            </form>
+         </div>
+      </main>
+   </div>
+
+   <app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlerta" [show]="showToast"></app-toast>
 </div>
-
-
-<app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlerta" [show]="showToast"></app-toast>
