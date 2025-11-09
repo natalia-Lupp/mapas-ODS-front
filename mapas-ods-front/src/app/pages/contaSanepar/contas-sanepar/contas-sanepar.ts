@@ -6,11 +6,12 @@ import { ContaSaneparService } from '../../../services/database/contaSanepar.ser
 import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
 import { Toast } from '../../../shared/components/toast/toast';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
+import { SharedModule } from '../../../shared/shared.module/shared.module';
 
 @Component({
   selector: 'app-contas-sanepar',
   standalone: true,
-  imports: [CommonModule, Toast],
+  imports: [CommonModule, Toast, SharedModule],
   templateUrl: './contas-sanepar.html',
   styleUrls: ['./contas-sanepar.css']
 })

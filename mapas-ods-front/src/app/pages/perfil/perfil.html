@@ -20,13 +20,15 @@
                             name="nome" />
                     </div>
 
-                    <!-- Email -->
+                    <!-- Email (comentado) -->
+                    <!--
                     <div>
                         <label class="block text-sm font-medium text-gray-500 mb-1">Email</label>
                         <input type="email" placeholder="exemplo@dominio.com"
                             class="input input-bordered w-full bg-white text-gray-500" [(ngModel)]="perfil.email"
                             name="email" />
                     </div>
+                    -->
 
                     <!-- Unidade -->
                     <div>
@@ -41,7 +43,7 @@
                     <!-- Descrição -->
                     <div>
                         <label class="block text-sm font-medium text-gray-500 mb-1">Descrição</label>
-                        <textarea class="textarea textarea-bordered w-full bg-white" rows="4"
+                        <textarea class="textarea textarea-bordered w-full bg-white text-gray-500" rows="4"
                             [(ngModel)]="perfil.descricao" name="descricao"
                             placeholder="Escreva uma breve descrição..."></textarea>
                     </div>
@@ -59,6 +61,15 @@
                         </button>
                     </div>
                 </form>
+            </div>
+
+            <!-- Campo dinâmico mostrando o perfil -->
+            <div class="bg-gray-100 rounded-xl p-6 mt-6 max-w-xl">
+                <h3 class="text-xl font-semibold mb-3">Dados atuais</h3>
+                <p><strong>Nome:</strong> {{ perfil.nome }}</p>
+                <!-- <p><strong>Email:</strong> {{ perfil.email }}</p> --> <!-- opcional -->
+                <p><strong>Unidade:</strong> {{ perfil.unidade }}</p>
+                <p><strong>Descrição:</strong> {{ perfil.descricao }}</p>
             </div>
         </main>
     </div>

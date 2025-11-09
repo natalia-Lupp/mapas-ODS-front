@@ -7,11 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ContaSaneparService } from '../../../services/database/contaSanepar.service';
 import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
+import { SharedModule } from '../../../shared/shared.module/shared.module';
 
 @Component({
   selector: 'app-form-conta-sanepar',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SharedModule],
   templateUrl: './form-conta-sanepar.html',
   styleUrl: './form-conta-sanepar.css',
   providers: [DatePipe] // necessário para usar DatePipe no standalone
@@ -67,9 +68,11 @@ export class FormContaSanepar implements OnInit {
     }
 
     const data: IntarefaceContaSanepar = {
-      mes: this.contaSaneparForm.value.mes,
-      metros_cubicos: this.contaSaneparForm.value.metrosCubicos
-    };
+  mes: new Date(this.contaSaneparForm.value.mes), // agora ta salvando no banco
+  metros_cubicos: this.contaSaneparForm.value.metrosCubicos
+};
+
+console.log('Dados a enviar:', data); // opcional para debug
 
     if (this.contaSaneparId) {
       this.contaSaneparService.update(this.contaSaneparId, data).subscribe({

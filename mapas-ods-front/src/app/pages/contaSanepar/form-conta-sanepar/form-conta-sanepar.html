@@ -1,16 +1,35 @@
-<div class="flex items-center justify-center">
-  <form [formGroup]="contaSaneparForm" (ngSubmit)="salvar()">
-    <fieldset class="fieldset bg-[#c9e2ff] border-base-300 rounded-box w-xs border p-4">
-      <label class="label">Data</label>
-      <input formControlName="mes" type="date" class="input" placeholder="data" />
+<!-- Área principal (Navbar + Conteúdo) -->
+<div class="flex-1 flex flex-col min-h-screen">
+  <!-- Navbar no topo -->
+  <app-navbar-adm></app-navbar-adm>
 
-      <label class="label">M³</label>
-      <input formControlName="metrosCubicos" type="number" class="input" placeholder="metros cubicos" />
+  <div class="drawer lg:drawer-open min-h-screen flex">
+    <!-- Sidebar -->
+    <app-sidebar class="hidden lg:block w-64"></app-sidebar>
 
-      <button type="submit" class="btn btn-success mt-4">
-        {{ contaSaneparId ? 'Atualizar' : 'Salvar' }}
-      </button>
-      <button type="button" class="btn btn-warning mt-4" (click)="back()">Voltar</button>
-    </fieldset>
-  </form>
+    <!-- Conteúdo principal -->
+    <main class="p-6 flex-1 bg-white flex flex-col items-center justify-start">
+      <h2 class="text-3xl font-semibold mb-6 text-gray-900">Cadastro de Leitura Sanepar</h2>
+
+      <!-- Formulário -->
+      <div class="flex items-center justify-center w-full">
+        <form [formGroup]="contaSaneparForm" (ngSubmit)="salvar()" class="w-full max-w-xs">
+          <fieldset class="fieldset bg-[#c9e2ff] border-base-300 rounded-box w-full border p-6 flex flex-col gap-4">
+            <label class="label">Data</label>
+            <input formControlName="mes" type="date" class="input" placeholder="Data" />
+
+            <label class="label">M³</label>
+            <input formControlName="metrosCubicos" type="number" class="input" placeholder="Metros cúbicos" />
+
+            <div class="flex gap-4 mt-4">
+              <button type="submit" class="btn btn-success flex-1">
+                {{ contaSaneparId ? 'Atualizar' : 'Salvar' }}
+              </button>
+              <button type="button" class="btn btn-warning flex-1" (click)="back()">Voltar</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </main>
+  </div>
 </div>

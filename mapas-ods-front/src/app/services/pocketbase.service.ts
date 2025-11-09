@@ -5,13 +5,15 @@ import { BASE_URLS } from './conts';
 @Injectable({
   providedIn: 'root'
 })
+
+// ignorar alguns comentarios da ia que qd fui corrigir pra ver se tinha erro ela colocou uns e ñ ficou ruim
 export class PocketBaseService {
   pb: PocketBase;
 
   constructor() {
     this.pb = new PocketBase(BASE_URLS.URL_POCKETBASE);
 
-    // 🔁 Recupera o auth do localStorage ao iniciar
+    //Recupera o auth do localStorage ao iniciar
     const storedAuth = localStorage.getItem('pb_auth');
     if (storedAuth) {
       try {

@@ -1,39 +1,59 @@
-<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 m-10 rounded-4xl">
-   <div class="flex justify-end mb-3">
-      <button class="btn btn-success" (click)="cadastrarLeitura()"><span class="text-white">Nova Leitura</span></button>
+<!-- Área principal (Navbar + Conteúdo) -->
+<div class="flex-1 flex flex-col min-h-screen">
+   <!-- Navbar no topo -->
+   <app-navbar-adm></app-navbar-adm>
+
+   <div class="drawer lg:drawer-open min-h-screen flex">
+      <!-- Sidebar -->
+      <app-sidebar class="hidden lg:block w-64"></app-sidebar>
+
+      <!-- Conteúdo principal -->
+      <main class="p-6 flex-1 bg-white">
+         <h2 class="text-3xl font-semibold mb-2 text-gray-900">Contas Sanepar</h2>
+         <h3 class="text-2xl font-semibold mb-6 text-gray-900 pt-4">Últimos Dados Cadastrados</h3>
+
+         <!-- Botão Nova Leitura -->
+         <div class="flex justify-end mb-6">
+            <button class="btn btn-success" (click)="cadastrarLeitura()">
+               <span class="text-white">Nova Leitura</span>
+            </button>
+         </div>
+
+         <!-- Tabela de Contas -->
+         <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 rounded-4xl ">
+            <table class="table w-full text-center text-gray-500">
+               <thead class="bg-[#c9e2ff] text-gray-500">
+                  <tr>
+                     <th>Data</th>
+                     <th>M³</th>
+                     <th>Consumo Esperado</th>
+                     <th></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let conta of listaContas">
+                     <td>{{ conta.mes | date:'dd/MM/yyyy' }}</td>
+                     <td>{{ conta.metros_cubicos }}</td>
+                     <td>
+                        <div class="badge badge-outline"
+                           [ngClass]="conta.metros_cubicos <= 900 ? 'badge-success' : 'badge-error'">
+                           {{ conta.metros_cubicos <= 900 ? 'Meta Atingida' : 'Meta Não Atingida' }} </div>
+                     </td>
+                     <td class="flex justify-center gap-2">
+                        <button class="btn btn-xs" (click)="atualizarLeitura(conta.id)">
+                           <i class="far fa-edit"></i>
+                        </button>
+                        <button class="btn btn-xs" (click)="deletarLeitura(conta.id)">
+                           <i class="fa-solid fa-trash"></i>
+                        </button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+
+         <!-- Toast -->
+         <app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlertaToast" [show]="showToast"></app-toast>
+      </main>
    </div>
-
-   <table class="table custom-zebra">
-      <!-- head -->
-      <thead class="bg-[#c9e2ff]">
-         <tr>
-            <th>Data</th>
-            <th>M³</th>
-            <th>Consumo Esperado</th>
-            <th></th>
-         </tr>
-      </thead>
-      <tbody>
-         <tr *ngFor="let conta of listaContas">
-            <td>{{ conta.mes | date:'dd/MM/yyyy' }}</td>
-            <td>{{ conta.metros_cubicos }}</td>
-            <td>
-               <div class="badge badge-outline"
-                    [ngClass]="conta.metros_cubicos <= 900 ? 'badge-success' : 'badge-error'">
-                  {{ conta.metros_cubicos <= 900 ? 'Meta Atingida' : 'Meta Não Atingida' }}
-               </div>
-            </td>
-            <td>
-               <button class="btn btn-xs" (click)="atualizarLeitura(conta.id)">
-                  <i class="far fa-edit"></i>
-               </button>
-               <button class="btn btn-xs" (click)="deletarLeitura(conta.id)">
-                  <i class="fa-solid fa-trash"></i>
-               </button>
-            </td>
-         </tr>
-      </tbody>
-   </table>
 </div>
-
-<app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlertaToast" [show]="showToast"></app-toast>

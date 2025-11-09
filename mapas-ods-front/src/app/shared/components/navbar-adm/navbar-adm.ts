@@ -14,7 +14,8 @@ import { PocketBaseService } from '../../../services/pocketbase.service';
 export class NavbarAdm {
 
   perfilRoute: string = '/perfil-adm';
-  dashboardRoute: string = '/dashboard-adm'; 
+  dashboardRoute: string = '/dashboard-adm';
+  saneparRoute: string = '/contas-sanepar';
 
   constructor(
     private pbService: PocketBaseService,
@@ -32,5 +33,9 @@ export class NavbarAdm {
 
  goDashboard() {
     this.router.navigate([this.dashboardRoute]);
+  }
+
+  goSanepar() {
+    this.router.navigate([this.saneparRoute]);
   }
 }
