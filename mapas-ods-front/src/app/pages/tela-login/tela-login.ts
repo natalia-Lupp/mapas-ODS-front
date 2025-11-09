@@ -19,11 +19,14 @@ import { Router } from '@angular/router';
 export class TelaLogin {
   form: FormGroup;
   showToast = false;
-  //deixa publico pro toast digamos 
   TipoAlerta = TipoAlerta;
 
-  constructor(private fb: FormBuilder, private pbService: PocketBaseService, private authService: AuthService, private router: Router) {
-
+  constructor(
+    private fb: FormBuilder,
+    private pbService: PocketBaseService,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.form = this.fb.group({
       login: ['', Validators.required],
       senha: ['', Validators.required]
@@ -33,13 +36,28 @@ export class TelaLogin {
   async onSubmit() {
     if (this.form.valid) {
       this.showToast = false;
-      const TOKEN_POCKET = await this.pbService.login(this.form.value.login, this.form.value.senha);
-      this.authService.setToken(TOKEN_POCKET);
-      this.router.navigate(['/contas-sanepar']);
+
+      try {
+        // 🔹 Agora login() retorna apenas o token (string)
+        const token = await this.pbService.login(
+          this.form.value.login,
+          this.form.value.senha
+        );
+
+        // 🔹 Salva o token no AuthService
+        this.authService.setToken(token);
+
+        // 🔹 Redireciona para o dashboard
+        this.router.navigate(['/dashboard-adm']);
+      } catch (error) {
+        console.error('Erro no login:', error);
+        this.showToast = true;
+        setTimeout(() => (this.showToast = false), 2000);
+      }
 
     } else {
       this.showToast = true;
-      setTimeout(() => this.showToast = false, 1000);
+      setTimeout(() => (this.showToast = false), 1000);
     }
   }
 }
