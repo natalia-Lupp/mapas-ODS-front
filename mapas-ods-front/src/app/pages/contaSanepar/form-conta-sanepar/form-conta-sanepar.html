@@ -8,26 +8,38 @@
     <app-sidebar class="hidden lg:block w-64"></app-sidebar>
 
     <!-- Conteúdo principal -->
-    <main class="p-6 flex-1 bg-white flex flex-col items-center justify-start">
+    <main class="p-6 flex-1 bg-white">
       <h2 class="text-3xl font-semibold mb-6 text-gray-900">Cadastro de Leitura Sanepar</h2>
 
-      <!-- Formulário -->
-      <div class="flex items-center justify-center w-full">
-        <form [formGroup]="contaSaneparForm" (ngSubmit)="salvar()" class="w-full max-w-xs">
-          <fieldset class="fieldset bg-[#c9e2ff] border-base-300 rounded-box w-full border p-6 flex flex-col gap-4">
-            <label class="label">Data</label>
-            <input formControlName="mes" type="date" class="input" placeholder="Data" />
+      <!-- Formulário card -->
+      <div class="max-w-lg w-full bg-[#c9e2ff] rounded-2xl p-6 shadow-md border border-blue-200">
+        <form [formGroup]="contaSaneparForm" (ngSubmit)="salvar()" class="space-y-5">
+          <!-- Data -->
+          <div>
+            <label class="block text-sm font-medium text-gray-500 mb-1">Data</label>
+            <input formControlName="mes" type="date" class="input input-bordered w-full bg-white text-gray-500"
+              placeholder="Data" />
+          </div>
 
-            <label class="label">M³</label>
-            <input formControlName="metrosCubicos" type="number" class="input" placeholder="Metros cúbicos" />
+          <!-- Metros Cúbicos -->
+          <div>
+            <label class="block text-sm font-medium text-gray-500 mb-1">M³</label>
+            <input formControlName="metrosCubicos" type="number"
+              class="input input-bordered w-full bg-white text-gray-500" placeholder="Metros cúbicos" />
+          </div>
 
-            <div class="flex gap-4 mt-4">
-              <button type="submit" class="btn btn-success flex-1">
-                {{ contaSaneparId ? 'Atualizar' : 'Salvar' }}
-              </button>
-              <button type="button" class="btn btn-warning flex-1" (click)="back()">Voltar</button>
-            </div>
-          </fieldset>
+          <!-- Botões -->
+          <div class="flex flex-col sm:flex-row justify-between gap-4 pt-4">
+            <button type="button"
+              class="px-6 py-2 rounded-full font-semibold text-blue-700 bg-white border w-full sm:w-auto"
+              (click)="back()">
+              Voltar
+            </button>
+            <button type="submit"
+              class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto">
+              {{ contaSaneparId ? 'Atualizar' : 'Salvar' }}
+            </button>
+          </div>
         </form>
       </div>
     </main>

@@ -20,9 +20,9 @@
          </div>
 
          <!-- Tabela de Contas -->
-         <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 rounded-4xl ">
+         <div class="card bg-white shadow-md border border-gray-200 rounded-2xl overflow-x-auto">
             <table class="table w-full text-center text-gray-500">
-               <thead class="bg-[#c9e2ff] text-gray-500">
+               <thead class="text-blue-800 bg-[#c9e2ff]">
                   <tr>
                      <th>Data</th>
                      <th>M³</th>
@@ -31,13 +31,14 @@
                   </tr>
                </thead>
                <tbody>
-                  <tr *ngFor="let conta of listaContas">
+                  <tr *ngFor="let conta of listaContas" class="hover:bg-blue-50">
                      <td>{{ conta.mes | date:'dd/MM/yyyy' }}</td>
                      <td>{{ conta.metros_cubicos }}</td>
                      <td>
                         <div class="badge badge-outline"
-                           [ngClass]="conta.metros_cubicos <= 900 ? 'badge-success' : 'badge-error'">
-                           {{ conta.metros_cubicos <= 900 ? 'Meta Atingida' : 'Meta Não Atingida' }} </div>
+                           [ngClass]="conta.metros_cubicos >= 266 && conta.metros_cubicos <= 404 ? 'badge-success' : 'badge-error'">
+                           {{ (conta.metros_cubicos >= 266 && conta.metros_cubicos <= 404) ? 'Meta Atingida'
+                              : 'Meta Não Atingida' }}</div>
                      </td>
                      <td class="flex justify-center gap-2">
                         <button class="btn btn-xs" (click)="atualizarLeitura(conta.id)">
