@@ -59,15 +59,41 @@ export class FormEventos implements OnInit {
       return;
     };
 
+
     const data: InterfaceEvento = {
       nome_evento: this.eventoForm.value.nome_evento,
       numero_estimado_pessoas: this.eventoForm.value.numero_estimado_pessoas,
       data_inicio: this.eventoForm.value.data_inicio,
       data_fim: this.eventoForm.value.data_fim,
       descricao_evento: this.eventoForm.value.descricao_evento
+    };
+
+
+    if (this.eventoId) {
+      this.update({ ...data, id: this.eventoId });
+      return;
     }
 
     this.eventoService.create(data).subscribe({
+
+      next: () => {
+        this.showToast = true;
+        this.showToastMessage("Evento Cadastrado Com Sucesso", TipoAlerta.SUCESSO, 1500);
+        this.router.navigate(["eventos"]);
+      },
+      error: (err) => {
+        this.showToast = true;
+        console.error(err);
+        this.showToastMessage('Não foi Possivel Salvar Evento', TipoAlerta.ERRO);
+      }
+    })
+  }
+
+  update(data: InterfaceEvento): void {
+    if (!data.id) {
+      return;
+    }
+    this.eventoService.update(data.id, data).subscribe({
       next: () => {
         this.showToast = true;
         this.showToastMessage("Evento Cadastrado Com Sucesso", TipoAlerta.SUCESSO, 1500);
