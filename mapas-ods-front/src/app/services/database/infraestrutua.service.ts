@@ -13,4 +13,5 @@ export class InfraestruturaService extends BasicService<InterfaceInfraestrutura>
       const endpoint = BASE_URLS.URL_POCKETBASE + BASE_URLS.URL_INFRAESTRUTURA;
       super(http, endpoint);
    }
+
 }

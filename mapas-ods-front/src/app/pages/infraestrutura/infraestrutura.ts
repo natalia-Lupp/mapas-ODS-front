@@ -17,13 +17,28 @@ import { SharedModule } from '../../../app/shared/shared.module/shared.module';
 export class Infraestrutura implements OnInit {
 
   formInfra!: FormGroup;
+  objInfra!: InterfaceInfraestrutura | null;
 
   constructor(private router: Router, private infraService: InfraestruturaService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.formInfra = this.formBuilder.group({
       area_construida: ["", [Validators.required, Validators.min(1)]]
-    })
+    });
+
+
+    //xaxho 
+    this.getInfraestutura().subscribe({
+      next: (infra) => {
+        this.objInfra = infra;
+        if (infra) {
+          this.formInfra.patchValue({
+            area_construida: infra.area_construida
+          });
+        }
+      },
+      error: (err) => console.error("Erro ao buscar infraestrutura:", err)
+    });
   }
 
   getInfraestutura(): Observable<InterfaceInfraestrutura | null> {
@@ -44,7 +59,14 @@ export class Infraestrutura implements OnInit {
       const data: InterfaceInfraestrutura = {
         area_construida: this.formInfra.value.area_construida
       };
-      this.infraService.create(data)
+      this.infraService.create(data).subscribe({
+        next(data) {
+
+        },
+        error(err) {
+          console.error({ "ERRO_AO_SALVAR_INFRAESTRUTURA": err });
+        },
+      })
     }
   }
 }

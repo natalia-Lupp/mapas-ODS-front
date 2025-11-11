@@ -22,7 +22,7 @@ export class BasicService<T> {
   getById(id: string): Observable<T> {
     return this.http.get<T>(`${this.endpoint}/${id}`);
   }
-  
+
 
   create(item: T): Observable<T> {
     console.log(item);
