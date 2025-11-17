@@ -36,10 +36,17 @@
                </div>
 
                <!-- Data Fim -->
+               <!-- Data Fim -->
                <div>
                   <label class="block text-sm font-medium text-gray-500 mb-1">Data Fim</label>
                   <input formControlName="data_fim" type="date"
                      class="input input-bordered w-full bg-white text-gray-500" placeholder="Data fim" />
+                  <!-- Mensagem de erro -->
+                  <div
+                     *ngIf="!validarData() && (eventoForm.get('data_fim')?.touched || eventoForm.get('data_inicio')?.touched)"
+                     class="text-red-500 text-sm mt-1">
+                     A data de fim não pode ser menor que a data de início.
+                  </div>
                </div>
 
                <!-- Descrição Evento -->
@@ -57,7 +64,8 @@
                      Voltar
                   </button>
                   <button type="submit"
-                     class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto">
+                     class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto disabled:bg-gray-400 disabled:cursor-not-allowed"
+                     [disabled]="!eventoForm.valid || !validarData()">
                      {{ eventoId ? 'Atualizar' : 'Salvar' }}
                   </button>
                </div>

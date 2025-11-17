@@ -37,14 +37,18 @@ export class FormEventos implements OnInit {
   }
 
 
-  private validarData(): boolean {
-    const dataInicio = new Date(this.eventoForm.value.data_inicio);
-    const dataFim = new Date(this.eventoForm.value.data_fim);
+   validarData(): boolean {
+    const dataInicioValue = this.eventoForm.value.data_inicio;
+    const dataFimValue = this.eventoForm.value.data_fim;
 
-    if (dataFim < dataInicio) {
-      return false;
+    if (!dataInicioValue || !dataFimValue) {
+      return true;
     }
-    return true;
+
+    const dataInicio = new Date(dataInicioValue);
+    const dataFim = new Date(dataFimValue);
+
+    return dataFim >= dataInicio;
   }
 
   back(): void {
