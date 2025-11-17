@@ -15,7 +15,7 @@ export class NavbarAdm {
 
   perfilRoute: string = '/perfil-adm';
   dashboardRoute: string = '/dashboard-adm';
-  saneparRoute: string = '/contas-sanepar';
+  saneparRoute: string = 'contas-sanepar';
   registerAccountsRoute: string = '/cadastrar-leitura-sanepar'
   infrastructureRoute: string = '/infraestrutura'
   eventRoute: string = '/eventos'
