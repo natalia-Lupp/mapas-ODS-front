@@ -21,7 +21,7 @@ import { ConsultarDados } from './pages/consultar-dados/consultar-dados';
 
 export const routes: Routes = [
 
-   
+
    // Página inicial
    {
       path: '',
@@ -70,7 +70,8 @@ export const routes: Routes = [
    {
       path: 'contas-sanepar',
       title: 'Contas Sanepar',
-      component: ContasSanepar
+      component: ContasSanepar,
+      pathMatch: 'full'
    },
    {
       path: 'cadastrar-leitura-sanepar',

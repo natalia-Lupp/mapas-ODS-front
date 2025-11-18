@@ -115,12 +115,9 @@
       </div>
    </section>
    <section>
-      <div class="flex gap-4">
+      <div class="flex gap-4 justify-end-safe">
          <button type="button" class="btn btn-warning px-8" (click)="back()">
             Voltar
-         </button>
-         <button type="button" class="btn btn-info px-8" (click)="gerarRelatorio()" [disabled]="formMetricas.invalid">
-            📄 Gerar Relatório
          </button>
          <button type="submit" class="btn btn-primary px-8" (click)="salvar()" [disabled]="formMetricas.invalid">
             Salvar

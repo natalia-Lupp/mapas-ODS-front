@@ -36,7 +36,7 @@ export class Outros implements OnInit {
   }
 
   cadastrar() {
-    this.router.navigate(['cadastrar-outros'])
+    this.router.navigate(['cadastrar-outro'])
   }
 
   atualizar(id?: string) {
