@@ -25,7 +25,6 @@ export class BasicService<T> {
 
 
   create(item: T): Observable<T> {
-    console.log(item);
     return this.http.post<T>(this.endpoint, item);
   }
 

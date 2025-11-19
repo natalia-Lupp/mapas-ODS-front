@@ -9,14 +9,14 @@ export interface InterfaceMetricas {
    outros?: IntefaceOutros[],
    alunos_semestres?: InterfaceAlunosSemestres[],
    id_infra: string,
-   peso_outro:number,
-   peso_evento:number,
-   peso_alunos_geral: number,
-   peso_alunos_noturno: number,
-   peso_alunos_integral: number,
-   peso_aux_administrativos: number,
-   peso_tercerizados: number,
-   peso_docentes: number,
    data_inicio_periodo: Date,
-   data_fim_periodo: Date
+   data_fim_periodo: Date,
+   consumo_total_agua: number,
+   total_pessoas_eventos: number,
+   total_auxiliares_administrativos: number,
+   total_tercerizados: number,
+   total_docentes: number,
+   total_alunos_geral: number,
+   total_alunos_integral: number,
+   total_alunos_noturnos: number
 };

@@ -14,6 +14,7 @@ import { InterfaceMetricas } from '../../../services/models/metrica';
 import { IntefaceOutros } from '../../../services/models/outros';
 import { Toast } from '../../../shared/components/toast/toast';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-tabela-nakagawa',
@@ -51,9 +52,22 @@ export class TabelaNakagawa implements OnChanges, OnInit {
   }
 
 
-  salvar(): void {
+  async salvar(): Promise<void> {
 
     const metricas = this.formMetricas.value;
+
+    const totalLitros = await this.getTotalContasSanepar();
+    const outrosObj: {
+      somaAuxAdministrativos: number;
+      somaTercerizados: number;
+      somaDocentes: number;
+    } | number = await this.getTotalOutros();
+    const totalPessoasEventos = await this.getTotalPessoasEventos();
+    const totalAlunos: {
+      somatoriaAlunosGeral: number;
+      somatoriaAlunosIntegral: number;
+      somatoriaAlunosNoturnos: number;
+    } | number = await this.getTotalAlunosSemestre();
 
     //xaxho 
     const metricasParaSalvar: InterfaceMetricas = {
@@ -62,18 +76,17 @@ export class TabelaNakagawa implements OnChanges, OnInit {
       outros: metricas.outros.map((o: any) => o.id),
       alunos_semestres: metricas.alunosSemestre.map((a: any) => a.id),
       id_infra: "c7wn6029s5lx4di", //valor sempre fixo tem que ajustar isso por horas vai assim mesmo
-      peso_alunos_geral: this.formPeso.value?.pesoAlunosSemestreGeral,
-      peso_alunos_noturno: this.formPeso.value?.pesoAlunosSemestreNotuno,
-      peso_alunos_integral: this.formPeso.value?.pesoAlunosSemestreIntegral,
-      peso_aux_administrativos: this.formPeso.value?.pesoAuxiliaresAdministrativos,
-      peso_tercerizados: this.formPeso.value?.pesoTercerizados,
-      peso_docentes: this.formPeso.value?.pesoDocentes,
-      peso_outro:this.formPeso.value?.pesoOutros,
-      peso_evento:this.formPeso.value?.pesoEventos,
       data_inicio_periodo: this.formPeso.value?.dataInicioSemestre,
-      data_fim_periodo: this.formPeso.value?.dataFimSemestre
+      data_fim_periodo: this.formPeso.value?.dataFimSemestre,
+      consumo_total_agua: totalLitros,
+      total_pessoas_eventos: totalPessoasEventos ?? 0,
+      total_auxiliares_administrativos: outrosObj.somaAuxAdministrativos,
+      total_tercerizados: outrosObj.somaTercerizados,
+      total_docentes: outrosObj.somaDocentes,
+      total_alunos_geral: totalAlunos.somatoriaAlunosGeral,
+      total_alunos_integral: totalAlunos.somatoriaAlunosIntegral,
+      total_alunos_noturnos: totalAlunos.somatoriaAlunosNoturnos
     };
-
 
     this.metricasService.create(metricasParaSalvar).subscribe({
       next: (metricaSalva) => {
@@ -101,6 +114,68 @@ export class TabelaNakagawa implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if ((changes['dataInicio'] && this.dataInicio) || (changes['dataFim'] && this.dataFim)) {
       this.getAllDados(this.dataInicio, this.dataFim);
+    }
+  }
+
+
+  // --------- SOMATORIAS --------
+
+  private async getTotalContasSanepar(): Promise<number> {
+    try {
+      return await firstValueFrom(
+        this.metricasService.somaContasSanepar(
+          this.formMetricas.get('contasSanepar')!.value
+        )
+      );
+    } catch (e) {
+      console.error(e);
+      return 0;
+    }
+  }
+
+  private async getTotalPessoasEventos(): Promise<number> {
+    try {
+      const ids = this.formMetricas.get('eventos')!.value.map((e: any) => e.id);
+      return await firstValueFrom(this.metricasService.somaEventos(ids));
+    } catch (e) {
+      console.error(e);
+      return 0;
+    }
+  }
+
+  private async getTotalOutros(): Promise<{
+    somaAuxAdministrativos: number;
+    somaTercerizados: number;
+    somaDocentes: number;
+  }> {
+    try {
+      const ids = this.formMetricas.get('outros')!.value.map((o: any) => o.id);
+      return await firstValueFrom(this.metricasService.somaOutros(ids));
+    } catch (e) {
+      console.error(e);
+      return {
+        somaAuxAdministrativos: 0,
+        somaTercerizados: 0,
+        somaDocentes: 0
+      };
+    }
+  }
+
+  private async getTotalAlunosSemestre(): Promise<{
+    somatoriaAlunosGeral: number;
+    somatoriaAlunosIntegral: number;
+    somatoriaAlunosNoturnos: number;
+  }> {
+    try {
+      const ids = this.formMetricas.get('alunosSemestre')!.value.map((a: any) => a.id);
+      return await firstValueFrom(this.metricasService.somaAlunos(ids, {} as any));
+    } catch (e) {
+      console.error(e);
+      return {
+        somatoriaAlunosGeral: 0,
+        somatoriaAlunosIntegral: 0,
+        somatoriaAlunosNoturnos: 0
+      };
     }
   }
 

@@ -41,11 +41,11 @@ export class AlunosSemestre implements OnInit {
   }
 
   cadastrar(): void {
-    this.router.navigate(["form-alunos-semestre"]);
+    this.router.navigate(["cadastrar-aluno-semestre"]);
   }
 
   atualizar(id?: string): void {
-    this.router.navigate([`form-alunos-semestre/${id}`]);
+    this.router.navigate([`atualizar-aluno-semestre/${id}`]);
   }
 
   deletar(id?: string): void {

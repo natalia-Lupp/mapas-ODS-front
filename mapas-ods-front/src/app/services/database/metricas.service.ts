@@ -4,6 +4,7 @@ import { forkJoin, map, Observable } from 'rxjs';
 
 import { BASE_URLS } from '../conts';
 import { InterfaceAlunosSemestres } from '../models/alunosSemestre';
+import { IntarefaceContaSanepar } from '../models/contaSanepar';
 import { InterfaceEvento } from '../models/evento';
 import { InterfaceMetricas } from '../models/metrica';
 import { IntefaceOutros } from '../models/outros';
@@ -12,8 +13,6 @@ import { BasicService } from './basic.service';
 import { ContaSaneparService } from './contaSanepar.service';
 import { EventosService } from './eventos.service';
 import { OutrosService } from './outros.service';
-import { IntarefaceContaSanepar } from '../models/contaSanepar';
-import { Resultado } from '../models/resultado';
 
 @Injectable({
    providedIn: "root"
@@ -36,7 +35,7 @@ export class MetricasService extends BasicService<InterfaceMetricas> {
       )
    }
 
-   private somaContasSanepar(ids: string[]): Observable<number> {
+   somaContasSanepar(ids: string[]): Observable<number> {
 
       const requisicoes = ids.map(id => this.contasSaneparService.getById(id));
 
@@ -51,10 +50,7 @@ export class MetricasService extends BasicService<InterfaceMetricas> {
       )
    }
 
-   private somaOutros(
-      ids: string[],
-      metrica: InterfaceMetricas
-   ): Observable<{
+   somaOutros(ids: string[]): Observable<{
       somaAuxAdministrativos: number;
       somaTercerizados: number;
       somaDocentes: number;
@@ -72,31 +68,26 @@ export class MetricasService extends BasicService<InterfaceMetricas> {
                },
                { somaAuxAdministrativos: 0, somaTercerizados: 0, somaDocentes: 0 }
             );
-            somas.somaAuxAdministrativos *= metrica.peso_aux_administrativos;
-            somas.somaTercerizados *= metrica.peso_tercerizados;
-            somas.somaDocentes *= metrica.peso_docentes;
+            somas.somaAuxAdministrativos;
+            somas.somaTercerizados;
+            somas.somaDocentes;
 
             return somas;
          })
       );
    }
 
-   private somaEventos(ids: string[], metrica: InterfaceMetricas): Observable<number> {
-
+   somaEventos(ids: string[]): Observable<number> {
       const requisicoes = ids.map(id => this.eventosService.getById(id));
-
       return forkJoin(requisicoes).pipe(
          map((eventos: InterfaceEvento[]) => {
             const totalPessoas = eventos.reduce((acc, evento) => acc + evento.numero_estimado_pessoas, 0);
-
-            const totalComPeso = totalPessoas * metrica.peso_evento;
-
-            return totalComPeso;
+            return totalPessoas;
          })
       )
    }
 
-   private somaAlunos(
+   somaAlunos(
       ids: string[],
       metrica: InterfaceMetricas
    ): Observable<{
@@ -118,9 +109,9 @@ export class MetricasService extends BasicService<InterfaceMetricas> {
                },
                { somatoriaAlunosGeral: 0, somatoriaAlunosIntegral: 0, somatoriaAlunosNoturnos: 0 }
             );
-            somas.somatoriaAlunosGeral *= metrica.peso_alunos_geral;
-            somas.somatoriaAlunosIntegral *= metrica.peso_alunos_integral;
-            somas.somatoriaAlunosNoturnos *= metrica.peso_alunos_noturno;
+            somas.somatoriaAlunosGeral;
+            somas.somatoriaAlunosIntegral;
+            somas.somatoriaAlunosNoturnos;
 
             return somas;
          })
