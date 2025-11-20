@@ -11,8 +11,6 @@ import { TabelaNakagawa } from './tabela-nakagawa/tabela-nakagawa';
 export class CalculadoraNakagawa implements OnInit {
 
   constructor(private formBuilder: FormBuilder) { }
-
-  //NOME é da formaula que esse japa usou
   formPeso!: FormGroup;
 
   ngOnInit(): void {

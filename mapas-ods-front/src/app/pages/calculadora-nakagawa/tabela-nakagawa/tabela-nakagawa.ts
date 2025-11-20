@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { AlunosServices } from '../../../services/database/alunos.service';
 import { ContaSaneparService } from '../../../services/database/contaSanepar.service';
@@ -44,6 +44,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
   ngOnInit(): void {
     this.formMetricas = this.formBuilder.group({
+      nomeCustomizado: new FormControl("",[Validators.required]),
       contasSanepar: this.formBuilder.array([]),
       eventos: this.formBuilder.array([]),
       alunosSemestre: this.formBuilder.array([]),
@@ -53,9 +54,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
 
   async salvar(): Promise<void> {
-
     const metricas = this.formMetricas.value;
-
     const totalLitros = await this.getTotalContasSanepar();
     const outrosObj: {
       somaAuxAdministrativos: number;
@@ -71,11 +70,12 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
     //xaxho 
     const metricasParaSalvar: InterfaceMetricas = {
+      nome_customizado:metricas.nomeCustomizado,
       contas_sanepars: metricas.contasSanepar.map((c: any) => c.id),
       eventos: metricas.eventos.map((e: any) => e.id),
       outros: metricas.outros.map((o: any) => o.id),
       alunos_semestres: metricas.alunosSemestre.map((a: any) => a.id),
-      id_infra: "c7wn6029s5lx4di", //valor sempre fixo tem que ajustar isso por horas vai assim mesmo
+      id_infra: "2mp0k6ruq359aqn", //valor sempre fixo tem que ajustar isso por horas vai assim mesmo
       data_inicio_periodo: this.formPeso.value?.dataInicioSemestre,
       data_fim_periodo: this.formPeso.value?.dataFimSemestre,
       consumo_total_agua: totalLitros,
@@ -122,11 +122,12 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
   private async getTotalContasSanepar(): Promise<number> {
     try {
-      return await firstValueFrom(
-        this.metricasService.somaContasSanepar(
-          this.formMetricas.get('contasSanepar')!.value
-        )
-      );
+      const ids = this.formMetricas
+        .get('contasSanepar')!
+        .value
+        .map((c: any) => c.id);
+
+      return await firstValueFrom(this.metricasService.somaContasSanepar(ids));
     } catch (e) {
       console.error(e);
       return 0;
@@ -135,7 +136,11 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
   private async getTotalPessoasEventos(): Promise<number> {
     try {
-      const ids = this.formMetricas.get('eventos')!.value.map((e: any) => e.id);
+      const ids = this.formMetricas
+        .get('eventos')!
+        .value
+        .map((e: any) => e.id);
+
       return await firstValueFrom(this.metricasService.somaEventos(ids));
     } catch (e) {
       console.error(e);
@@ -143,13 +148,13 @@ export class TabelaNakagawa implements OnChanges, OnInit {
     }
   }
 
-  private async getTotalOutros(): Promise<{
-    somaAuxAdministrativos: number;
-    somaTercerizados: number;
-    somaDocentes: number;
-  }> {
+  private async getTotalOutros(): Promise<{somaAuxAdministrativos: number;somaTercerizados: number;somaDocentes: number;}> {
     try {
-      const ids = this.formMetricas.get('outros')!.value.map((o: any) => o.id);
+      const ids = this.formMetricas
+        .get('outros')!
+        .value
+        .map((o: any) => o.id);
+
       return await firstValueFrom(this.metricasService.somaOutros(ids));
     } catch (e) {
       console.error(e);
@@ -161,14 +166,14 @@ export class TabelaNakagawa implements OnChanges, OnInit {
     }
   }
 
-  private async getTotalAlunosSemestre(): Promise<{
-    somatoriaAlunosGeral: number;
-    somatoriaAlunosIntegral: number;
-    somatoriaAlunosNoturnos: number;
-  }> {
+  private async getTotalAlunosSemestre(): Promise<{somatoriaAlunosGeral: number;somatoriaAlunosIntegral: number;somatoriaAlunosNoturnos: number; }> {
     try {
-      const ids = this.formMetricas.get('alunosSemestre')!.value.map((a: any) => a.id);
-      return await firstValueFrom(this.metricasService.somaAlunos(ids, {} as any));
+      const ids = this.formMetricas
+        .get('alunosSemestre')!
+        .value
+        .map((a: any) => a.id);
+
+      return await firstValueFrom(this.metricasService.somaAlunos(ids));
     } catch (e) {
       console.error(e);
       return {
@@ -178,6 +183,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
       };
     }
   }
+
 
   // ---------GETTERS FORMULARIOS ---------
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, map, Observable } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of, throwError } from 'rxjs';
 
 import { BASE_URLS } from '../conts';
 import { InterfaceAlunosSemestres } from '../models/alunosSemestre';
@@ -23,6 +23,37 @@ export class MetricasService extends BasicService<InterfaceMetricas> {
       super(http, endpoint);
    }
 
+   override create(data: InterfaceMetricas): Observable<InterfaceMetricas> {
+      const consumo = data.consumo_total_agua;
+      data.litros_por_total_pessoas_eventos =
+         this.calcularLitros(data.total_pessoas_eventos, consumo);
+
+      data.litros_por_total_auxiliares_administrativos =
+         this.calcularLitros(data.total_auxiliares_administrativos, consumo);
+
+      data.litros_por_total_tercerizados =
+         this.calcularLitros(data.total_tercerizados, consumo);
+
+      data.litros_por_total_docentes =
+         this.calcularLitros(data.total_docentes, consumo);
+
+      data.litros_por_total_alunos_geral =
+         this.calcularLitros(data.total_alunos_geral, consumo);
+
+      data.litros_por_total_alunos_integral =
+         this.calcularLitros(data.total_alunos_integral, consumo);
+
+      data.litros_por_total_alunos_noturnos =
+         this.calcularLitros(data.total_alunos_noturnos, consumo);
+
+      return super.create(data);
+   }
+
+   private calcularLitros(total: number, consumoTotal: number): number {
+      if (!total || !consumoTotal) return 0;
+      return Number((consumoTotal / total).toFixed(2));
+   }
+
    getEventosByIntervaloData(dataInicio: Date, dataFim: Date) {
       return this.getAll().pipe(
          map((metricas: InterfaceMetricas[]) => {
@@ -36,18 +67,30 @@ export class MetricasService extends BasicService<InterfaceMetricas> {
    }
 
    somaContasSanepar(ids: string[]): Observable<number> {
-
-      const requisicoes = ids.map(id => this.contasSaneparService.getById(id));
-
-      return forkJoin(requisicoes).pipe(
-         map((contas: IntarefaceContaSanepar[]) => {
-            const totalContas = contas.reduce((acc, conta) => acc + conta.metros_cubicos, 0);
-
-            const totalEmLitros = totalContas * 1000;
-
-            return totalEmLitros;
+      return forkJoin(
+         ids.map(id =>
+            this.getContaSaneper(id).pipe(
+               catchError(() => of(null)) // se não tiver ele "pula fora"
+            )
+         )
+      ).pipe(
+         map(resultados => {
+            const totalMetros =
+               resultados
+                  .filter((c): c is IntarefaceContaSanepar => c !== null)
+                  .reduce((acc, conta) => acc + conta.metros_cubicos, 0);
+            return totalMetros * 1000; // converte para litros
          })
-      )
+      );
+   }
+
+   private getContaSaneper(id: string): Observable<IntarefaceContaSanepar> {
+      return this.contasSaneparService.getById(id).pipe(
+         catchError(err => {
+            console.error("Erro em getContaSaneper:", err);
+            return throwError(() => err);
+         })
+      );
    }
 
    somaOutros(ids: string[]): Observable<{
@@ -88,8 +131,7 @@ export class MetricasService extends BasicService<InterfaceMetricas> {
    }
 
    somaAlunos(
-      ids: string[],
-      metrica: InterfaceMetricas
+      ids: string[]
    ): Observable<{
       somatoriaAlunosGeral: number;
       somatoriaAlunosIntegral: number;

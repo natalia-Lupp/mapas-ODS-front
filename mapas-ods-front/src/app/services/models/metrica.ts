@@ -4,6 +4,7 @@ import { InterfaceEvento } from './evento';
 import { IntefaceOutros } from './outros';
 
 export interface InterfaceMetricas {
+   nome_customizado: string,
    contas_sanepars?: IntarefaceContaSanepar[],
    eventos?: InterfaceEvento[],
    outros?: IntefaceOutros[],
@@ -19,4 +20,11 @@ export interface InterfaceMetricas {
    total_alunos_geral: number,
    total_alunos_integral: number,
    total_alunos_noturnos: number
+   litros_por_total_pessoas_eventos?: number,
+   litros_por_total_auxiliares_administrativos?: number,
+   litros_por_total_tercerizados?: number,
+   litros_por_total_docentes?: number,
+   litros_por_total_alunos_geral?: number,
+   litros_por_total_alunos_integral?: number,
+   litros_por_total_alunos_noturnos?: number
 };
