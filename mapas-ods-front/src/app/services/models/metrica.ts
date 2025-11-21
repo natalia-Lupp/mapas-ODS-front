@@ -4,6 +4,7 @@ import { InterfaceEvento } from './evento';
 import { IntefaceOutros } from './outros';
 
 export interface InterfaceMetricas {
+   id?:string,
    nome_customizado: string,
    contas_sanepars?: IntarefaceContaSanepar[],
    eventos?: InterfaceEvento[],

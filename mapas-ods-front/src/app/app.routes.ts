@@ -18,6 +18,7 @@ import { PerfilUser } from './pages/perfil-user/perfil-user';
 import { Perfil } from './pages/perfil/perfil';
 import { TelaLogin } from './pages/tela-login/tela-login';
 import { ConsultarDados } from './pages/consultar-dados/consultar-dados';
+import { ListaMetricas } from './pages/lista-metricas/lista-metricas';
 
 export const routes: Routes = [
 
@@ -26,7 +27,7 @@ export const routes: Routes = [
    {
       path: '',
       title: 'Home Mapa ODS',
-      component: Home,
+      component: ListaMetricas,
       pathMatch: 'full'
    },
    {
@@ -142,7 +143,7 @@ export const routes: Routes = [
       component: CalculadoraNakagawa
    },
    {
-      path: 'dashboard-nakagawa',
+      path: 'dashboard-nakagawa/:id',
       title: 'Dashboard Nakagawa',
       component: DashboardNakagawa
    },
@@ -158,5 +159,9 @@ export const routes: Routes = [
    {
       path: '**',
       redirectTo: ''
+   },
+   {
+      path:"listagem-metricas",
+      component:ListaMetricas
    }
 ];
