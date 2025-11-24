@@ -7,10 +7,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { Toast } from '../../../shared/components/toast/toast';
+import { SharedModule } from '../../../shared/shared.module/shared.module';
 
 @Component({
   selector: 'app-alunos-semestre',
-  imports: [CommonModule, ReactiveFormsModule, Toast],
+  imports: [CommonModule, ReactiveFormsModule, Toast, SharedModule],
   standalone: true,
   templateUrl: './form-alunos-semestre.html',
   styleUrl: './form-alunos-semestre.css',

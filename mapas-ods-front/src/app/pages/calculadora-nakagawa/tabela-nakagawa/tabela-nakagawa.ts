@@ -19,7 +19,7 @@ import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-tabela-nakagawa',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, Toast],
+  imports: [ReactiveFormsModule, CommonModule, Toast,],
   templateUrl: './tabela-nakagawa.html',
   styleUrls: ['./tabela-nakagawa.css'],
   providers: [DatePipe]
@@ -54,6 +54,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
 
   async salvar(): Promise<void> {
+
     const metricas = this.formMetricas.value;
     const totalLitros = await this.getTotalContasSanepar();
     const outrosObj: {

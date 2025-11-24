@@ -11,6 +11,7 @@ import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
 import { MetricasService } from '../../../services/database/metricas.service';
 import { InterfaceMetricas } from '../../../services/models/metrica';
 import { retry } from 'rxjs';
+import { SharedModule } from '../../../shared/shared.module/shared.module';
 
 //tem que registrar ANTES do componente
 echarts.use([PieChart, GridComponent, TooltipComponent, CanvasRenderer]);
@@ -18,7 +19,7 @@ echarts.use([PieChart, GridComponent, TooltipComponent, CanvasRenderer]);
 @Component({
   selector: 'app-dashboard-nakagawa',
   standalone: true,
-  imports: [CommonModule, NgxEchartsDirective],
+  imports: [CommonModule, NgxEchartsDirective, SharedModule],
   providers: [
     DatePipe,
     provideEchartsCore({ echarts })
