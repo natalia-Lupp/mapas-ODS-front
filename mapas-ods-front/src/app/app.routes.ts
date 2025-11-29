@@ -162,6 +162,7 @@ export const routes: Routes = [
    },
    {
       path:"listagem-metricas",
+       title: 'lista de metricas',
       component:ListaMetricas
    }
 ];

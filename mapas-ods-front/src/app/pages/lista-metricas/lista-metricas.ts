@@ -38,4 +38,9 @@ export class ListaMetricas implements OnInit {
       },
     })
   }
+
+  novaLeitura() {
+  this.router.navigate(['/calculadora-nakagawa']);
+}
+
 }

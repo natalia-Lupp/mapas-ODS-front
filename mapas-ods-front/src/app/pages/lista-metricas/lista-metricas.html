@@ -5,7 +5,18 @@
       <app-sidebar class="hidden lg:block w-64"></app-sidebar>
 
       <main class="p-6 flex-1 bg-white">
-         <h2 class="text-3xl font-semibold mb-2 text-gray-900">Metricas Registradas</h2>
+         <h2 class="text-3xl font-semibold mb-2 text-gray-900">Consultas da calculadora Efetuadas</h2>
+
+         <!-- Botão -->
+         <div class="flex justify-end mb-6">
+            <button
+               class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto"
+               (click)="novaLeitura()">
+               Novo Calculo
+            </button>
+         </div>
+
+
          <div class="card bg-white shadow-md border border-gray-200 rounded-2xl">
             <table class="hidden sm:table custom-zebra w-full text-center text-gray-500">
                <thead class="bg-[#c9e2ff]">
@@ -13,7 +24,7 @@
                      <th class="font-extrabold text-center text-gray-500">Nome</th>
                      <th class="font-extrabold text-center whitespace-nowrap text-gray-500">Data Início</th>
                      <th class="font-extrabold text-center whitespace-nowrap text-gray-500">Data Fim</th>
-                     <th>Acoes</th>
+                     <th></th>
                   </tr>
                </thead>
                <tbody>
