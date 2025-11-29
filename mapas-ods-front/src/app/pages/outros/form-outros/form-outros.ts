@@ -6,9 +6,10 @@ import { OutrosService } from '../../../services/database/outros.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../../../shared/shared.module/shared.module';
 @Component({
   selector: 'app-form-outros',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, SharedModule],
   templateUrl: './form-outros.html',
   styleUrls: ['./form-outros.css'],
   providers:[DatePipe]
