@@ -15,11 +15,12 @@ import { IntefaceOutros } from '../../../services/models/outros';
 import { Toast } from '../../../shared/components/toast/toast';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { firstValueFrom } from 'rxjs';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-tabela-nakagawa',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, Toast,],
+  imports: [ReactiveFormsModule, CommonModule, Toast, RouterModule],
   templateUrl: './tabela-nakagawa.html',
   styleUrls: ['./tabela-nakagawa.css'],
   providers: [DatePipe]
@@ -40,8 +41,16 @@ export class TabelaNakagawa implements OnChanges, OnInit {
   formMetricas!: FormGroup;
   formArrayTabela!: FormArray;
 
-  constructor(private contasSaneparService: ContaSaneparService, private eventosService: EventosService, private alunosService: AlunosServices, private outrosServices: OutrosService, private metricasService: MetricasService, private formBuilder: FormBuilder, private datePipe: DatePipe) { }
-
+  constructor(
+    private contasSaneparService: ContaSaneparService, 
+    private eventosService: EventosService, 
+    private alunosService: AlunosServices, 
+    private outrosServices: OutrosService, 
+    private metricasService: MetricasService, 
+    private formBuilder: FormBuilder, 
+    private datePipe: DatePipe,   
+    private router: Router) { }
+ 
   ngOnInit(): void {
     this.formMetricas = this.formBuilder.group({
       nomeCustomizado: new FormControl("",[Validators.required]),
@@ -101,9 +110,9 @@ export class TabelaNakagawa implements OnChanges, OnInit {
     });
   }
 
-  back(): void {
-
-  }
+back(): void {
+  this.router.navigate(['/metricas']);
+}
 
   showToastMessage(mensagem: string, tipo: TipoAlerta, duration = 1500) {
     this.toastMensagem = mensagem;
