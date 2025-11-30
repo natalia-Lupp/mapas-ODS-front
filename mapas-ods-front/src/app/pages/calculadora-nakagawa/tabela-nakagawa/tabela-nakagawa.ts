@@ -17,6 +17,7 @@ import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { firstValueFrom } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-tabela-nakagawa',
   standalone: true,
@@ -61,7 +62,6 @@ export class TabelaNakagawa implements OnChanges, OnInit {
     });
   }
 
-
   async salvar(): Promise<void> {
     const metricas = this.formMetricas.value;
     const totalLitros = await this.getTotalContasSanepar();
@@ -98,8 +98,8 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
     this.metricasService.create(metricasParaSalvar).subscribe({
       next: (metricaSalva) => {
-        console.log(metricaSalva);
         this.showToastMessage("Metrica Registrada com Sucesso", TipoAlerta.SUCESSO);
+         this.router.navigate(['/adm/calculadora-nakagawa/listagem-metricas']);
       },
       error: (err) => {
         this.showToastMessage("Não Foi Possivel Salvar Metrica", TipoAlerta.ERRO);
