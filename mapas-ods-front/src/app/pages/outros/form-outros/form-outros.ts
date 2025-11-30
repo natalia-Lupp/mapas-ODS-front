@@ -10,6 +10,7 @@ import { SharedModule } from '../../../shared/shared.module/shared.module';
 import { Toast } from '../../../shared/components/toast/toast';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
+import { PessoasNotifierService } from '../../../services/pessoas-notifier.service';
 
 @Component({
   selector: 'app-form-outros',
@@ -26,7 +27,7 @@ export class FormOutros implements OnInit {
 
   toastVisivel = false;
   toastMensagem = "";
-toastTipo: TipoAlerta = TipoAlerta.SUCESSO; // mais um toast que quebrou e só avisou qd ta nos 42 do segundo tempo
+  toastTipo: TipoAlerta = TipoAlerta.SUCESSO; 
 
 
   constructor(
@@ -34,7 +35,8 @@ toastTipo: TipoAlerta = TipoAlerta.SUCESSO; // mais um toast que quebrou e só a
     private outrosService: OutrosService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private pessoasNotifierService: PessoasNotifierService // 🔥 INJETADO
   ) { }
 
   ngOnInit(): void {
@@ -75,14 +77,14 @@ toastTipo: TipoAlerta = TipoAlerta.SUCESSO; // mais um toast que quebrou e só a
 
   // Método para exibir Toast
   private mostrarToast(mensagem: string, tipo: TipoAlerta = TipoAlerta.SUCESSO) {
-  this.toastMensagem = mensagem;
-  this.toastTipo = tipo;
-  this.toastVisivel = true;
+    this.toastMensagem = mensagem;
+    this.toastTipo = tipo;
+    this.toastVisivel = true;
 
-  setTimeout(() => {
-    this.toastVisivel = false;
-  }, 3000);
-}
+    setTimeout(() => {
+      this.toastVisivel = false;
+    }, 3000);
+  }
 
   salvar(): void {
     if (this.formOutro.invalid) {
@@ -103,11 +105,14 @@ toastTipo: TipoAlerta = TipoAlerta.SUCESSO; // mais um toast que quebrou e só a
       // Criar
       this.outrosService.create(outro).subscribe({
         next: () => {
-     this.mostrarToast("Registro criado com sucesso!", TipoAlerta.SUCESSO);
+          // 🔔 Notificação após criação bem-sucedida
+          this.pessoasNotifierService.notifyPessoasChange();
+          
+          this.mostrarToast("Registro criado com sucesso!", TipoAlerta.SUCESSO);
           setTimeout(() => this.back(), 1500);
         },
         error: (err) => {
-      this.mostrarToast("Erro ao criar registro!", TipoAlerta.ERRO);
+          this.mostrarToast("Erro ao criar registro!", TipoAlerta.ERRO);
           console.error(err);
         }
       });
@@ -116,11 +121,15 @@ toastTipo: TipoAlerta = TipoAlerta.SUCESSO; // mais um toast que quebrou e só a
       // Atualizar
       this.outrosService.update(this.outroId, outro).subscribe({
         next: () => {
-          this.mostrarToast("Registro criado com sucesso!", TipoAlerta.SUCESSO);
+          // 🔔 Notificação após atualização bem-sucedida
+          this.pessoasNotifierService.notifyPessoasChange();
+          
+          // Nota: a mensagem do toast estava "Registro criado...", corrigi para "Registro atualizado"
+          this.mostrarToast("Registro atualizado com sucesso!", TipoAlerta.SUCESSO); 
           setTimeout(() => this.back(), 1500);
         },
         error: (err) => {
-          this.mostrarToast("Erro ao criar registro!", TipoAlerta.ERRO);
+          this.mostrarToast("Erro ao atualizar registro!", TipoAlerta.ERRO);
           console.error(err);
         }
       });

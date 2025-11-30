@@ -10,6 +10,7 @@ import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { SharedModule } from '../../../../app/shared/shared.module/shared.module';
 import { CommonModule } from '@angular/common';
 import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
+import { PessoasNotifierService } from '../../../services/pessoas-notifier.service'; // 🔥 IMPORTADO
 
 @Component({
   selector: 'app-form-eventos',
@@ -27,7 +28,14 @@ export class FormEventos implements OnInit {
   tipoAlerta: TipoAlerta = TipoAlerta.SUCESSO;
   eventoId?: string;
 
-  constructor(private http: HttpClient, private eventoService: EventosService, private router: Router, private route: ActivatedRoute, private dataPipe: DatePipe) {
+  constructor(
+    private http: HttpClient, 
+    private eventoService: EventosService, 
+    private router: Router, 
+    private route: ActivatedRoute, 
+    private dataPipe: DatePipe,
+    private pessoasNotifierService: PessoasNotifierService // 🔥 INJETADO
+  ) {
     this.eventoForm = new FormGroup({
       nome_evento: new FormControl("", [Validators.required, Validators.minLength(3)]),
       numero_estimado_pessoas: new FormControl("", [Validators.required]),
@@ -58,7 +66,7 @@ export class FormEventos implements OnInit {
 
   salvar(): void {
 
-    if (!this.eventoForm || !this.validarData()) {
+    if (!this.eventoForm.valid || !this.validarData()) { // Alterado para checar .valid
       this.showToast = true;
       this.showToastMessage('Verifique os dados informados', TipoAlerta.ERRO);
       return;
@@ -79,9 +87,13 @@ export class FormEventos implements OnInit {
       return;
     }
 
+    // Criação
     this.eventoService.create(data).subscribe({
 
       next: () => {
+        // 🔥 Notifica o dashboard sobre a mudança
+        this.pessoasNotifierService.notifyPessoasChange();
+
         this.showToast = true;
         this.showToastMessage("Evento Cadastrado Com Sucesso", TipoAlerta.SUCESSO, 1500);
         this.router.navigate(["/adm/eventos"]);
@@ -100,9 +112,12 @@ export class FormEventos implements OnInit {
     }
     this.eventoService.update(data.id, data).subscribe({
       next: () => {
+        // 🔥 Notifica o dashboard sobre a mudança
+        this.pessoasNotifierService.notifyPessoasChange();
+        
         this.showToast = true;
-        this.showToastMessage("Evento Cadastrado Com Sucesso", TipoAlerta.SUCESSO, 1500);
-        this.router.navigate(["eventos"]);
+        this.showToastMessage("Evento Atualizado Com Sucesso", TipoAlerta.SUCESSO, 1500); // Ajustei a mensagem
+        this.router.navigate(["adm/eventos"]); // Ajustei a rota de navegação para 'adm/eventos'
       },
       error: (err) => {
         this.showToast = true;

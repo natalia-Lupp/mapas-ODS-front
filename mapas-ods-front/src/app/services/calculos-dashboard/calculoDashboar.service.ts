@@ -1,73 +1,96 @@
 import { Injectable } from '@angular/core';
 import { IntarefaceContaSanepar } from '../models/contaSanepar'; // Certifique-se de que o caminho do model está correto
-
 @Injectable({
   providedIn: 'root'
 })
 export class CalculosDashboardService {
 
-  // Constantes de cálculo movidas do componente
-  private totalPessoas = 1026;
-  private metaLitrosPorPessoaDia = 50; // Meta ONU DIÁRIA por pessoa (litros/dia)
-  private diasNoMesPadrao = 30; 
+  private _totalPessoas: number = 0; 
+  private metaLitrosPorPessoaDia = 50; 
+  // private diasNoMesPadrao = 30; // 🛑 Removido
 
   constructor() { }
 
-  /**
-   * Converte metros cúbicos (m³) para litros.
-   * @param metrosCubicos Consumo em m³.
-   * @returns Consumo em litros.
-   */
+  setTotalPessoas(total: number): void {
+      this._totalPessoas = total > 0 ? total : 1; 
+  }
+
+  getTotalPessoas(): number {
+      return this._totalPessoas;
+  }
+
   valorTotalLitros(metrosCubicos: number): number {
-    return metrosCubicos * 1000; // 1 m³ = 1000 litros
+    return metrosCubicos * 1000; 
+  }
+
+  /**
+   * Calcula o número de dias entre duas datas (leitura anterior e leitura atual).
+   */
+  calcularDiferencaDias(dataInicio: string | Date, dataFim: string | Date): number {
+    const d1 = new Date(dataInicio).getTime();
+    const d2 = new Date(dataFim).getTime();
+    
+    const diffTime = Math.abs(d2 - d1);
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+    
+    return diffDays > 0 ? diffDays : 1;
   }
 
   /**
    * Calcula a média total de consumo ESPERADA (ONU) MENSAL em litros.
-   * @returns Consumo esperado em litros para um mês de 30 dias.
+   * Agora precisa do número de dias da medição.
    */
-  mediaConsumoTotalOnuMensal(): number {
-    // Cálculo: Pessoas * Meta Diária (L/dia) * Dias no Mês
-    return this.totalPessoas * this.metaLitrosPorPessoaDia * this.diasNoMesPadrao;
+  mediaConsumoTotalOnuMensal(diasNoPeriodo: number): number {
+    return this._totalPessoas * this.metaLitrosPorPessoaDia * diasNoPeriodo;
   }
 
   /**
    * Verifica se o consumo mensal atingiu a meta da ONU.
-   * @param metrosCubicos Consumo mensal em m³.
-   * @returns true se o consumo real for menor ou igual à meta.
+   * Agora precisa do número de dias da medição.
    */
-  atingiuMeta(metrosCubicos: number): boolean {
+  atingiuMeta(metrosCubicos: number, diasNoPeriodo: number): boolean {
     const totalLitrosRealMensal = this.valorTotalLitros(metrosCubicos);
-    const metaOnuMensal = this.mediaConsumoTotalOnuMensal();
+    const metaOnuMensal = this.mediaConsumoTotalOnuMensal(diasNoPeriodo);
     return totalLitrosRealMensal <= metaOnuMensal;
   }
 
   /**
    * Calcula a média REAL de consumo DIÁRIO por pessoa para um dado mês.
-   * @param metrosCubicos Consumo mensal em m³.
-   * @returns Média de consumo em litros/pessoa/dia.
+   * Agora precisa do número de dias da medição.
    */
-  mediaConsumoDiarioReal(metrosCubicos: number): number {
+  mediaConsumoDiarioReal(metrosCubicos: number, diasNoPeriodo: number): number {
     const totalLitrosMensal = this.valorTotalLitros(metrosCubicos);
-    const totalLitrosDiario = totalLitrosMensal / this.diasNoMesPadrao;
-    const mediaPorPessoa = totalLitrosDiario / this.totalPessoas;
+    const totalLitrosDiario = totalLitrosMensal / diasNoPeriodo; 
+    const mediaPorPessoa = totalLitrosDiario / this._totalPessoas; 
     return mediaPorPessoa;
   }
 
   /**
    * Calcula a média REAL de consumo DIÁRIO por pessoa sobre todos os registros.
-   * @param listaContas Lista de registros de consumo.
-   * @returns Média geral arredondada em litros/pessoa/dia.
    */
   calcularMediaGeralDiariaPorPessoa(listaContas: IntarefaceContaSanepar[]): number {
-    const medias = listaContas.map(c => this.mediaConsumoDiarioReal(c.metros_cubicos));
-    const mediaGeral = medias.reduce((acc, m) => acc + m, 0) / (medias.length || 1);
-    return Math.round(mediaGeral);
+    if (listaContas.length <= 1) return 0; 
+
+    const contasOrdenadas = [...listaContas].sort((a, b) => new Date(a.mes).getTime() - new Date(b.mes).getTime());
+
+    let somaMedias = 0;
+    let numContasValidas = 0;
+
+    for (let i = 1; i < contasOrdenadas.length; i++) {
+        const contaAtual = contasOrdenadas[i];
+        const contaAnterior = contasOrdenadas[i - 1];
+        
+        const diasNoPeriodo = this.calcularDiferencaDias(contaAnterior.mes, contaAtual.mes);
+        
+        if (diasNoPeriodo > 0) {
+            somaMedias += this.mediaConsumoDiarioReal(contaAtual.metros_cubicos, diasNoPeriodo);
+            numContasValidas++;
+        }
+    }
+    
+    return Math.round(somaMedias / (numContasValidas || 1));
   }
 
-  /**
-   * Retorna a meta diária por pessoa (para exibição no card).
-   */
   getMetaDiariaPorPessoa(): number {
     return this.metaLitrosPorPessoaDia;
   }
