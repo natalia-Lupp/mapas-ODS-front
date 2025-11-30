@@ -9,6 +9,7 @@ import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { Toast } from '../../../shared/components/toast/toast';
 import { SharedModule } from '../../../shared/shared.module/shared.module';
 import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
+import { PessoasNotifierService } from '../../../services/pessoas-notifier.service'; 
 
 @Component({
   selector: 'app-alunos-semestre',
@@ -32,7 +33,8 @@ export class FormAlunosSemestre implements OnInit {
     private alunosService: AlunosServices,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private pessoasNotifierService: PessoasNotifierService // 🔥 INJETADO
   ) {
     this.formAlunosSemestre = this.formBuilder.group({
       alunosSemestreGeral: ["", Validators.required],
@@ -87,6 +89,9 @@ export class FormAlunosSemestre implements OnInit {
     if (!this.alunosSemestreId) {
       this.alunosService.create(alunosSemestreData).subscribe({
         next: () => {
+          // 🔔 Notificação
+          this.pessoasNotifierService.notifyPessoasChange(); 
+          
           this.showToastMessage("Dados Salvos com Sucesso", TipoAlerta.SUCESSO);
 
           setTimeout(() => {
@@ -103,6 +108,9 @@ export class FormAlunosSemestre implements OnInit {
     // 🔥 SE FOR ATUALIZAÇÃO
     this.alunosService.update(this.alunosSemestreId, alunosSemestreData).subscribe({
       next: () => {
+        // 🔔 Notificação
+        this.pessoasNotifierService.notifyPessoasChange();
+        
         this.showToastMessage("Dados Atualizados com Sucesso", TipoAlerta.SUCESSO);
 
         setTimeout(() => {

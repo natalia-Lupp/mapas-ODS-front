@@ -8,6 +8,10 @@
          <h2 class="text-3xl font-semibold mb-2 text-gray-900">Funcionarios</h2>
          <h3 class="text-2xl font-semibold mb-6 text-gray-900 pt-4">Últimos Dados Cadastrados</h3>
 
+         <div class="mb-4 text-xl font-bold text-blue-700">
+            Total Geral de Funcionários Registrados: {{ totalGeralFuncionarios }}
+         </div>
+
          <div class="flex justify-end mb-6">
             <button
                class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto"
@@ -21,12 +25,13 @@
             <table class="hidden sm:table w-full text-center text-gray-500 custom-zebra">
                <thead class="text-blue-800" style="background-color:#c9e2ff">
                   <tr>
-                     <th class="font-extrabold text-center text-blue-800">Identificador do Semestre</th>
+                     <th class="font-extrabold text-center text-blue-800">ID do Semestre</th>
                      <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Periodo Início</th>
                      <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Periodo Fim</th>
                      <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Aux. Administrativos</th>
                      <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Docentes</th>
                      <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Tercerizados</th>
+                     <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Total Func.</th>
                      <th></th>
                   </tr>
                </thead>
@@ -38,6 +43,7 @@
                      <td>{{ outro.auxiliares_administrativos }}</td>
                      <td>{{ outro.docentes }}</td>
                      <td>{{ outro.tercerizados }}</td>
+                     <td class=" text-gray-500">{{ outro.totalFuncionarios }}</td>
 
                      <td class="flex justify-center gap-2 whitespace-nowrap">
                         <button
@@ -91,6 +97,9 @@
 
                      <div class="font-semibold text-gray-700">Tercerizados:</div>
                      <div>{{ outro.tercerizados }}</div>
+
+                     <div class="font-semibold text-gray-700">Total Func:</div>
+                     <div class="font-bold text-gray-700">{{ outro.totalFuncionarios }}</div>
                   </div>
 
                </div>
