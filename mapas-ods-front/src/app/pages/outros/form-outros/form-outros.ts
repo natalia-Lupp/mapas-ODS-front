@@ -8,6 +8,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module/shared.module';
 import { Toast } from '../../../shared/components/toast/toast';
+import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
 
 @Component({
@@ -26,7 +27,8 @@ export class FormOutros implements OnInit {
   // 🔥 Variáveis do Toast
   toastVisivel = false;
   toastMensagem = "";
-  toastTipo = "alert-success";
+toastTipo: TipoAlerta = TipoAlerta.SUCESSO; // mais um toast que quebrou e só avisou qd ta nos 42 do segundo tempo
+
 
   constructor(
     private router: Router,
@@ -72,16 +74,16 @@ export class FormOutros implements OnInit {
     this.router.navigate(["adm/funcionarios"]);
   }
 
-  // 🔥 Método para exibir Toast
-  private mostrarToast(mensagem: string, tipo: string = "alert-success") {
-    this.toastMensagem = mensagem;
-    this.toastTipo = tipo;
-    this.toastVisivel = true;
+  // Método para exibir Toast
+  private mostrarToast(mensagem: string, tipo: TipoAlerta = TipoAlerta.SUCESSO) {
+  this.toastMensagem = mensagem;
+  this.toastTipo = tipo;
+  this.toastVisivel = true;
 
-    setTimeout(() => {
-      this.toastVisivel = false;
-    }, 3000);
-  }
+  setTimeout(() => {
+    this.toastVisivel = false;
+  }, 3000);
+}
 
   salvar(): void {
     if (this.formOutro.invalid) {
@@ -102,11 +104,11 @@ export class FormOutros implements OnInit {
       // Criar
       this.outrosService.create(outro).subscribe({
         next: () => {
-          this.mostrarToast("Registro criado com sucesso!", "alert-success");
+     this.mostrarToast("Registro criado com sucesso!", TipoAlerta.SUCESSO);
           setTimeout(() => this.back(), 1500);
         },
         error: (err) => {
-          this.mostrarToast("Erro ao criar registro!", "alert-error");
+      this.mostrarToast("Erro ao criar registro!", TipoAlerta.ERRO);
           console.error(err);
         }
       });
@@ -115,11 +117,11 @@ export class FormOutros implements OnInit {
       // Atualizar
       this.outrosService.update(this.outroId, outro).subscribe({
         next: () => {
-          this.mostrarToast("Registro atualizado com sucesso!", "alert-success");
+          this.mostrarToast("Registro criado com sucesso!", TipoAlerta.SUCESSO);
           setTimeout(() => this.back(), 1500);
         },
         error: (err) => {
-          this.mostrarToast("Erro ao atualizar registro!", "alert-error");
+          this.mostrarToast("Erro ao criar registro!", TipoAlerta.ERRO);
           console.error(err);
         }
       });
