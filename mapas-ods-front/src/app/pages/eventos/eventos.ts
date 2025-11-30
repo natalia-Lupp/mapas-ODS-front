@@ -35,7 +35,6 @@ export class Eventos implements OnInit {
     this.eventoService.getAll().subscribe({
       next: (data) => {
         this.listaEventos = data;
-        console.log(this.listaEventos);
         this.showToastMessage("Dados carregados com sucesso", TipoAlerta.SUCESSO);
       },
       error: (err) => {

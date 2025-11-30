@@ -31,33 +31,7 @@ export class NavbarAdm {
     this.router.navigate(['/login']);
   }
 
-  goPerfil() {
-    this.router.navigate([this.perfilRoute]);
-  }
-
- goDashboard() {
-    this.router.navigate([this.dashboardRoute]);
-  }
-
-  goSanepar() {
-    this.router.navigate([this.saneparRoute]);
-  }
-
-  registerAccounts() {
-    this.router.navigate([this.registerAccountsRoute]);
-  }
-
-  infrastructure() {
-  this.router.navigate([this.infrastructureRoute]);
-  }
-
-  eventUTF() {
-  this.router.navigate([this.eventRoute]);
-  }
-
-  queryData() {
-  this.router.navigate([this.queryDataRoute]);
-  }
+ 
 
   
 }

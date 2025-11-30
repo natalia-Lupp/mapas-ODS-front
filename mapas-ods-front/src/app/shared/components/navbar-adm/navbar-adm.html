@@ -1,38 +1,16 @@
 <div class="navbar bg-base-100 bg-white shadow-sm px-4 border-b border-gray-200">
-  <!-- Botão hambúrguer mobile -->
-  <div class="flex-none lg:hidden">
-    <label for="dashboard-drawer" class="btn btn-ghost btn-circle">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </label>
-  </div>
-
-  <!-- logo -->
   <div class="flex-1">
     <img src="assets/img/logo-escrito.png" alt="MapasODS" class="h-8 w-auto" />
   </div>
 
-  <div class="flex-none mr-15">
-    <ul class="menu menu-horizontal px-1 text-gray-500">
-      <details class="dropdown">
-        <summary class="btn m-1"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></summary>
-        <ul class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-          <li><a (click)="goDashboard()">Dashboard</a></li>
-          <li><a (click)="goSanepar()"><i class="fas fa-plus"></i> Cadastrar Consumo</a></li>
-          <li><a (click)="queryData()">Visualizar Dados</a></li>
-          <li><a routerLink="/eventos">Eventos</a></li>
-          <li><a routerLink="/outros">Eventos</a></li>
-          <li><a routerLink="/alunos-semestre">Alunos Semestre</a></li>
-          <li><a routerLink="/infraestrutura">Infraestrutura</a></li>
-          <li><a routerLink="/calculadora-nakagawa">Nakagawa</a></li>
-        </ul>
-      </details>
-    </ul>
-  </div>
+  <div class="flex-none flex">
 
-  <!-- Avatar admin -->
-  <div class="flex-none">
+    <ul class="menu menu-horizontal text-gray-500 hidden sm:flex">
+      <li><a routerLink="/dashboard-adm" class="hover:bg-gray-100 hover:text-gray-800">Dashboard</a></li>
+      <li><a routerLink="/contas-sanepar"><i class="fas fa-plus"></i>Cadastrar Consumo</a></li>
+      <!-- <li><a routerLink="/consultar-dados">Visualizar Dados</a></li>-->
+    </ul>
+
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
@@ -40,12 +18,29 @@
         </div>
       </div>
       <ul tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 bg-white shadow text-gray-500">
-        <li><a (click)="goPerfil()">Perfil</a></li>
-        <li><a (click)="infrastructure()">Cadastrar Novo Prédio</a></li>
-        <li><a (click)="registerAccounts()">Cadastrar Contas</a></li>
-        <li><a (click)="eventUTF()">Cadastrar Evento</a></li>
-        <li><a (click)="logout()">Sair</a></li>
+        class="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 bg-white shadow text-gray-500">
+        <li><a routerLink="/dashboard-adm" class="hover:bg-gray-100 hover:text-gray-800">Dashbord</a></li>
+        <li><a routerLink="/contas-sanepar" class="hover:bg-gray-100 hover:text-gray-800"><i
+              class="fas fa-plus"></i>Cadastrar Consumo</a></li>
+        <!--<li><a routerLink="/consultar-dados" class="hover:bg-gray-100 hover:text-gray-800">Visualizar Dados</a></li>-->
+
+        <li>
+          <hr class="my-2 border-gray-200">
+        </li>
+
+        <!--<li><a routerLink="/perfil-adm" class="hover:bg-gray-100 hover:text-gray-800">Perfil</a></li>-->
+        <li><a routerLink="/infraestrutura" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Novo Prédio</a></li>
+        <li><a routerLink="/cadastrar-leitura-sanepar" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar
+            Contas</a></li>
+        <li><a routerLink="/eventos" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Evento</a></li>
+
+        <li><a routerLink="/outros" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Funcionarios</a></li>
+        <li><a routerLink="/alunos-semestre" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Alunos por
+            Semestre</a></li>
+        <li><a routerLink="/infraestrutura" class="hover:bg-gray-100 hover:text-gray-800">Infraestrutura</a></li>
+        <li><a routerLink="/listagem-metricas" class=" hover:bg-gray-100 hover:text-gray-800">Calculadora</a></li>
+
+        <li><a (click)="logout()" class="hover:bg-gray-100 hover:text-gray-800">Sair</a></li>
       </ul>
     </div>
   </div>

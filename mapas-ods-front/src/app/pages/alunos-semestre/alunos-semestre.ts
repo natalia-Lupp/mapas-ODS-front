@@ -5,11 +5,12 @@ import { InterfaceAlunosSemestres } from '../../services/models/alunosSemestre';
 import { CommonModule } from '@angular/common';
 import { TipoAlerta } from '../../shared/components/toast/toast.enum';
 import { Toast } from '../../shared/components/toast/toast';
+import { SharedModule } from '../../shared/shared.module/shared.module';
 
 @Component({
   selector: 'app-alunos-semestre',
   standalone: true,
-  imports: [CommonModule, Toast],
+  imports: [CommonModule, Toast, SharedModule],
   templateUrl: './alunos-semestre.html',
   styleUrls: ['./alunos-semestre.css']
 })
@@ -41,11 +42,11 @@ export class AlunosSemestre implements OnInit {
   }
 
   cadastrar(): void {
-    this.router.navigate(["form-alunos-semestre"]);
+    this.router.navigate(["cadastrar-aluno-semestre"]);
   }
 
   atualizar(id?: string): void {
-    this.router.navigate([`form-alunos-semestre/${id}`]);
+    this.router.navigate([`atualizar-aluno-semestre/${id}`]);
   }
 
   deletar(id?: string): void {

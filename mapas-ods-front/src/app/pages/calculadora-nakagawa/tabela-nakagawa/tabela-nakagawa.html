@@ -1,132 +1,180 @@
-<form [formGroup]="formMetricas" *ngIf="formMetricas"
-   class="space-y-10 p-6 bg-gradient-to-b from-[#e8f3ff] to-[#f7fbff] rounded-2xl shadow-lg">
-   <!-- Contas Sanepar -->
-   <section formArrayName="contasSanepar" class="space-y-6">
-      <h2 class="text-2xl font-bold text-sky-700 border-b pb-2 mb-3">💧 Contas Sanepar</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-         <div *ngFor="let linha of contasFormArray.controls; let i = index" [formGroupName]="i"
-            class="bg-white p-4 rounded-xl shadow border border-blue-100 hover:shadow-md transition-shadow">
-            <div class="grid grid-cols-2 gap-4">
-               <div>
-                  <label class="text-sm text-gray-600 font-semibold block mb-1">Data</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="mes" readonly />
-               </div>
-               <div>
-                  <label class="text-sm text-gray-600 font-semibold block mb-1">Metros Cúbicos</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="metrosCubicos" readonly />
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
+<!-- CONTAINER PRINCIPAL -->
+<div class="flex-1 flex flex-col min-h-screen bg-white p-6">
 
-   <!-- Alunos Semestre -->
-   <section formArrayName="alunosSemestre" class="space-y-6">
-      <h2 class="text-2xl font-bold text-sky-700 border-b pb-2 mb-3">🎓 Alunos por Semestre</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-         <div *ngFor="let linhaAlunos of alunosFormArray.controls; let i = index" [formGroupName]="i"
-            class="bg-white p-4 rounded-xl shadow border border-blue-100 hover:shadow-md transition-shadow">
-            <p class="font-bold text-blue-700 text-center mb-3">{{ linhaAlunos.value.nomeSemestre }}</p>
-            <div class="grid grid-cols-2 gap-3">
-               <div>
-                  <label class="text-sm font-semibold text-gray-600 block">Geral</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="alunosSemestreGeral"
-                     readonly />
-               </div>
-               <div>
-                  <label class="text-sm font-semibold text-gray-600 block">Integral</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="alunosSemestreIntegral"
-                     readonly />
-               </div>
-               <div>
-                  <label class="text-sm font-semibold text-gray-600 block">Noturno</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="alunosSemestreNoturno"
-                     readonly />
-               </div>
-               <div>
-                  <label class="text-sm font-semibold text-gray-600 block">Início</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="dataInicioSemestre"
-                     readonly />
-               </div>
-               <div>
-                  <label class="text-sm font-semibold text-gray-600 block">Fim</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="dataFimSemestre" readonly />
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
+   <!-- CARD CENTRALIZADO -->
+   <div class="max-w-5xl w-full mx-auto bg-[#c9e2ff] rounded-2xl p-8 shadow-md border border-blue-200">
 
-   <!-- Eventos -->
-   <section formArrayName="eventos" class="space-y-6">
-      <h2 class="text-2xl font-bold text-sky-700 border-b pb-2 mb-3">🎉 Eventos</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-         <div *ngFor="let linhaEventos of eventosFormArray.controls; let i = index" [formGroupName]="i"
-            class="bg-white p-4 rounded-xl shadow border border-blue-100 hover:shadow-md transition-shadow">
-            <h3 class="text-blue-700 font-semibold text-lg mb-3">{{ linhaEventos.value.nomeEvento }}</h3>
-            <div class="space-y-2">
-               <div>
-                  <label class="text-sm text-gray-600 font-semibold block">N° Estimado Pessoas</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="numeroEstimadoPessoas"
-                     readonly />
-               </div>
-               <div class="grid grid-cols-2 gap-3">
-                  <div>
-                     <label class="text-sm font-semibold text-gray-600 block">Data Início</label>
-                     <input type="text" class="input input-bordered w-full" formControlName="eventoDataInicio"
-                        readonly />
-                  </div>
-                  <div>
-                     <label class="text-sm font-semibold text-gray-600 block">Data Fim</label>
-                     <input type="text" class="input input-bordered w-full" formControlName="eventoDataFim" readonly />
+      <form [formGroup]="formMetricas" *ngIf="formMetricas" class="space-y-10">
+
+         <!-- Nome Customizado -->
+         <section>
+            <label class="text-sm text-gray-700 font-semibold block mb-1">Nome Customizado</label>
+            <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+               formControlName="nomeCustomizado" />
+         </section>
+
+         <!-- Contas Sanepar -->
+         <section formArrayName="contasSanepar" class="space-y-6">
+            <h2 class="text-2xl font-bold text-sky-700 border-b pb-2 mb-3">💧 Contas Sanepar</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+               <div *ngFor="let linha of contasFormArray.controls; let i = index" [formGroupName]="i"
+                  class="bg-white p-4 rounded-xl shadow border border-blue-100 hover:shadow-md transition-shadow">
+
+                  <div class="grid grid-cols-2 gap-4">
+                     <div>
+                        <label class="text-sm text-gray-600 font-semibold block mb-1">Data</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="mes" readonly />
+                     </div>
+
+                     <div>
+                        <label class="text-sm text-gray-600 font-semibold block mb-1">Metros Cúbicos</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="metrosCubicos" readonly />
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-      </div>
-   </section>
+         </section>
 
-   <!-- Outros -->
-   <section formArrayName="outros" class="space-y-6">
-      <h2 class="text-2xl font-bold text-sky-700 border-b pb-2 mb-3">👥 Outros Colaboradores</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-         <div *ngFor="let linhasOutros of outroFormArray.controls; let i = index" [formGroupName]="i"
-            class="bg-white p-4 rounded-xl shadow border border-blue-100 hover:shadow-md transition-shadow">
-            <div class="grid grid-cols-2 gap-4">
-               <div>
-                  <label class="text-sm font-semibold text-gray-600 block">Aux. Administrativos</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="auxiliaresAdministrativos"
-                     readonly />
-               </div>
-               <div>
-                  <label class="text-sm font-semibold text-gray-600 block">Tercerizados</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="tercerizados" readonly />
-               </div>
-               <div>
-                  <label class="text-sm font-semibold text-gray-600 block">Docentes</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="docentes" readonly />
-               </div>
-               <div>
-                  <label class="text-sm font-semibold text-gray-600 block">Apelido</label>
-                  <input type="text" class="input input-bordered w-full" formControlName="apelido" readonly />
+         <!-- Alunos Semestre -->
+         <section formArrayName="alunosSemestre" class="space-y-6">
+            <h2 class="text-2xl font-bold text-sky-700 border-b pb-2 mb-3">🎓 Alunos por Semestre</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               <div *ngFor="let linhaAlunos of alunosFormArray.controls; let i = index" [formGroupName]="i"
+                  class="bg-white p-4 rounded-xl shadow border border-blue-100 hover:shadow-md transition-shadow">
+
+                  <p class="font-bold text-blue-700 text-center mb-3">{{ linhaAlunos.value.nomeSemestre }}</p>
+
+                  <div class="grid grid-cols-2 gap-3">
+                     <div>
+                        <label class="text-sm font-semibold text-gray-600 block">Geral</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="alunosSemestreGeral" readonly />
+                     </div>
+
+                     <div>
+                        <label class="text-sm font-semibold text-gray-600 block">Integral</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="alunosSemestreIntegral" readonly />
+                     </div>
+
+                     <div>
+                        <label class="text-sm font-semibold text-gray-600 block">Noturno</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="alunosSemestreNoturno" readonly />
+                     </div>
+
+                     <div>
+                        <label class="text-sm font-semibold text-gray-600 block">Início</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="dataInicioSemestre" readonly />
+                     </div>
+
+                     <div>
+                        <label class="text-sm font-semibold text-gray-600 block">Fim</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="dataFimSemestre" readonly />
+                     </div>
+                  </div>
                </div>
             </div>
-         </div>
-      </div>
-   </section>
-   <section>
-      <div class="flex gap-4">
-         <button type="button" class="btn btn-warning px-8" (click)="back()">
-            Voltar
-         </button>
-         <button type="button" class="btn btn-info px-8" (click)="gerarRelatorio()" [disabled]="formMetricas.invalid">
-            📄 Gerar Relatório
-         </button>
-         <button type="submit" class="btn btn-primary px-8" (click)="salvar()" [disabled]="formMetricas.invalid">
-            Salvar
-         </button>
-      </div>
-   </section>
-</form>
+         </section>
+
+         <!-- Eventos -->
+         <section formArrayName="eventos" class="space-y-6">
+            <h2 class="text-2xl font-bold text-sky-700 border-b pb-2 mb-3">🎉 Eventos</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               <div *ngFor="let linhaEventos of eventosFormArray.controls; let i = index" [formGroupName]="i"
+                  class="bg-white p-4 rounded-xl shadow border border-blue-100 hover:shadow-md transition-shadow">
+
+                  <h3 class="text-blue-700 font-semibold text-lg mb-3">{{ linhaEventos.value.nomeEvento }}</h3>
+
+                  <div class="space-y-2">
+                     <div>
+                        <label class="text-sm text-gray-600 font-semibold block">N° Estimado Pessoas</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="numeroEstimadoPessoas" readonly />
+                     </div>
+
+                     <div class="grid grid-cols-2 gap-3">
+                        <div>
+                           <label class="text-sm font-semibold text-gray-600 block">Data Início</label>
+                           <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                              formControlName="eventoDataInicio" readonly />
+                        </div>
+
+                        <div>
+                           <label class="text-sm font-semibold text-gray-600 block">Data Fim</label>
+                           <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                              formControlName="eventoDataFim" readonly />
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+         <!-- Outros -->
+         <section formArrayName="outros" class="space-y-6">
+            <h2 class="text-2xl font-bold text-sky-700 border-b pb-2 mb-3">👥 Outros Colaboradores</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               <div *ngFor="let linhasOutros of outroFormArray.controls; let i = index" [formGroupName]="i"
+                  class="bg-white p-4 rounded-xl shadow border border-blue-100 hover:shadow-md transition-shadow">
+
+                  <div class="grid grid-cols-2 gap-4">
+                     <div>
+                        <label class="text-sm font-semibold text-gray-600 block">Aux. Administrativos</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="auxiliaresAdministrativos" readonly />
+                     </div>
+
+                     <div>
+                        <label class="text-sm font-semibold text-gray-600 block">Tercerizados</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="tercerizados" readonly />
+                     </div>
+
+                     <div>
+                        <label class="text-sm font-semibold text-gray-600 block">Docentes</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="docentes" readonly />
+                     </div>
+
+                     <div>
+                        <label class="text-sm font-semibold text-gray-600 block">Apelido</label>
+                        <input type="text" class="input input-bordered w-full bg-white text-gray-700"
+                           formControlName="apelido" readonly />
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </section>
+
+         <!-- BOTÕES -->
+         <section>
+            <div class="flex flex-col sm:flex-row justify-between gap-4 pt-4">
+               <button type="button"
+                  class="px-6 py-2 rounded-full font-semibold text-blue-700 bg-white border w-full sm:w-auto"
+                  (click)="back()">
+                  Voltar
+               </button>
+
+               <button type="submit"
+                  class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto"
+                  (click)="salvar()" [disabled]="formMetricas.valid">
+                  Salvar
+               </button>
+            </div>
+         </section>
+
+      </form>
+   </div>
+</div>
 
 <app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlerta" [show]="showToast"></app-toast>

@@ -1,37 +1,59 @@
-<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 m-10 rounded-4xl">
-   <div class="flex justify-end mb-3">
-      <button class="btn btn-success" (click)="cadastrar()"><span class="text-white">Novo+</span></button>
-   </div>
+<div class="flex-1 flex flex-col min-h-screen">
+   <!-- Navbar -->
+   <app-navbar-adm></app-navbar-adm>
 
-   <table class="table custom-zebra">
-      <thead class="bg-[#c9e2ff]">
-         <tr class="text-center">
-            <th>Apelido</th>
-            <th>Aux. Administrtivos</th>
-            <th>Docentes</th>
-            <th>tercerizados</th>
-            <th>Periodo Inicio</th>
-            <th>Periodo Fim</th>
-            <th>Ações</th>
-         </tr>
-      </thead>
-      <tbody>
-         <tr class="text-center" *ngFor="let outro of outrosLista">
-            <td>{{outro.apelido}}</td>
-            <td>{{outro.auxiliares_administrativos}}</td>
-            <td>{{outro.docentes}}</td>
-            <td>{{outro.tercerizados}}</td>
-            <td>{{outro.periodo_inicio | date :"dd/MM/yyyy"}}</td>
-            <td>{{outro.periodo_fim | date :"dd/MM/yyyy"}}</td>
-            <td class="flex flex-row justify-center">
-               <button class="btn btn-xs bg-warning" (click)="atualizar(outro.id)">
-                  <i class="far fa-edit"></i>
-               </button>
-               <button class="btn btn-xs bg-error" (click)="deletar(outro.id)">
-                  <i class="fa-solid fa-trash"></i>
-               </button>
-            </td>
-         </tr>
-      </tbody>
-   </table>
+   <div class="drawer lg:drawer-open min-h-screen flex">
+      <!-- Sidebar -->
+      <app-sidebar class="hidden lg:block w-64"></app-sidebar>
+
+      <!-- Conteúdo principal -->
+      <main class="p-6 flex-1 bg-white">
+         <h2 class="text-3xl font-semibold mb-2 text-gray-900">Funcionarios</h2>
+         <h3 class="text-2xl font-semibold mb-6 text-gray-900 pt-4">Últimos Dados Cadastrados</h3>
+
+         <!-- Botão Novo -->
+         <div class="flex justify-end mb-6">
+            <button
+               class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto"
+               (click)="cadastrar()">
+               <span class="text-white">Novo +</span>
+            </button>
+         </div>
+
+         <!-- Tabela -->
+         <div class="card bg-white shadow-md border border-gray-200 rounded-2xl overflow-x-auto">
+            <table class="table w-full text-center text-gray-500">
+               <thead class="text-blue-800 bg-[#c9e2ff]">
+                  <tr>
+                     <th>Apelido</th>
+                     <th>Aux. Administrativos</th>
+                     <th>Docentes</th>
+                     <th>Tercerizados</th>
+                     <th>Periodo Início</th>
+                     <th>Periodo Fim</th>
+                     <th>Ações</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let outro of outrosLista" class="hover:bg-blue-50">
+                     <td>{{ outro.apelido }}</td>
+                     <td>{{ outro.auxiliares_administrativos }}</td>
+                     <td>{{ outro.docentes }}</td>
+                     <td>{{ outro.tercerizados }}</td>
+                     <td>{{ outro.periodo_inicio | date:'dd/MM/yyyy' }}</td>
+                     <td>{{ outro.periodo_fim | date:'dd/MM/yyyy' }}</td>
+                     <td class="flex justify-center gap-2">
+                        <button class="btn btn-xs" (click)="atualizar(outro.id)">
+                           <i class="far fa-edit"></i>
+                        </button>
+                        <button class="btn btn-xs" (click)="deletar(outro.id)">
+                           <i class="fa-solid fa-trash"></i>
+                        </button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </main>
+   </div>
 </div>
