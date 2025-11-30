@@ -62,9 +62,9 @@
                             <td class="p-3 text-sm">{{ conta.mes | date:'MMMM/yyyy' }}</td>
                             <td class="p-3 text-sm">{{ conta.metros_cubicos }}</td>
                             <td class="p-3 text-sm">
-                                <span class="badge"
-                                    [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success text-white' : 'badge-error text-white'">
-                                    {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu' : 'Não atingiu' }}
+                                <span class="badge badge-outline"
+                                    [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success' : 'badge-error'">
+                                    {{ atingiuMeta(conta.metros_cubicos) ? 'Meta Atingida' : 'Meta Não Atingida' }}
                                 </span>
                             </td>
                             <td class="p-3 text-sm">{{ mediaConsumoDiarioReal(conta.metros_cubicos) | number:'1.0-0' }}

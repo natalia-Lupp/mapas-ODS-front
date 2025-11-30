@@ -83,7 +83,7 @@ export class FormEventos implements OnInit {
       next: () => {
         this.showToast = true;
         this.showToastMessage("Evento Cadastrado Com Sucesso", TipoAlerta.SUCESSO, 1500);
-        this.router.navigate(["eventos"]);
+        this.router.navigate(["/adm/eventos"]);
       },
       error: (err) => {
         this.showToast = true;

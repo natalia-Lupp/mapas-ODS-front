@@ -49,7 +49,7 @@ export class Eventos implements OnInit {
       this.showToastMessage('Erro ao atualizar evento', TipoAlerta.ERRO);
       return;
     }
-    this.router.navigate(['gerenciar-evento', idEvento]);
+    this.router.navigate(['adm/eventos/gerenciar-evento', idEvento]);
   }
 
   deletarEvento(idEvento?: string) {

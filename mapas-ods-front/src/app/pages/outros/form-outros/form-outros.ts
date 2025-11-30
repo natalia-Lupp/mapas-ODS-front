@@ -7,18 +7,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module/shared.module';
+
 @Component({
   selector: 'app-form-outros',
   imports: [ReactiveFormsModule, CommonModule, SharedModule],
   templateUrl: './form-outros.html',
   styleUrls: ['./form-outros.css'],
-  providers:[DatePipe]
+  providers: [DatePipe]
 })
 export class FormOutros implements OnInit {
 
   formOutro!: FormGroup;
   outroId?: string;
   outroModel?: IntefaceOutros;
+
+  // 🔥 Variáveis do Toast
+  toastVisivel = false;
+  toastMensagem = "";
+  toastTipo = "alert-success";
 
   constructor(
     private router: Router,
@@ -48,8 +54,8 @@ export class FormOutros implements OnInit {
             auxiliaresAdministrativos: data.auxiliares_administrativos ?? 0,
             tercerizados: data.tercerizados ?? 0,
             docentes: data.docentes ?? 0,
-            periodoInicio: this.datePipe.transform(data.periodo_inicio,"yyyy-MM-dd"),
-            periodoFim: this.datePipe.transform(data.periodo_fim,"yyyy-MM-dd")
+            periodoInicio: this.datePipe.transform(data.periodo_inicio, "yyyy-MM-dd"),
+            periodoFim: this.datePipe.transform(data.periodo_fim, "yyyy-MM-dd")
           });
         }
       });
@@ -64,11 +70,23 @@ export class FormOutros implements OnInit {
     this.router.navigate(["adm/funcionarios"]);
   }
 
+  // 🔥 Método para exibir Toast
+  private mostrarToast(mensagem: string, tipo: string = "alert-success") {
+    this.toastMensagem = mensagem;
+    this.toastTipo = tipo;
+    this.toastVisivel = true;
+
+    setTimeout(() => {
+      this.toastVisivel = false;
+    }, 3000);
+  }
+
   salvar(): void {
     if (this.formOutro.invalid) {
       this.formOutro.markAllAsTouched();
       return;
     }
+
     const outro: IntefaceOutros = {
       apelido: this.formOutro.value.apelido,
       auxiliares_administrativos: this.formOutro.value.auxiliaresAdministrativos ?? 0,
@@ -79,22 +97,30 @@ export class FormOutros implements OnInit {
     };
 
     if (!this.outroId) {
+      // Criar
       this.outrosService.create(outro).subscribe({
         next: () => {
-          alert('Registro criado com sucesso!');
-          this.back();
+          this.mostrarToast("Registro criado com sucesso!", "alert-success");
+          setTimeout(() => this.back(), 1500);
         },
-        error: (err) => console.error('Erro ao criar registro:', err)
+        error: (err) => {
+          this.mostrarToast("Erro ao criar registro!", "alert-error");
+          console.error(err);
+        }
       });
+
     } else {
+      // Atualizar
       this.outrosService.update(this.outroId, outro).subscribe({
         next: () => {
-          alert('Registro atualizado com sucesso!');
-          this.back();
+          this.mostrarToast("Registro atualizado com sucesso!", "alert-success");
+          setTimeout(() => this.back(), 1500);
         },
-        error: (err) => console.error('Erro ao atualizar registro:', err)
+        error: (err) => {
+          this.mostrarToast("Erro ao atualizar registro!", "alert-error");
+          console.error(err);
+        }
       });
     }
   }
-
 }
