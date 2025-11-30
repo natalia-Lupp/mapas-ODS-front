@@ -42,11 +42,11 @@ export class AlunosSemestre implements OnInit {
   }
 
   cadastrar(): void {
-    this.router.navigate(["cadastrar-aluno-semestre"]);
+    this.router.navigate(["adm/alunos-semestre/cadastrar-aluno-semestre"]);
   }
 
   atualizar(id?: string): void {
-    this.router.navigate([`atualizar-aluno-semestre/${id}`]);
+    this.router.navigate([`adm/alunos-semestre/atualizar-aluno-semestre/${id}`]);
   }
 
   deletar(id?: string): void {

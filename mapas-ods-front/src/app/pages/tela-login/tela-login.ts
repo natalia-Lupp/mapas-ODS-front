@@ -48,7 +48,7 @@ export class TelaLogin {
         this.authService.setToken(token);
 
         // 🔹 Redireciona para o dashboard
-        this.router.navigate(['/dashboard-adm']);
+        this.router.navigate(['/adm/dashboard-adm']);
       } catch (error) {
         console.error('Erro no login:', error);
         this.showToast = true;

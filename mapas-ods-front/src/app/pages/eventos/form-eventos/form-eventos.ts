@@ -52,7 +52,7 @@ export class FormEventos implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(['eventos']);
+    this.router.navigate(['adm/eventos']);
   }
 
   salvar(): void {

@@ -27,16 +27,10 @@ export const routes: Routes = [
    {
       path: '',
       title: 'Home Mapa ODS',
-      component: ListaMetricas,
+      component: Home,
       pathMatch: 'full'
    },
-   {
-      path: 'consultar-dados',
-      title: "Consultar Dados",
-      component: ConsultarDados
-   },
-
-   // Login
+     // Login
    {
       path: 'login',
       title: 'Tela de Login',
@@ -45,112 +39,129 @@ export const routes: Routes = [
 
    // Dashboards
    {
-      path: 'dashboard-adm',
+      path: 'adm/dashboard-adm',
       title: 'Dashboard Administrador',
       component: DashboardAdmin
    },
    {
-      path: 'dashboard-user',
+      path: 'user/dashboard-user',
       title: 'Dashboard Usuário',
       component: DashboardUser
    },
 
-   // Perfis
+   // Consultar Dados temporarimamente desativado por calculos estarem sendo feitos pela calculadora
+/*
+    {
+      path: 'adm/consultar-dados',
+      title: "Consultar Dados",
+      component: ConsultarDados
+   },
+   */
+
+   // Perfis temporariamente desativados para implementação futura
+   /*
    {
-      path: 'perfil-adm',
+      path: 'adm/perfil-adm',
       title: 'Perfil Administrador',
       component: Perfil
    },
    {
-      path: 'perfil-user',
+      path: 'adm/perfil-user',
       title: 'Perfil Usuário',
       component: PerfilUser
    },
+   */ 
 
    // Contas Sanepar
    {
-      path: 'contas-sanepar',
+      path: 'adm/contas-sanepar',
       title: 'Contas Sanepar',
       component: ContasSanepar,
       pathMatch: 'full'
    },
    {
-      path: 'cadastrar-leitura-sanepar',
+      path: 'adm/contas-sanepar/cadastrar-leitura-sanepar',
       title: 'Cadastrar Leitura Sanepar',
       component: FormContaSanepar
    },
    {
-      path: 'atualizar-leitura-sanepar/:id',
+      path: 'adm/contas-sanepar/atualizar-leitura-sanepar/:id',
       title: 'Atualizar Leitura Sanepar',
       component: FormContaSanepar
    },
 
    // Eventos
    {
-      path: 'eventos',
+      path: 'adm/eventos',
       title: 'Eventos',
       component: Eventos
    },
    {
-      path: 'cadastrar-evento',
+      path: 'adm/eventos/cadastrar-evento',
       title: 'Cadastrar Evento',
       component: FormEventos
    },
    {
-      path: 'gerenciar-evento/:id',
+      path: 'adm/eventos/gerenciar-evento/:id',
       title: 'Gerenciar Evento',
       component: FormEventos
    },
 
-   // Outros
+   // funcionarios
    {
-      path: 'outros',
-      title: 'Outros',
+      path: 'adm/funcionarios',
+      title: 'Funcionarios',
       component: Outros
    },
    {
-      path: 'cadastrar-outro',
-      title: 'Cadastrar Outro',
+      path: 'adm/funcionarios/cadastrar-funcionarios',
+      title: 'Cadastrar Funcionários',
       component: FormOutros
    },
    {
-      path: 'atualizar-outro/:id',
-      title: 'Atualizar Outro',
+      path: 'adm/funcionarios/atualizar-funcionarios/:id',
+      title: 'Atualizar Funcionários',
       component: FormOutros
    },
 
    // Alunos Semestre
    {
-      path: 'alunos-semestre',
+      path: 'adm/alunos-semestre',
       title: 'Alunos por Semestre',
       component: AlunosSemestre
    },
    {
-      path: 'cadastrar-aluno-semestre',
+      path: 'adm/alunos-semestre/cadastrar-aluno-semestre',
       title: 'Cadastrar Aluno Semestre',
       component: FormAlunosSemestre
    },
    {
-      path: 'atualizar-aluno-semestre/:id',
+      path: 'adm/alunos-semestre/atualizar-aluno-semestre/:id',
       title: 'Atualizar Aluno Semestre',
       component: FormAlunosSemestre
    },
 
    // Calculadora Nakagawa
+    {
+      path:"adm/calculadora-nakagawa/listagem-metricas",
+       title: 'lista de metricas',
+      component:ListaMetricas
+   },
+
    {
-      path: 'calculadora-nakagawa',
+      path: 'adm/calculadora-nakagawa/filtro',
       title: 'Calculadora Nakagawa',
       component: CalculadoraNakagawa
    },
    {
-      path: 'dashboard-nakagawa/:id',
+      path: 'adm/calculadora-nakagawa/dashboard-nakagawa/:id',
       title: 'Dashboard Nakagawa',
       component: DashboardNakagawa
    },
 
    // Infraestrutura
    {
-      path: 'infraestrutura',
+      path: 'adm/infraestrutura',
       title: 'Infraestrutura',
       component: Infraestrutura
    },
@@ -159,10 +170,5 @@ export const routes: Routes = [
    {
       path: '**',
       redirectTo: ''
-   },
-   {
-      path:"listagem-metricas",
-       title: 'lista de metricas',
-      component:ListaMetricas
    }
 ];

@@ -117,7 +117,7 @@ export class FormAlunosSemestre implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(['alunos-semestre']);
+    this.router.navigate(['adm/alunos-semestre']);
   }
 
   getAllAlunosSemestres() {

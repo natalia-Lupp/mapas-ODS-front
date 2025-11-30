@@ -61,7 +61,7 @@ export class FormOutros implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(["outros"]);
+    this.router.navigate(["adm/funcionarios"]);
   }
 
   salvar(): void {

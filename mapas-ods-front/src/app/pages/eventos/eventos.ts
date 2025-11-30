@@ -27,7 +27,7 @@ export class Eventos implements OnInit {
   }
 
   cadastrar(): void {
-    this.router.navigate(["cadastrar-evento"]);
+    this.router.navigate(["adm/eventos/cadastrar-evento"]);
   }
 
 

@@ -35,12 +35,12 @@ export class Outros implements OnInit {
   }
 
   cadastrar() {
-    this.router.navigate(['cadastrar-outro']);
+    this.router.navigate(['adm/funcionarios/cadastrar-funcionarios']);
   }
 
   atualizar(id?: string) {
     if (!id) return;
-    this.router.navigate([`outros/${id}`]);
+    this.router.navigate([`adm/funcionarios/atualizar-funcionarios/${id}`]);
   }
 
   deletar(id?: string) {

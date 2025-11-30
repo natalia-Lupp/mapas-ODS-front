@@ -24,7 +24,7 @@ export class ListaMetricas implements OnInit {
   }
 
   visualizarMetrica(id?:string){
-    this.router.navigate([`dashboard-nakagawa/${id}`])
+    this.router.navigate([`adm/calculadora-nakagawa/dashboard-nakagawa/${id}`])
   }
 
   private getAllMetricas() {
@@ -40,7 +40,7 @@ export class ListaMetricas implements OnInit {
   }
 
   novaLeitura() {
-  this.router.navigate(['/calculadora-nakagawa']);
+  this.router.navigate(['/adm/calculadora-nakagawa/filtro']);
 }
 
 }

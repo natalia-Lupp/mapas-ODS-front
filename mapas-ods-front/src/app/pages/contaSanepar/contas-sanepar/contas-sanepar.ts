@@ -28,7 +28,7 @@ export class ContasSanepar implements OnInit {
   }
 
   cadastrarLeitura(): void {
-    this.router.navigate(["cadastrar-leitura-sanepar"]);
+    this.router.navigate(["/adm/contas-sanepar/cadastrar-leitura-sanepar"]);
   }
 
   atualizarLeitura(idLeitura?: string): void {
@@ -36,7 +36,7 @@ export class ContasSanepar implements OnInit {
       this.showToastMessage("ID inválido para atualizar", TipoAlerta.ERRO);
       return;
     }
-    this.router.navigate([`/atualizar-leitura-sanepar`, idLeitura]);
+    this.router.navigate([`/adm/contas-sanepar/atualizar-leitura-sanepar/`, idLeitura]);
   }
 
   deletarLeitura(idLeitura?: string): void {

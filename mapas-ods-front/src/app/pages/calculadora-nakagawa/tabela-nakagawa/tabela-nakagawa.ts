@@ -112,7 +112,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
   }
 
 back(): void {
-  this.router.navigate(['/metricas']);
+  this.router.navigate(['/adm/calculadora-nakagawa/listagem-metricas']);
 }
 
   showToastMessage(mensagem: string, tipo: TipoAlerta, duration = 1500) {
