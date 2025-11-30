@@ -3,16 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { EventosService } from '../../../services/database/eventos.service';
 import { InterfaceEvento } from '../../../services/models/evento';
 import { Toast } from '../../../shared/components/toast/toast';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { SharedModule } from '../../../../app/shared/shared.module/shared.module';
+import { CommonModule } from '@angular/common';
+import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
 
 @Component({
   selector: 'app-form-eventos',
-  imports: [ReactiveFormsModule, Toast, SharedModule],
+  imports: [ReactiveFormsModule, Toast, SharedModule, CommonModule, OnlyNumbersDirective],
   standalone: true,
   templateUrl: './form-eventos.html',
   styleUrl: './form-eventos.css',
@@ -52,7 +53,7 @@ export class FormEventos implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(['eventos']);
+    this.router.navigate(['adm/eventos']);
   }
 
   salvar(): void {
@@ -83,7 +84,7 @@ export class FormEventos implements OnInit {
       next: () => {
         this.showToast = true;
         this.showToastMessage("Evento Cadastrado Com Sucesso", TipoAlerta.SUCESSO, 1500);
-        this.router.navigate(["eventos"]);
+        this.router.navigate(["/adm/eventos"]);
       },
       error: (err) => {
         this.showToast = true;

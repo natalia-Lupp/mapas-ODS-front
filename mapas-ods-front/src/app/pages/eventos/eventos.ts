@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { EventosService } from '../../services/database/eventos.service';
 import { InterfaceEvento } from '../../services/models/evento';
 import { TipoAlerta } from '../../shared/components/toast/toast.enum';
@@ -27,7 +26,7 @@ export class Eventos implements OnInit {
   }
 
   cadastrar(): void {
-    this.router.navigate(["cadastrar-evento"]);
+    this.router.navigate(["adm/eventos/cadastrar-evento"]);
   }
 
 
@@ -49,7 +48,7 @@ export class Eventos implements OnInit {
       this.showToastMessage('Erro ao atualizar evento', TipoAlerta.ERRO);
       return;
     }
-    this.router.navigate(['gerenciar-evento', idEvento]);
+    this.router.navigate(['adm/eventos/gerenciar-evento', idEvento]);
   }
 
   deletarEvento(idEvento?: string) {

@@ -63,8 +63,6 @@ export class TabelaNakagawa implements OnChanges, OnInit {
 
 
   async salvar(): Promise<void> {
-    console.log('123123');
-
     const metricas = this.formMetricas.value;
     const totalLitros = await this.getTotalContasSanepar();
     const outrosObj: {
@@ -86,7 +84,6 @@ export class TabelaNakagawa implements OnChanges, OnInit {
       eventos: metricas.eventos.map((e: any) => e.id),
       outros: metricas.outros.map((o: any) => o.id),
       alunos_semestres: metricas.alunosSemestre.map((a: any) => a.id),
-      id_infra: "zcq6tb94y011jwd", //valor sempre fixo tem que ajustar isso por horas vai assim mesmo
       data_inicio_periodo: this.formPeso.value?.dataInicioSemestre,
       data_fim_periodo: this.formPeso.value?.dataFimSemestre,
       consumo_total_agua: totalLitros,
@@ -112,7 +109,7 @@ export class TabelaNakagawa implements OnChanges, OnInit {
   }
 
 back(): void {
-  this.router.navigate(['/metricas']);
+  this.router.navigate(['/adm/calculadora-nakagawa/listagem-metricas']);
 }
 
   showToastMessage(mensagem: string, tipo: TipoAlerta, duration = 1500) {

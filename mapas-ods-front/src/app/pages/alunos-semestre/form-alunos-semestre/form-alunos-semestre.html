@@ -13,8 +13,8 @@
          </h2>
 
          <!-- CARD PRINCIPAL -->
-         <form class="max-w-4xl w-full mx-auto bg-[#c9e2ff] rounded-2xl p-8 shadow-md border border-blue-200"
-            [formGroup]="formAlunosSemestre" (ngSubmit)="salvar()">
+         <form class="max-w-4xl w-full mx-auto rounded-2xl p-8 shadow-md border border-blue-200"
+            style="background-color:#c9e2ff" [formGroup]="formAlunosSemestre" (ngSubmit)="salvar()">
 
             <!-- Linha 1 -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -22,7 +22,7 @@
                   <label class="block text-sm font-medium text-gray-700 mb-1">
                      Alunos Semestre Geral
                   </label>
-                  <input formControlName="alunosSemestreGeral" type="number"
+                  <input formControlName="alunosSemestreGeral" type="text" appOnlyNumbers
                      class="input input-bordered w-full bg-white text-gray-700" placeholder="Quantidade geral"
                      min="1" />
                </div>
@@ -31,7 +31,7 @@
                   <label class="block text-sm font-medium text-gray-700 mb-1">
                      Alunos Semestre Integral
                   </label>
-                  <input formControlName="alunosSemestreIntegral" type="number"
+                  <input formControlName="alunosSemestreIntegral" type="text" appOnlyNumbers
                      class="input input-bordered w-full bg-white text-gray-700" placeholder="Quantidade integral"
                      min="1" />
                </div>
@@ -40,7 +40,7 @@
                   <label class="block text-sm font-medium text-gray-700 mb-1">
                      Alunos Semestre Noturno
                   </label>
-                  <input formControlName="alunosSemestreNoturno" type="number"
+                  <input formControlName="alunosSemestreNoturno" type="text" appOnlyNumbers
                      class="input input-bordered w-full bg-white text-gray-700" placeholder="Quantidade noturno"
                      min="1" />
                </div>
@@ -69,7 +69,8 @@
                      Nome Semestre
                   </label>
                   <input formControlName="nomeSemestre" type="text"
-                     class="input input-bordered w-full bg-white text-gray-700" required />
+                     class="input input-bordered w-full bg-white text-gray-700" placeholder="Ex: 2025/1" min="1"
+                     required />
                </div>
             </div>
 

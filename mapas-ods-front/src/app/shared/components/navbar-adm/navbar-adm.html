@@ -1,26 +1,26 @@
 <div class="navbar bg-base-100 bg-white shadow-sm px-4 border-b border-gray-200">
   <div class="flex-1">
-    <img src="assets/img/logo-escrito.png" alt="MapasODS" class="h-8 w-auto" />
+    <img src="../../../../assets/img/logo-escrito.png" alt="MapasODS" class="h-8 w-auto" />
   </div>
 
   <div class="flex-none flex">
 
     <ul class="menu menu-horizontal text-gray-500 hidden sm:flex">
-      <li><a routerLink="/dashboard-adm" class="hover:bg-gray-100 hover:text-gray-800">Dashboard</a></li>
-      <li><a routerLink="/contas-sanepar"><i class="fas fa-plus"></i>Cadastrar Consumo</a></li>
+      <li><a routerLink="/adm/dashboard-adm" class="hover:bg-gray-100 hover:text-gray-800">Dashboard</a></li>
+      <li><a routerLink="/adm/contas-sanepar"><i class="fas fa-plus"></i>Cadastrar Consumo</a></li>
       <!-- <li><a routerLink="/consultar-dados">Visualizar Dados</a></li>-->
     </ul>
 
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img src="assets/img/img-modelo-adm.png" alt="adm" />
+          <img src="../../../../assets/img/img-modelo-adm.png" alt="adm" />
         </div>
       </div>
       <ul tabindex="0"
         class="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 bg-white shadow text-gray-500">
-        <li><a routerLink="/dashboard-adm" class="hover:bg-gray-100 hover:text-gray-800">Dashbord</a></li>
-        <li><a routerLink="/contas-sanepar" class="hover:bg-gray-100 hover:text-gray-800"><i
+        <li><a routerLink="/adm/dashboard-adm" class="hover:bg-gray-100 hover:text-gray-800">Dashbord</a></li>
+        <li><a routerLink="/adm/contas-sanepar" class="hover:bg-gray-100 hover:text-gray-800"><i
               class="fas fa-plus"></i>Cadastrar Consumo</a></li>
         <!--<li><a routerLink="/consultar-dados" class="hover:bg-gray-100 hover:text-gray-800">Visualizar Dados</a></li>-->
 
@@ -29,16 +29,18 @@
         </li>
 
         <!--<li><a routerLink="/perfil-adm" class="hover:bg-gray-100 hover:text-gray-800">Perfil</a></li>-->
-        <li><a routerLink="/infraestrutura" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Novo Prédio</a></li>
-        <li><a routerLink="/cadastrar-leitura-sanepar" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar
-            Contas</a></li>
-        <li><a routerLink="/eventos" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Evento</a></li>
+        <li><a routerLink="/adm/infraestrutura" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Novo Prédio</a>
+        </li>
+        <!--<li><a routerLink="/adm/cadastrar-leitura-sanepar" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar
+            Contas</a></li>-->
+        <li><a routerLink="/adm/eventos" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Evento</a></li>
 
-        <li><a routerLink="/outros" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Funcionarios</a></li>
-        <li><a routerLink="/alunos-semestre" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Alunos por
+        <li><a routerLink="/adm/funcionarios" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Funcionarios</a>
+        </li>
+        <li><a routerLink="/adm/alunos-semestre" class="hover:bg-gray-100 hover:text-gray-800">Cadastrar Alunos por
             Semestre</a></li>
-        <li><a routerLink="/infraestrutura" class="hover:bg-gray-100 hover:text-gray-800">Infraestrutura</a></li>
-        <li><a routerLink="/listagem-metricas" class=" hover:bg-gray-100 hover:text-gray-800">Calculadora</a></li>
+        <li><a routerLink="/adm/calculadora-nakagawa/listagem-metricas"
+            class=" hover:bg-gray-100 hover:text-gray-800">Calculadora</a></li>
 
         <li><a (click)="logout()" class="hover:bg-gray-100 hover:text-gray-800">Sair</a></li>
       </ul>

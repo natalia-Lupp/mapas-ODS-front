@@ -12,7 +12,7 @@
       <h2 class="text-3xl font-semibold mb-6 text-gray-900">Cadastro de Leitura Sanepar</h2>
 
       <!-- Formulário card -->
-      <div class="max-w-lg w-full bg-[#c9e2ff] rounded-2xl p-6 shadow-md border border-blue-200">
+      <div class="max-w-lg w-full rounded-2xl p-6 shadow-md border border-blue-200" style="background-color:#c9e2ff">
         <form [formGroup]="contaSaneparForm" (ngSubmit)="salvar()" class="space-y-5">
           <!-- Data -->
           <div>
@@ -24,8 +24,8 @@
           <!-- Metros Cúbicos -->
           <div>
             <label class="block text-sm font-medium text-gray-500 mb-1">M³</label>
-            <input formControlName="metrosCubicos" type="number"
-              class="input input-bordered w-full bg-white text-gray-500" placeholder="Metros cúbicos" />
+            <input formControlName="metrosCubicos" type="text" appOnlyNumbers
+              class="input input-bordered w-full bg-white text-gray-500" placeholder="valor numerico" />
           </div>
 
           <!-- Botões -->

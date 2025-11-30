@@ -16,12 +16,12 @@
 
          <div class="card bg-white shadow-md border border-gray-200 rounded-2xl">
             <table class="hidden sm:table custom-zebra w-full text-center text-gray-500">
-               <thead class="bg-[#c9e2ff]">
+               <thead style="background-color:#c9e2ff">
                   <tr>
-                     <th class="font-extrabold text-center text-gray-500">Nome</th>
-                     <th class="font-extrabold text-center text-gray-500">Nº Pessoas</th>
-                     <th class="font-extrabold text-center whitespace-nowrap text-gray-500">Data Início</th>
-                     <th class="font-extrabold text-center whitespace-nowrap text-gray-500">Data Fim</th>
+                     <th class="font-extrabold text-center text-blue-800">Nome</th>
+                     <th class="font-extrabold text-center text-blue-800">Nº Pessoas</th>
+                     <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Data Início</th>
+                     <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Data Fim</th>
                      <th></th>
                   </tr>
                </thead>
@@ -32,10 +32,14 @@
                      <td class="whitespace-nowrap">{{evento.data_inicio | date:"dd/MM/yyyy"}}</td>
                      <td class="whitespace-nowrap">{{evento.data_fim | date:"dd/MM/yyyy"}}</td>
                      <td class="flex justify-center gap-2 whitespace-nowrap">
-                        <button class="btn btn-xs" (click)="atualizarEvento(evento.id)">
+                        <button
+                           class="border border-blue-300 text-blue-600 hover:bg-blue-50 flex items-center justify-center p-1 rounded"
+                           (click)="atualizarEvento(evento.id)">
                            <i class="far fa-edit"></i>
                         </button>
-                        <button class="btn btn-xs" (click)="deletarEvento(evento.id)">
+                        <button
+                           class="border border-red-300 text-red-600 hover:bg-red-50 flex items-center justify-center p-1 rounded"
+                           (click)="deletarEvento(evento.id)">
                            <i class="fa-solid fa-trash"></i>
                         </button>
                      </td>

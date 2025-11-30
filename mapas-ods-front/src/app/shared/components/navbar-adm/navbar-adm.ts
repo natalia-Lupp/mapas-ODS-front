@@ -13,14 +13,6 @@ import { PocketBaseService } from '../../../services/pocketbase.service';
 })
 export class NavbarAdm {
 
-  perfilRoute: string = '/perfil-adm';
-  dashboardRoute: string = '/dashboard-adm';
-  saneparRoute: string = 'contas-sanepar';
-  registerAccountsRoute: string = '/cadastrar-leitura-sanepar'
-  infrastructureRoute: string = '/infraestrutura'
-  eventRoute: string = '/eventos'
-  queryDataRoute: string = '/consultar-dados'
-
   constructor(
     private pbService: PocketBaseService,
     private router: Router

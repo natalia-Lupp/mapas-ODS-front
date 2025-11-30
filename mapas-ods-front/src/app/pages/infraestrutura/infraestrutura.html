@@ -12,12 +12,12 @@
          <h2 class="text-3xl font-semibold mb-6 text-gray-900">Informações do Campus UTFPR-Guarapuava</h2>
 
          <!-- Formulário card -->
-         <div class="max-w-lg w-full bg-[#c9e2ff] rounded-2xl p-6 shadow-md border border-blue-200">
+         <div class="max-w-lg w-full rounded-2xl p-6 shadow-md border border-blue-200" style="background-color:#c9e2ff">
             <form [formGroup]="formInfra" (ngSubmit)="salvar()" class="space-y-5">
                <!-- Tamanho do Campus -->
                <div>
                   <label class="block text-sm font-medium text-gray-500 mb-1">Tamanho Campus (m²)</label>
-                  <input formControlName="area_construida" type="number"
+                  <input formControlName="area_construida" type="text" appOnlyNumbers
                      class="input input-bordered w-full bg-white text-gray-500"
                      placeholder="Informe em m² o tamanho do campus" />
                </div>
@@ -26,7 +26,7 @@
                <div class="flex flex-col sm:flex-row justify-between gap-4 pt-4">
                   <button type="button"
                      class="px-6 py-2 rounded-full font-semibold text-blue-700 bg-white border w-full sm:w-auto"
-                     (click)="navigate('dashboard-adm')">
+                     (click)="navigate('adm/dashboard-adm')">
                      Voltar
                   </button>
                   <button type="submit"

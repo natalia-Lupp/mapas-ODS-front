@@ -1,56 +1,48 @@
 <div class="flex-1 flex flex-col min-h-screen">
-   <!-- Navbar -->
    <app-navbar-adm></app-navbar-adm>
 
    <div class="drawer lg:drawer-open min-h-screen flex">
-      <!-- Sidebar -->
       <app-sidebar class="hidden lg:block w-64"></app-sidebar>
 
-      <!-- Conteúdo principal -->
       <main class="p-6 flex-1 bg-white">
-         <h2 class="text-3xl font-semibold mb-6 text-gray-900">Informações Extras</h2>
+         <h2 class="text-3xl font-semibold mb-6 text-gray-900">Cadastrar Funcionarios</h2>
 
-         <!-- CARD CENTRALIZADO -->
-         <div class="max-w-4xl w-full mx-auto bg-[#c9e2ff] rounded-2xl p-8 shadow-md border border-blue-200">
+         <app-toast *ngIf="toastVisivel" [mensagem]="toastMensagem" [tipoAlerta]="toastTipo" [show]="toastVisivel">
+         </app-toast>
+
+         <div class="max-w-4xl w-full mx-auto rounded-2xl p-8 shadow-md border border-blue-200" style="background-color:#c9e2ff">
 
             <form [formGroup]="formOutro" class="space-y-8">
 
-               <!-- LINHA 1 -->
                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 
-                  <!-- Apelido -->
                   <div>
-                     <label class="block text-sm font-medium text-gray-700 mb-1">Apelido</label>
+                     <label class="block text-sm font-medium text-gray-700 mb-1">Idenficador do Semestre</label>
                      <input formControlName="apelido" type="text"
-                        class="input input-bordered w-full bg-white text-gray-700" placeholder="ex: ano 2025" />
+                        class="input input-bordered w-full bg-white text-gray-700" placeholder="ex: 2025/1" />
                   </div>
 
-                  <!-- Aux Administrativos -->
                   <div>
                      <label class="block text-sm font-medium text-gray-700 mb-1">Nº Aux Administrativos</label>
-                     <input formControlName="auxiliaresAdministrativos" type="number"
-                        class="input input-bordered w-full bg-white text-gray-700" placeholder="0" />
+                     <input formControlName="auxiliaresAdministrativos" type="text" appOnlyNumbers
+                        class="input input-bordered w-full bg-white text-gray-700" placeholder="Ex: 40" />
                   </div>
 
-                  <!-- Tercerizados -->
                   <div>
                      <label class="block text-sm font-medium text-gray-700 mb-1">Nº Terceirizados</label>
-                     <input formControlName="tercerizados" type="number"
-                        class="input input-bordered w-full bg-white text-gray-700" placeholder="0" />
+                     <input formControlName="tercerizados" type="text" appOnlyNumbers
+                        class="input input-bordered w-full bg-white text-gray-700" placeholder="Ex: 40" />
                   </div>
 
-                  <!-- Docentes -->
                   <div>
                      <label class="block text-sm font-medium text-gray-700 mb-1">Nº Docentes</label>
-                     <input formControlName="docentes" type="number"
-                        class="input input-bordered w-full bg-white text-gray-700" placeholder="0" />
+                     <input formControlName="docentes" type="text" appOnlyNumbers
+                        class="input input-bordered w-full bg-white text-gray-700" placeholder="Ex: 40" />
                   </div>
                </div>
 
-               <!-- LINHA 2 (Datas) -->
                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                  <!-- Período Início -->
                   <div>
                      <label class="block text-sm font-medium text-gray-700 mb-1 text-center md:text-left">
                         Período Início
@@ -59,7 +51,6 @@
                         class="input input-bordered w-full bg-white text-gray-700" />
                   </div>
 
-                  <!-- Período Fim -->
                   <div>
                      <label class="block text-sm font-medium text-gray-700 mb-1 text-center md:text-left">
                         Período Fim
@@ -69,7 +60,6 @@
                   </div>
                </div>
 
-               <!-- BOTÕES -->
                <div class="flex flex-col sm:flex-row justify-between gap-4 pt-4">
                   <button type="button"
                      class="px-6 py-2 rounded-full font-semibold text-blue-700 bg-white border w-full sm:w-auto"

@@ -1,58 +1,105 @@
 <div class="flex-1 flex flex-col min-h-screen">
-   <!-- Navbar -->
    <app-navbar-adm></app-navbar-adm>
 
    <div class="drawer lg:drawer-open min-h-screen flex">
-      <!-- Sidebar -->
       <app-sidebar class="hidden lg:block w-64"></app-sidebar>
 
-      <!-- Conteúdo principal -->
       <main class="p-6 flex-1 bg-white">
          <h2 class="text-3xl font-semibold mb-2 text-gray-900">Funcionarios</h2>
          <h3 class="text-2xl font-semibold mb-6 text-gray-900 pt-4">Últimos Dados Cadastrados</h3>
 
-         <!-- Botão Novo -->
          <div class="flex justify-end mb-6">
             <button
                class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto"
                (click)="cadastrar()">
-               <span class="text-white">Novo +</span>
+               <span class="text-white">+ Novo Registro</span>
             </button>
          </div>
 
-         <!-- Tabela -->
-         <div class="card bg-white shadow-md border border-gray-200 rounded-2xl overflow-x-auto">
-            <table class="table w-full text-center text-gray-500">
-               <thead class="text-blue-800 bg-[#c9e2ff]">
+         <div class="card bg-white shadow-md border border-gray-200 rounded-2xl">
+
+            <table class="hidden sm:table w-full text-center text-gray-500 custom-zebra">
+               <thead class="text-blue-800" style="background-color:#c9e2ff">
                   <tr>
-                     <th>Apelido</th>
-                     <th>Aux. Administrativos</th>
-                     <th>Docentes</th>
-                     <th>Tercerizados</th>
-                     <th>Periodo Início</th>
-                     <th>Periodo Fim</th>
-                     <th>Ações</th>
+                     <th class="font-extrabold text-center text-blue-800">Identificador do Semestre</th>
+                     <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Periodo Início</th>
+                     <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Periodo Fim</th>
+                     <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Aux. Administrativos</th>
+                     <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Docentes</th>
+                     <th class="font-extrabold text-center whitespace-nowrap text-blue-800">Tercerizados</th>
+                     <th></th>
                   </tr>
                </thead>
                <tbody>
-                  <tr *ngFor="let outro of outrosLista" class="hover:bg-blue-50">
+                  <tr *ngFor="let outro of outrosLista" class="text-center text-gray-500 hover:bg-blue-50">
                      <td>{{ outro.apelido }}</td>
+                     <td class="whitespace-nowrap">{{ outro.periodo_inicio | date:'dd/MM/yyyy' }}</td>
+                     <td class="whitespace-nowrap">{{ outro.periodo_fim | date:'dd/MM/yyyy' }}</td>
                      <td>{{ outro.auxiliares_administrativos }}</td>
                      <td>{{ outro.docentes }}</td>
                      <td>{{ outro.tercerizados }}</td>
-                     <td>{{ outro.periodo_inicio | date:'dd/MM/yyyy' }}</td>
-                     <td>{{ outro.periodo_fim | date:'dd/MM/yyyy' }}</td>
-                     <td class="flex justify-center gap-2">
-                        <button class="btn btn-xs" (click)="atualizar(outro.id)">
+
+                     <td class="flex justify-center gap-2 whitespace-nowrap">
+                        <button
+                           class="border border-blue-300 text-blue-600 hover:bg-blue-50 flex items-center justify-center p-1 rounded"
+                           (click)="atualizar(outro.id)">
                            <i class="far fa-edit"></i>
                         </button>
-                        <button class="btn btn-xs" (click)="deletar(outro.id)">
+                        <button
+                           class="border border-red-300 text-red-600 hover:bg-red-50 flex items-center justify-center p-1 rounded"
+                           (click)="deletar(outro.id)">
                            <i class="fa-solid fa-trash"></i>
                         </button>
                      </td>
                   </tr>
                </tbody>
             </table>
+
+            <div *ngIf="!outrosLista || outrosLista.length === 0"
+               class="hidden sm:block text-center py-4 text-gray-500">
+               Nenhum funcionário registrado.
+            </div>
+
+            <div class="p-4 sm:hidden flex flex-col gap-4">
+               <div *ngFor="let outro of outrosLista"
+                  class="bg-gray-50 p-4 border border-gray-200 rounded-lg shadow-sm">
+
+                  <div class="flex justify-between items-start mb-2 border-b pb-2">
+                     <div class="font-bold text-lg text-gray-800">{{ outro.apelido }}</div>
+                     <div class="flex gap-2">
+                        <button class="btn btn-xs btn-ghost" (click)="atualizar(outro.id)">
+                           <i class="far fa-edit text-blue-500"></i>
+                        </button>
+                        <button class="btn btn-xs btn-ghost" (click)="deletar(outro.id)">
+                           <i class="fa-solid fa-trash text-red-500"></i>
+                        </button>
+                     </div>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-y-2 text-sm text-gray-600">
+                     <div class="font-semibold text-gray-700">Início:</div>
+                     <div>{{ outro.periodo_inicio | date:'dd/MM/yyyy' }}</div>
+
+                     <div class="font-semibold text-gray-700">Fim:</div>
+                     <div>{{ outro.periodo_fim | date:'dd/MM/yyyy' }}</div>
+
+                     <div class="font-semibold text-gray-700">Aux. Adm:</div>
+                     <div>{{ outro.auxiliares_administrativos }}</div>
+
+                     <div class="font-semibold text-gray-700">Docentes:</div>
+                     <div>{{ outro.docentes }}</div>
+
+                     <div class="font-semibold text-gray-700">Tercerizados:</div>
+                     <div>{{ outro.tercerizados }}</div>
+                  </div>
+
+               </div>
+
+               <div *ngIf="!outrosLista || outrosLista.length === 0" class="text-center py-4 text-gray-500">
+                  Nenhum funcionário registrado.
+               </div>
+            </div>
+
          </div>
       </main>
    </div>

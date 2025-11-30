@@ -9,7 +9,7 @@ export interface InterfaceMetricas {
    eventos?: string[],
    outros?: IntefaceOutros[],
    alunos_semestres?: InterfaceAlunosSemestres[],
-   id_infra: string,
+   id_infra?: string,
    data_inicio_periodo: Date,
    data_fim_periodo: Date,
    consumo_total_agua: number,

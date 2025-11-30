@@ -7,18 +7,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module/shared.module';
+import { Toast } from '../../../shared/components/toast/toast';
+import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
+import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
+
 @Component({
   selector: 'app-form-outros',
-  imports: [ReactiveFormsModule, CommonModule, SharedModule],
+  imports: [ReactiveFormsModule, CommonModule, SharedModule, Toast, OnlyNumbersDirective],
   templateUrl: './form-outros.html',
   styleUrls: ['./form-outros.css'],
-  providers:[DatePipe]
+  providers: [DatePipe]
 })
 export class FormOutros implements OnInit {
 
   formOutro!: FormGroup;
   outroId?: string;
   outroModel?: IntefaceOutros;
+
+  toastVisivel = false;
+  toastMensagem = "";
+toastTipo: TipoAlerta = TipoAlerta.SUCESSO; // mais um toast que quebrou e só avisou qd ta nos 42 do segundo tempo
+
 
   constructor(
     private router: Router,
@@ -48,8 +57,8 @@ export class FormOutros implements OnInit {
             auxiliaresAdministrativos: data.auxiliares_administrativos ?? 0,
             tercerizados: data.tercerizados ?? 0,
             docentes: data.docentes ?? 0,
-            periodoInicio: this.datePipe.transform(data.periodo_inicio,"yyyy-MM-dd"),
-            periodoFim: this.datePipe.transform(data.periodo_fim,"yyyy-MM-dd")
+            periodoInicio: this.datePipe.transform(data.periodo_inicio, "yyyy-MM-dd"),
+            periodoFim: this.datePipe.transform(data.periodo_fim, "yyyy-MM-dd")
           });
         }
       });
@@ -61,14 +70,26 @@ export class FormOutros implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(["outros"]);
+    this.router.navigate(["adm/funcionarios"]);
   }
+
+  // Método para exibir Toast
+  private mostrarToast(mensagem: string, tipo: TipoAlerta = TipoAlerta.SUCESSO) {
+  this.toastMensagem = mensagem;
+  this.toastTipo = tipo;
+  this.toastVisivel = true;
+
+  setTimeout(() => {
+    this.toastVisivel = false;
+  }, 3000);
+}
 
   salvar(): void {
     if (this.formOutro.invalid) {
       this.formOutro.markAllAsTouched();
       return;
     }
+
     const outro: IntefaceOutros = {
       apelido: this.formOutro.value.apelido,
       auxiliares_administrativos: this.formOutro.value.auxiliaresAdministrativos ?? 0,
@@ -79,22 +100,30 @@ export class FormOutros implements OnInit {
     };
 
     if (!this.outroId) {
+      // Criar
       this.outrosService.create(outro).subscribe({
         next: () => {
-          alert('Registro criado com sucesso!');
-          this.back();
+     this.mostrarToast("Registro criado com sucesso!", TipoAlerta.SUCESSO);
+          setTimeout(() => this.back(), 1500);
         },
-        error: (err) => console.error('Erro ao criar registro:', err)
+        error: (err) => {
+      this.mostrarToast("Erro ao criar registro!", TipoAlerta.ERRO);
+          console.error(err);
+        }
       });
+
     } else {
+      // Atualizar
       this.outrosService.update(this.outroId, outro).subscribe({
         next: () => {
-          alert('Registro atualizado com sucesso!');
-          this.back();
+          this.mostrarToast("Registro criado com sucesso!", TipoAlerta.SUCESSO);
+          setTimeout(() => this.back(), 1500);
         },
-        error: (err) => console.error('Erro ao atualizar registro:', err)
+        error: (err) => {
+          this.mostrarToast("Erro ao criar registro!", TipoAlerta.ERRO);
+          console.error(err);
+        }
       });
     }
   }
-
 }

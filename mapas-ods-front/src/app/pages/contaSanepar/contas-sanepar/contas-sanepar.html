@@ -1,35 +1,31 @@
-<!-- Área principal (Navbar + Conteúdo) -->
 <div class="flex-1 flex flex-col min-h-screen">
-   <!-- Navbar no topo -->
    <app-navbar-adm></app-navbar-adm>
 
    <div class="drawer lg:drawer-open min-h-screen flex">
-      <!-- Sidebar -->
       <app-sidebar class="hidden lg:block w-64"></app-sidebar>
 
-      <!-- Conteúdo principal -->
       <main class="p-6 flex-1 bg-white">
          <h2 class="text-3xl font-semibold mb-2 text-gray-900">Contas Sanepar</h2>
          <h3 class="text-2xl font-semibold mb-6 text-gray-900 pt-4">Últimos Dados Cadastrados</h3>
 
-         <!-- Botão Nova Leitura -->
          <div class="flex justify-end mb-6">
             <button
                class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 w-full sm:w-auto"
                (click)="cadastrarLeitura()">
-               <span class="text-white">Nova Leitura</span>
+               <span class="text-white">+ Nova Leitura</span>
             </button>
          </div>
 
-         <!-- Tabela de Contas -->
          <div class="card bg-white shadow-md border border-gray-200 rounded-2xl overflow-x-auto">
-            <table class="table w-full text-center text-gray-500">
-               <thead class="text-blue-800 bg-[#c9e2ff]">
+            <table class="hidden sm:table w-full text-center text-gray-500">
+
+              <thead style="background-color:#c9e2ff">
+
                   <tr>
-                     <th>Data</th>
-                     <th>M³</th>
-                     <th>Consumo Esperado</th>
-                     <th></th>
+                     <th class="p-3 text-sm text-blue-800 font-extrabold">Data</th>
+                     <th class="p-3 text-sm text-blue-800 font-extrabold">M³</th>
+                     <th class="p-3 text-sm text-blue-800 font-extrabold">Consumo Esperado</th>
+                     <th class="p-3 text-sm text-blue-800 font-extrabold"></th>
                   </tr>
                </thead>
                <tbody>
@@ -43,20 +39,61 @@
                               : 'Meta Não Atingida' }}</div>
                      </td>
                      <td class="flex justify-center gap-2">
-                        <button class="btn btn-xs" (click)="atualizarLeitura(conta.id)">
+                        <button
+                           class="border border-blue-300 text-blue-600 hover:bg-blue-50 flex items-center justify-center p-1 rounded"
+                           (click)="atualizarLeitura(conta.id)">
                            <i class="far fa-edit"></i>
                         </button>
-                        <button class="btn btn-xs" (click)="deletarLeitura(conta.id)">
+                        <button
+                           class="border border-red-300 text-red-600 hover:bg-red-50 flex items-center justify-center p-1 rounded"
+                           (click)="deletarLeitura(conta.id)">
                            <i class="fa-solid fa-trash"></i>
                         </button>
                      </td>
                   </tr>
                </tbody>
             </table>
-         </div>
 
-         <!-- Toast -->
-         <app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlertaToast" [show]="showToast"></app-toast>
+            <div class="p-4 sm:hidden flex flex-col gap-4">
+               <div *ngFor="let conta of listaContas"
+                  class="bg-gray-50 p-4 border border-gray-200 rounded-lg shadow-sm">
+
+                  <div class="flex justify-between items-start mb-2 border-b pb-2">
+                     <div class="font-bold text-lg text-gray-800">Leitura de {{ conta.mes | date:'MM/yyyy' }}</div>
+                     <div class="flex gap-2">
+                        <button class="btn btn-xs btn-ghost" (click)="atualizarLeitura(conta.id)">
+                           <i class="far fa-edit text-blue-500"></i>
+                        </button>
+                        <button class="btn btn-xs btn-ghost" (click)="deletarLeitura(conta.id)">
+                           <i class="fa-solid fa-trash text-red-500"></i>
+                        </button>
+                     </div>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-y-2 text-sm text-gray-600">
+                     <div class="font-semibold text-gray-700">Data:</div>
+                     <div>{{ conta.mes | date:'dd/MM/yyyy' }}</div>
+
+                     <div class="font-semibold text-gray-700">M³:</div>
+                     <div>{{ conta.metros_cubicos }}</div>
+
+                     <div class="font-semibold text-gray-700">Consumo Esperado:</div>
+                     <div>
+                        <div class="badge badge-outline"
+                           [ngClass]="conta.metros_cubicos >= 266 && conta.metros_cubicos <= 404 ? 'badge-success' : 'badge-error'">
+                           {{ (conta.metros_cubicos >= 266 && conta.metros_cubicos <= 404) ? 'Meta Atingida'
+                              : 'Meta Não Atingida' }}</div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div *ngIf="!listaContas || listaContas.length === 0" class="text-center py-4 text-gray-500">
+                     Nenhuma leitura registrada.
+                  </div>
+               </div>
+            </div>
+
+            <app-toast [mensagem]="toastMensagem" [tipoAlerta]="tipoAlertaToast" [show]="showToast"></app-toast>
       </main>
    </div>
 </div>

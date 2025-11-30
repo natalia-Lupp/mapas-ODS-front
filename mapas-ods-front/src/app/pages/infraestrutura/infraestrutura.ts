@@ -6,10 +6,11 @@ import { InfraestruturaService } from '../../services/database/infraestrutua.ser
 import { FormBuilder, FormGroup, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../app/shared/shared.module/shared.module';
+import { OnlyNumbersDirective } from '../../shared/components/directives/only-numbers.directive';
 
 @Component({
   selector: 'app-infraestrutura',
-  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule, SharedModule],
+  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule, SharedModule, OnlyNumbersDirective],
   standalone: true,
   templateUrl: './infraestrutura.html',
   styleUrl: './infraestrutura.css'
@@ -60,10 +61,10 @@ export class Infraestrutura implements OnInit {
         area_construida: this.formInfra.value.area_construida
       };
       this.infraService.create(data).subscribe({
-        next(data) {
-
+        next: (data) => {
+          this.navigate('adm/dashboard-adm');
         },
-        error(err) {
+        error: (err) => {
           console.error({ "ERRO_AO_SALVAR_INFRAESTRUTURA": err });
         },
       })

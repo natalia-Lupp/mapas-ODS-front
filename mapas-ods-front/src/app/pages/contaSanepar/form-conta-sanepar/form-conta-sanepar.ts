@@ -8,11 +8,12 @@ import { ContaSaneparService } from '../../../services/database/contaSanepar.ser
 import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { SharedModule } from '../../../shared/shared.module/shared.module';
+import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
 
 @Component({
   selector: 'app-form-conta-sanepar',
   standalone: true,
-  imports: [ReactiveFormsModule, SharedModule],
+  imports: [ReactiveFormsModule, SharedModule, OnlyNumbersDirective],
   templateUrl: './form-conta-sanepar.html',
   styleUrl: './form-conta-sanepar.css',
   providers: [DatePipe] // necessário para usar DatePipe no standalone
@@ -58,7 +59,7 @@ export class FormContaSanepar implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(['/contas-sanepar']);
+    this.router.navigate(['/adm/contas-sanepar']);
   }
 
   salvar(): void {
@@ -78,7 +79,7 @@ console.log('Dados a enviar:', data); // opcional para debug
       this.contaSaneparService.update(this.contaSaneparId, data).subscribe({
         next: () => {
           this.showToastMessage("Conta atualizada com sucesso!", TipoAlerta.SUCESSO);
-          this.router.navigate(['/contas-sanepar']);
+          this.router.navigate(['/adm/contas-sanepar']);
         },
         error: (err) => {
           console.error(err);
@@ -90,7 +91,7 @@ console.log('Dados a enviar:', data); // opcional para debug
         next: () => {
           this.showToastMessage("Conta registrada com sucesso!", TipoAlerta.SUCESSO);
           this.contaSaneparForm.reset();
-          this.router.navigate(['/contas-sanepar']);
+          this.router.navigate(['/adm/contas-sanepar']);
         },
         error: (err) => {
           console.error(err);
@@ -106,4 +107,6 @@ console.log('Dados a enviar:', data); // opcional para debug
     this.showToast = true;
     setTimeout(() => this.showToast = false, duration);
   }
+
+
 }

@@ -1,23 +1,23 @@
 <div class="flex-1 flex flex-col min-h-screen">
-    <!-- Navbar no topo -->
+    <!-- Navbar -->
     <app-navbar-adm></app-navbar-adm>
 
     <div class="drawer lg:drawer-open min-h-screen flex">
         <!-- Sidebar -->
         <app-sidebar class="hidden lg:block w-64"></app-sidebar>
 
-        <main class="p-4 sm:p-6 flex-1 bg-white">
-            <h2 class="text-3xl font-semibold mb-2 text-gray-900">Contas Sanepar</h2>
+        <main class="p-4 sm:p-6 flex-1 bg-white" id="areaPDF">
+            <h2 class="text-3xl font-semibold mb-2 text-gray-900">Dashboard</h2>
             <h3 class="text-xl sm:text-2xl font-semibold mb-6 text-gray-900 pt-4">Últimos Dados Cadastrados</h3>
 
-            <!-- Cards de resumo-->
             <div class="flex flex-wrap justify-center sm:justify-start gap-4 sm:gap-6 mb-6 pt-2">
 
                 <!-- Média real de consumo por pessoa -->
                 <div class="card bg-white shadow-md border border-blue-200 w-full sm:w-48">
                     <div class="card-body p-4">
-                        <h3 class="text-xs sm:text-sm text-center text-gray-500 leading-tight">Média Real de Consumo de
-                            Agua por Pessoa (L/dia)</h3>
+                        <h3 class="text-xs sm:text-sm text-center text-gray-500 leading-tight">
+                            Média Real de Consumo de Agua por Pessoa (L/dia)
+                        </h3>
                         <p class="text-2xl text-center font-bold text-blue-600 mt-2">
                             {{ mediaConsumoRealPorPessoaExibicao }}
                         </p>
@@ -27,8 +27,9 @@
                 <!-- Meta ONU -->
                 <div class="card bg-white shadow-md border border-green-200 w-full sm:w-48">
                     <div class="card-body p-4">
-                        <h3 class="text-xs sm:text-sm text-center text-gray-500 leading-tight">Meta ONU (L/mês)</h3>
-                        <!-- Ajustei o mt-10 para um valor menor para telas pequenas -->
+                        <h3 class="text-xs sm:text-sm text-center text-gray-500 leading-tight">
+                            Meta ONU (L/mês)
+                        </h3>
                         <p class="text-2xl text-center font-bold text-green-600 mt-4 sm:mt-10">
                             {{ metaLitrosPorPessoaDia }}
                         </p>
@@ -37,37 +38,37 @@
 
             </div>
 
-            <!-- Tabela -->
-            <div class="card bg-white shadow-md border border-gray-200 rounded-2xl **overflow-x-auto**">
+            <div class="card bg-white shadow-md border border-gray-200 rounded-2xl overflow-x-auto hidden sm:block">
+
                 <table class="table w-full text-center text-gray-500">
-                    <thead class="text-blue-800 bg-[#c9e2ff]">
+                    <thead class="text-blue-800" style="background-color:#c9e2ff">
                         <tr>
                             <th class="p-3 text-sm">Mês / Ano</th>
-                            <th class="p-3 text-sm">
-                                <span class="hidden sm:inline">Consumo Total (m³)</span>
-                                <span class="sm:hidden">M³</span>
-                            </th>
-                            <th class="p-3 text-sm">
-                                <span class="hidden sm:inline">Status da Meta</span>
-                                <span class="sm:hidden">Meta</span>
-                            </th>
-                            <th class="p-3 text-sm">
-                                <span class="hidden sm:inline">Média Real Comsumo (litros/pessoa)</span>
-                                <span class="sm:hidden">Média Real</span>
-                            </th>
+                            <th class="p-3 text-sm">Consumo Total (m³)</th>
+                            <th class="p-3 text-sm">Status da Meta</th>
+                            <th class="p-3 text-sm">Média Real Consumo</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr *ngFor="let conta of listaContas" class="hover:bg-blue-50">
-                            <td class="p-3 text-sm">{{ conta.mes | date:'MMMM/yyyy' }}</td>
-                            <td class="p-3 text-sm">{{ conta.metros_cubicos }}</td>
                             <td class="p-3 text-sm">
-                                <span class="badge"
-                                    [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success text-white' : 'badge-error text-white'">
-                                    {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu' : 'Não atingiu' }}
-                                </span>
+                                {{ conta.mes | date:'MMMM/yyyy' }}
                             </td>
-                            <td class="p-3 text-sm">{{ mediaConsumoDiarioReal(conta.metros_cubicos) | number:'1.0-0' }}
+
+                            <td class="p-3 text-sm">
+                                {{ conta.metros_cubicos }}
+                            </td>
+
+                            <td class="p-3 text-sm">
+                                <div class="badge badge-outline"
+                                    [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success' : 'badge-error'">
+                                    {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
+                                </div>
+                            </td>
+
+                            <td class="p-3 text-sm">
+                                {{ mediaConsumoDiarioReal(conta.metros_cubicos) | number:'1.0-0' }}
                             </td>
                         </tr>
                     </tbody>
@@ -75,17 +76,85 @@
 
             </div>
 
-            <!-- Botões-->
+            <div class="sm:hidden mt-4 flex flex-col gap-4">
+
+                <div *ngFor="let conta of listaContas" class="bg-white shadow-md border border-gray-200 rounded-xl p-4">
+
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">
+                        {{ conta.mes | date:'MMMM/yyyy' }}
+                    </h3>
+
+                    <div class="grid grid-cols-2 gap-y-2 text-sm text-gray-700 mb-4">
+
+                        <div class="font-semibold">Consumo (m³):</div>
+                        <div>{{ conta.metros_cubicos }}</div>
+
+                        <div class="font-semibold">Meta:</div>
+                        <div>
+                            <span class="badge"
+                                [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success text-white' : 'badge-error text-white'">
+                                {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
+                            </span>
+                        </div>
+
+                        <div class="font-semibold">Média Real:</div>
+                        <div>{{ mediaConsumoDiarioReal(conta.metros_cubicos) | number:'1.0-0' }}</div>
+
+                    </div>
+
+                </div>
+
+                <div *ngIf="!listaContas || listaContas.length === 0" class="text-center text-gray-500 py-4">
+                    Nenhum registro encontrado.
+                </div>
+
+            </div>
+
+            <!-- Botões -->
             <div class="flex flex-nowrap justify-center sm:justify-between items-center mt-8 gap-4 overflow-x-auto">
                 <button class="btn btn-outline btn-error px-6 rounded-full font-semibold whitespace-nowrap"
-                    (click)="onExcluirTodos()">Excluir Todos</button>
+                    (click)="onExcluirTodos()">
+                    Excluir Todos
+                </button>
+
                 <button
                     class="px-6 py-2 rounded-full font-semibold text-white bg-blue-700 hover:bg-blue-800 whitespace-nowrap"
                     (click)="onExportarPDF()">
                     Exportar PDF
                 </button>
             </div>
-        </main>
-    </div>
 
+        </main>
+        <!-- Container invisível usado apenas para gerar PDF -->
+        <div id="areaPDF"
+            style="display:none; background-color:#ffffff; color:#1f2937; padding:20px; font-family: Arial, sans-serif;">
+
+            <h2 style="font-size:24px; font-weight:bold; margin-bottom:10px;">Dashboard</h2>
+            <h3 style="font-size:18px; font-weight:bold; margin-bottom:20px;">Últimos Dados Cadastrados</h3>
+
+            <table style="width:100%; border-collapse: collapse; text-align:center;">
+                <thead>
+                    <tr>
+                        <th style="border:1px solid #ccc; padding:8px;">Mês / Ano</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Consumo Total (m³)</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Status da Meta</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Média Real Consumo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let conta of listaContas">
+                        <td style="border:1px solid #ccc; padding:8px;">{{ conta.mes | date:'MMMM/yyyy' }}</td>
+                        <td style="border:1px solid #ccc; padding:8px;">{{ conta.metros_cubicos }}</td>
+                        <td style="border:1px solid #ccc; padding:8px;">
+                            {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
+                        </td>
+                        <td style="border:1px solid #ccc; padding:8px;">
+                            {{ mediaConsumoDiarioReal(conta.metros_cubicos) | number:'1.0-0' }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 </div>

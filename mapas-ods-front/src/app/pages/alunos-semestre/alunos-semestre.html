@@ -11,7 +11,7 @@
 
          <!-- Título -->
          <h2 class="text-3xl font-semibold mb-2 text-gray-900">
-            Gerenciar Semestres
+            Alunos por Semestre
          </h2>
 
          <!-- Botão -->
@@ -27,14 +27,14 @@
          <div class="card bg-white shadow-md border border-gray-200 rounded-2xl overflow-hidden">
 
             <table class="hidden sm:table custom-zebra w-full text-center text-gray-600">
-               <thead class="bg-[#c9e2ff]">
+               <thead style="background-color:#c9e2ff">
                   <tr class="text-center">
-                     <th class="font-extrabold text-gray-700">Semestre</th>
-                     <th class="font-extrabold text-gray-700">Alunos Semestre</th>
-                     <th class="font-extrabold text-gray-700">Alunos Integral</th>
-                     <th class="font-extrabold text-gray-700">Alunos Noturnos</th>
-                     <th class="font-extrabold text-gray-700 whitespace-nowrap">Data Início</th>
-                     <th class="font-extrabold text-gray-700 whitespace-nowrap">Data Fim</th>
+                     <th class="font-extrabold text-blue-800 text-sm">Semestre</th>
+                     <th class="font-extrabold text-blue-800 text-sm">Alunos Semestre</th>
+                     <th class="font-extrabold text-blue-800 text-sm">Alunos Integral</th>
+                     <th class="font-extrabold text-blue-800 text-sm">Alunos Noturnos</th>
+                     <th class="font-extrabold text-blue-800 whitespace-nowrap text-sm">Data Início</th>
+                     <th class="font-extrabold text-blue-800 whitespace-nowrap text-sm">Data Fim</th>
                      <th></th>
                   </tr>
                </thead>
@@ -52,10 +52,14 @@
                         {{alunosDoSemestre.data_fim_semestre | date :"dd/MM/yyyy"}}
                      </td>
                      <td class="flex justify-center gap-2 whitespace-nowrap">
-                        <button class="btn btn-xs" (click)="atualizar(alunosDoSemestre.id)">
+                        <button
+                           class="border border-blue-300 text-blue-600 hover:bg-blue-50 flex items-center justify-center p-1 rounded"
+                           (click)="atualizar(alunosDoSemestre.id)">
                            <i class="far fa-edit"></i>
                         </button>
-                        <button class="btn btn-xs" (click)="deletar(alunosDoSemestre.id)">
+                        <button
+                           class="border border-red-300 text-red-600 hover:bg-red-50 flex items-center justify-center p-1 rounded"
+                           (click)="deletar(alunosDoSemestre.id)">
                            <i class="fa-solid fa-trash"></i>
                         </button>
                      </td>
