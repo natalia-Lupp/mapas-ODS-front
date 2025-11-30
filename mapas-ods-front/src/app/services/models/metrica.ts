@@ -7,7 +7,7 @@ export interface InterfaceMetricas {
    id?:string,
    nome_customizado: string,
    contas_sanepars?: IntarefaceContaSanepar[],
-   eventos?: InterfaceEvento[],
+   eventos?: string[],
    outros?: IntefaceOutros[],
    alunos_semestres?: InterfaceAlunosSemestres[],
    id_infra: string,

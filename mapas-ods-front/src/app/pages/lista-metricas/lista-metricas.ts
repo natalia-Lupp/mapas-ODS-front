@@ -30,7 +30,6 @@ export class ListaMetricas implements OnInit {
   private getAllMetricas() {
     this.metricasService.getAll().subscribe({
       next: (value) => {
-        console.log(value);
         this.listaMetricas = value
       },
       error: (err) => {
