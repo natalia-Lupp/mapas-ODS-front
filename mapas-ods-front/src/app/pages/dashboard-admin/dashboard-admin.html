@@ -61,10 +61,10 @@
                             </td>
 
                             <td class="p-3 text-sm">
-                                <span class="badge"
-                                    [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success text-white' : 'badge-error text-white'">
+                                <div class="badge badge-outline"
+                                    [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success' : 'badge-error'">
                                     {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
-                                </span>
+                                </div>
                             </td>
 
                             <td class="p-3 text-sm">

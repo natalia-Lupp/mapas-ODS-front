@@ -8,11 +8,12 @@ import { ContaSaneparService } from '../../../services/database/contaSanepar.ser
 import { IntarefaceContaSanepar } from '../../../services/models/contaSanepar';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { SharedModule } from '../../../shared/shared.module/shared.module';
+import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
 
 @Component({
   selector: 'app-form-conta-sanepar',
   standalone: true,
-  imports: [ReactiveFormsModule, SharedModule],
+  imports: [ReactiveFormsModule, SharedModule, OnlyNumbersDirective],
   templateUrl: './form-conta-sanepar.html',
   styleUrl: './form-conta-sanepar.css',
   providers: [DatePipe] // necessário para usar DatePipe no standalone
@@ -106,4 +107,6 @@ console.log('Dados a enviar:', data); // opcional para debug
     this.showToast = true;
     setTimeout(() => this.showToast = false, duration);
   }
+
+
 }

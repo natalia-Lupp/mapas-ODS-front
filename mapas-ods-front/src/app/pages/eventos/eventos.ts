@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { EventosService } from '../../services/database/eventos.service';
 import { InterfaceEvento } from '../../services/models/evento';
 import { TipoAlerta } from '../../shared/components/toast/toast.enum';

@@ -7,10 +7,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module/shared.module';
+import { Toast } from '../../../shared/components/toast/toast';
+import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
 
 @Component({
   selector: 'app-form-outros',
-  imports: [ReactiveFormsModule, CommonModule, SharedModule],
+  imports: [ReactiveFormsModule, CommonModule, SharedModule, Toast, OnlyNumbersDirective],
   templateUrl: './form-outros.html',
   styleUrls: ['./form-outros.css'],
   providers: [DatePipe]

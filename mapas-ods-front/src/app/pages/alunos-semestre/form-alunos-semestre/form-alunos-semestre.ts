@@ -8,10 +8,11 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { TipoAlerta } from '../../../shared/components/toast/toast.enum';
 import { Toast } from '../../../shared/components/toast/toast';
 import { SharedModule } from '../../../shared/shared.module/shared.module';
+import { OnlyNumbersDirective } from '../../../shared/components/directives/only-numbers.directive';
 
 @Component({
   selector: 'app-alunos-semestre',
-  imports: [CommonModule, ReactiveFormsModule, Toast, SharedModule],
+  imports: [CommonModule, ReactiveFormsModule, Toast, SharedModule, OnlyNumbersDirective],
   standalone: true,
   templateUrl: './form-alunos-semestre.html',
   styleUrl: './form-alunos-semestre.css',

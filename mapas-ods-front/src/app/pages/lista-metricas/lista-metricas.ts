@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { MetricasService } from '../../services/database/metricas.service';
 import { InterfaceMetricas } from '../../services/models/metrica';
 import { SharedModule } from '../../shared/shared.module/shared.module';
