@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
 
+// 🚨 Importação do AuthGuard (Assumindo que você o criou em './guards/auth.guard')
+import { AuthGuard } from './guards/auth.guard'; 
+
 import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
 import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre/form-alunos-semestre';
 import { CalculadoraNakagawa } from './pages/calculadora-nakagawa/calculadora-nakagawa';
@@ -41,12 +44,14 @@ export const routes: Routes = [
    {
       path: 'adm/dashboard-adm',
       title: 'Dashboard Administrador',
-      component: DashboardAdmin
+      component: DashboardAdmin,
+      canActivate: [AuthGuard] 
    },
    {
       path: 'user/dashboard-user',
       title: 'Dashboard Usuário',
-      component: DashboardUser
+      component: DashboardUser,
+      canActivate: [AuthGuard] 
    },
 
    // Consultar Dados temporarimamente desativado por calculos estarem sendo feitos pela calculadora
@@ -77,98 +82,115 @@ export const routes: Routes = [
       path: 'adm/contas-sanepar',
       title: 'Contas Sanepar',
       component: ContasSanepar,
-      pathMatch: 'full'
+      pathMatch: 'full',
+      canActivate: [AuthGuard] 
    },
    {
       path: 'adm/contas-sanepar/cadastrar-leitura-sanepar',
       title: 'Cadastrar Leitura Sanepar',
-      component: FormContaSanepar
+      component: FormContaSanepar,
+      canActivate: [AuthGuard] 
    },
    {
       path: 'adm/contas-sanepar/atualizar-leitura-sanepar/:id',
       title: 'Atualizar Leitura Sanepar',
-      component: FormContaSanepar
+      component: FormContaSanepar,
+      canActivate: [AuthGuard] 
    },
 
    // Eventos
    {
       path: 'adm/eventos',
       title: 'Eventos',
-      component: Eventos
+      component: Eventos,
+      canActivate: [AuthGuard] 
    },
    {
       path: 'adm/eventos/cadastrar-evento',
       title: 'Cadastrar Evento',
-      component: FormEventos
+      component: FormEventos,
+      canActivate: [AuthGuard] 
    },
    {
       path: 'adm/eventos/gerenciar-evento/:id',
       title: 'Gerenciar Evento',
-      component: FormEventos
+      component: FormEventos,
+      canActivate: [AuthGuard] 
    },
 
    // funcionarios
    {
       path: 'adm/funcionarios',
       title: 'Funcionarios',
-      component: Outros
+      component: Outros,
+      canActivate: [AuthGuard] 
    },
    {
       path: 'adm/funcionarios/cadastrar-funcionarios',
       title: 'Cadastrar Funcionários',
-      component: FormOutros
+      component: FormOutros,
+      canActivate: [AuthGuard]
    },
    {
       path: 'adm/funcionarios/atualizar-funcionarios/:id',
       title: 'Atualizar Funcionários',
-      component: FormOutros
+      component: FormOutros,
+      canActivate: [AuthGuard]
    },
 
    // Alunos Semestre
    {
       path: 'adm/alunos-semestre',
       title: 'Alunos por Semestre',
-      component: AlunosSemestre
+      component: AlunosSemestre,
+      canActivate: [AuthGuard]
    },
    {
       path: 'adm/alunos-semestre/cadastrar-aluno-semestre',
       title: 'Cadastrar Aluno Semestre',
-      component: FormAlunosSemestre
+      component: FormAlunosSemestre,
+      canActivate: [AuthGuard]
    },
    {
       path: 'adm/alunos-semestre/atualizar-aluno-semestre/:id',
       title: 'Atualizar Aluno Semestre',
-      component: FormAlunosSemestre
+      component: FormAlunosSemestre,
+      canActivate: [AuthGuard]
    },
 
    // Calculadora Nakagawa
     {
       path:"adm/calculadora-nakagawa/listagem-metricas",
        title: 'lista de metricas',
-      component:ListaMetricas
+      component:ListaMetricas,
+      canActivate: [AuthGuard]
    },
 
    {
       path: 'adm/calculadora-nakagawa/filtro',
       title: 'Calculadora Nakagawa',
-      component: CalculadoraNakagawa
+      component: CalculadoraNakagawa,
+      canActivate: [AuthGuard] 
    },
    {
       path: 'adm/calculadora-nakagawa/dashboard-nakagawa/:id',
       title: 'Dashboard Nakagawa',
-      component: DashboardNakagawa
+      component: DashboardNakagawa,
+      canActivate: [AuthGuard]
    },
 
    // Infraestrutura
    {
       path: 'adm/infraestrutura',
       title: 'Infraestrutura',
-      component: Infraestrutura
+      component: Infraestrutura,
+      canActivate: [AuthGuard] 
    },
 
    // Rota curinga (404)
    {
-      path: '**',
-      redirectTo: ''
+     path: '**',
+   redirectTo: '/',
+   pathMatch: 'full'
    }
 ];
