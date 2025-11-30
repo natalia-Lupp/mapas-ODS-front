@@ -1,6 +1,5 @@
 import { InterfaceAlunosSemestres } from './alunosSemestre';
 import { IntarefaceContaSanepar } from './contaSanepar';
-import { InterfaceEvento } from './evento';
 import { IntefaceOutros } from './outros';
 
 export interface InterfaceMetricas {

@@ -264,9 +264,9 @@ export class DashboardNakagawa implements OnInit {
           },
 
           data: [
-            { value: this.totalLitrosConsumidosPorAlunos(), name: 'Alunos' },
-            { value: this.totalLitrosConsumidosPorFuncionarios(), name: 'Funcionarios' },
-            { value: this.metrica?.litros_por_total_pessoas_eventos ?? 0, name: 'Evento' },
+            { value: this.totalLitrosConsumidosPorAlunos().toFixed(2), name: 'Alunos' },
+            { value: this.totalLitrosConsumidosPorFuncionarios().toFixed(2), name: 'Funcionarios' },
+            { value: this.metrica?.litros_por_total_pessoas_eventos?? 0, name: 'Evento' },
           ]
         }
       ]
