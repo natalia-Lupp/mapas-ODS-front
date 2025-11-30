@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 
-// 🚨 Importação do AuthGuard (Assumindo que você o criou em './guards/auth.guard')
-import { AuthGuard } from './guards/auth.guard'; 
-
+import { AuthGuard } from './guards/auth.guard';
 import { AlunosSemestre } from './pages/alunos-semestre/alunos-semestre';
 import { FormAlunosSemestre } from './pages/alunos-semestre/form-alunos-semestre/form-alunos-semestre';
 import { CalculadoraNakagawa } from './pages/calculadora-nakagawa/calculadora-nakagawa';
@@ -15,14 +13,12 @@ import { Eventos } from './pages/eventos/eventos';
 import { FormEventos } from './pages/eventos/form-eventos/form-eventos';
 import { Home } from './pages/home/home';
 import { Infraestrutura } from './pages/infraestrutura/infraestrutura';
+import { ListaMetricas } from './pages/lista-metricas/lista-metricas';
 import { FormOutros } from './pages/outros/form-outros/form-outros';
 import { Outros } from './pages/outros/outros';
-import { PerfilUser } from './pages/perfil-user/perfil-user';
-import { Perfil } from './pages/perfil/perfil';
 import { TelaLogin } from './pages/tela-login/tela-login';
-import { ConsultarDados } from './pages/consultar-dados/consultar-dados';
-import { ListaMetricas } from './pages/lista-metricas/lista-metricas';
 
+// 🚨 Importação do AuthGuard (Assumindo que você o criou em './guards/auth.guard')
 export const routes: Routes = [
 
 
