@@ -60,10 +60,10 @@ export class Infraestrutura implements OnInit {
         area_construida: this.formInfra.value.area_construida
       };
       this.infraService.create(data).subscribe({
-        next(data) {
-
+        next: (data) => {
+          this.navigate('adm/dashboard-adm');
         },
-        error(err) {
+        error: (err) => {
           console.error({ "ERRO_AO_SALVAR_INFRAESTRUTURA": err });
         },
       })
