@@ -26,30 +26,33 @@ export class MetricasService extends BasicService<InterfaceMetricas> {
    override create(data: InterfaceMetricas): Observable<InterfaceMetricas> {
       const consumo = data.consumo_total_agua;
       data.litros_por_total_pessoas_eventos =
-         this.calcularLitros(data.total_pessoas_eventos, consumo);
+         this.calcularLitros(data.total_pessoas_eventos ?? 0, consumo);
 
       data.litros_por_total_auxiliares_administrativos =
-         this.calcularLitros(data.total_auxiliares_administrativos, consumo);
+         this.calcularLitros(data.total_auxiliares_administrativos ?? 0, consumo);
 
       data.litros_por_total_tercerizados =
-         this.calcularLitros(data.total_tercerizados, consumo);
+         this.calcularLitros(data.total_tercerizados ?? 0, consumo);
 
       data.litros_por_total_docentes =
-         this.calcularLitros(data.total_docentes, consumo);
+         this.calcularLitros(data.total_docentes ?? 0, consumo);
 
       data.litros_por_total_alunos_geral =
-         this.calcularLitros(data.total_alunos_geral, consumo);
+         this.calcularLitros(data.total_alunos_geral ?? 0, consumo);
 
       data.litros_por_total_alunos_integral =
-         this.calcularLitros(data.total_alunos_integral, consumo);
+         this.calcularLitros(data.total_alunos_integral ?? 0, consumo);
 
       data.litros_por_total_alunos_noturnos =
-         this.calcularLitros(data.total_alunos_noturnos, consumo);
+         this.calcularLitros(data.total_alunos_noturnos ?? 0, consumo);
 
       return super.create(data);
    }
 
    private calcularLitros(total: number, consumoTotal: number): number {
+      if (total == 0) {
+         return 0;
+      }
       if (!total || !consumoTotal) return 0;
       return Number((consumoTotal / total).toFixed(2));
    }
