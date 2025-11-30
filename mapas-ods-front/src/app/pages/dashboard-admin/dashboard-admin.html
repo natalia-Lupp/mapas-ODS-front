@@ -6,7 +6,7 @@
         <!-- Sidebar -->
         <app-sidebar class="hidden lg:block w-64"></app-sidebar>
 
-        <main class="p-4 sm:p-6 flex-1 bg-white">
+        <main class="p-4 sm:p-6 flex-1 bg-white" id="areaPDF">
             <h2 class="text-3xl font-semibold mb-2 text-gray-900">Dashboard</h2>
             <h3 class="text-xl sm:text-2xl font-semibold mb-6 text-gray-900 pt-4">Últimos Dados Cadastrados</h3>
 
@@ -41,7 +41,7 @@
             <div class="card bg-white shadow-md border border-gray-200 rounded-2xl overflow-x-auto hidden sm:block">
 
                 <table class="table w-full text-center text-gray-500">
-                    <thead class="text-blue-800 bg-[#c9e2ff]">
+                    <thead class="text-blue-800" style="background-color:#c9e2ff">
                         <tr>
                             <th class="p-3 text-sm">Mês / Ano</th>
                             <th class="p-3 text-sm">Consumo Total (m³)</th>
@@ -93,7 +93,7 @@
                         <div>
                             <span class="badge"
                                 [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success text-white' : 'badge-error text-white'">
-                                {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu' : 'Não atingiu' }}
+                                {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
                             </span>
                         </div>
 
@@ -125,5 +125,36 @@
             </div>
 
         </main>
+        <!-- Container invisível usado apenas para gerar PDF -->
+        <div id="areaPDF"
+            style="display:none; background-color:#ffffff; color:#1f2937; padding:20px; font-family: Arial, sans-serif;">
+
+            <h2 style="font-size:24px; font-weight:bold; margin-bottom:10px;">Dashboard</h2>
+            <h3 style="font-size:18px; font-weight:bold; margin-bottom:20px;">Últimos Dados Cadastrados</h3>
+
+            <table style="width:100%; border-collapse: collapse; text-align:center;">
+                <thead>
+                    <tr>
+                        <th style="border:1px solid #ccc; padding:8px;">Mês / Ano</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Consumo Total (m³)</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Status da Meta</th>
+                        <th style="border:1px solid #ccc; padding:8px;">Média Real Consumo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let conta of listaContas">
+                        <td style="border:1px solid #ccc; padding:8px;">{{ conta.mes | date:'MMMM/yyyy' }}</td>
+                        <td style="border:1px solid #ccc; padding:8px;">{{ conta.metros_cubicos }}</td>
+                        <td style="border:1px solid #ccc; padding:8px;">
+                            {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
+                        </td>
+                        <td style="border:1px solid #ccc; padding:8px;">
+                            {{ mediaConsumoDiarioReal(conta.metros_cubicos) | number:'1.0-0' }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </div>

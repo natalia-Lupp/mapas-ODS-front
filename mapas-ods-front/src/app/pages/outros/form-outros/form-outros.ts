@@ -24,7 +24,6 @@ export class FormOutros implements OnInit {
   outroId?: string;
   outroModel?: IntefaceOutros;
 
-  // 🔥 Variáveis do Toast
   toastVisivel = false;
   toastMensagem = "";
 toastTipo: TipoAlerta = TipoAlerta.SUCESSO; // mais um toast que quebrou e só avisou qd ta nos 42 do segundo tempo
