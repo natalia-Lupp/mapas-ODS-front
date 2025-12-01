@@ -43,16 +43,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let conta of listaContas" class="hover:bg-blue-50">
+            <tr *ngFor="let conta of listaContas;let i =index" class="hover:bg-blue-50">
               <td class="p-3 text-sm">{{ conta.mes | date:'MMMM/yyyy' }}</td>
               <td class="p-3 text-sm">{{ conta.metros_cubicos }}</td>
               <td class="p-3 text-sm">
                 <div class="badge badge-outline"
-                     [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success' : 'badge-error'">
-                  {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
+                     [ngClass]="atingiuMeta(conta.metros_cubicos,i) ? 'badge-success' : 'badge-error'">
+                  {{ atingiuMeta(conta.metros_cubicos,i) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
                 </div>
               </td>
-              <td class="p-3 text-sm">{{ mediaConsumoDiarioReal(conta.metros_cubicos) | number:'1.0-0' }}</td>
+              <td class="p-3 text-sm">{{ mediaConsumoDiarioReal(conta.metros_cubicos,i) | number:'1.0-0' }}</td>
             </tr>
           </tbody>
         </table>
@@ -61,7 +61,7 @@
       <!-- Cards Mobile -->
       <div class="block sm:hidden flex flex-col gap-4">
         <ng-container *ngIf="listaContas?.length; else semDados">
-          <div *ngFor="let conta of listaContas" class="card bg-white shadow-md border border-gray-200 rounded-xl p-4">
+          <div *ngFor="let conta of listaContas;let i =index" class="card bg-white shadow-md border border-gray-200 rounded-xl p-4">
             <h3 class="text-lg font-bold text-gray-900 mb-2">{{ conta.mes | date:'MMMM/yyyy' }}</h3>
             <div class="grid grid-cols-2 gap-y-2 text-sm text-gray-700 mb-4">
               <div class="font-semibold">Consumo (m³):</div>
@@ -70,13 +70,13 @@
               <div class="font-semibold">Meta:</div>
               <div>
                 <span class="badge"
-                      [ngClass]="atingiuMeta(conta.metros_cubicos) ? 'badge-success text-white' : 'badge-error text-white'">
-                  {{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
+                      [ngClass]="atingiuMeta(conta.metros_cubicos,i) ? 'badge-success text-white' : 'badge-error text-white'">
+                  {{ atingiuMeta(conta.metros_cubicos,i) ? 'Atingiu a meta' : 'Não atingiu a meta' }}
                 </span>
               </div>
 
               <div class="font-semibold">Média Real:</div>
-              <div>{{ mediaConsumoDiarioReal(conta.metros_cubicos) | number:'1.0-0' }}</div>
+              <div>{{ mediaConsumoDiarioReal(conta.metros_cubicos,i) | number:'1.0-0' }}</div>
             </div>
           </div>
         </ng-container>
@@ -108,11 +108,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let conta of listaContas">
+            <tr *ngFor="let conta of listaContas; let i = index">
               <td class="border p-2">{{ conta.mes | date:'MMMM/yyyy' }}</td>
               <td class="border p-2">{{ conta.metros_cubicos }}</td>
-              <td class="border p-2">{{ atingiuMeta(conta.metros_cubicos) ? 'Atingiu a meta' : 'Não atingiu a meta' }}</td>
-              <td class="border p-2">{{ mediaConsumoDiarioReal(conta.metros_cubicos) | number:'1.0-0' }}</td>
+              <td class="border p-2">{{ atingiuMeta(conta.metros_cubicos,i) ? 'Atingiu a meta' : 'Não atingiu a meta' }}</td>
+              <td class="border p-2">{{ mediaConsumoDiarioReal(conta.metros_cubicos,i) | number:'1.0-0' }}</td>
             </tr>
           </tbody>
         </table>
